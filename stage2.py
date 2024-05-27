@@ -17,10 +17,11 @@ BLUE = (0, 0, 255)
 FLOOR_COLOR = (144, 228, 144)
 
 # 캐릭터 속성 설정
-character_width, character_height = 50, 50
-character_x, character_y = 50, 50
+character_width, character_height = 20, 20
+initial_character_x, initial_character_y = 50, 50
+character_x, character_y = initial_character_x, initial_character_y
 character_speed = 6
-jump_speed = 18
+jump_speed = 16
 gravity = 1
 
 # 바닥 속성 설정
@@ -31,14 +32,6 @@ floor_y = SCREEN_HEIGHT - floor_height
 platform_width, platform_height = 100, 20
 platform_color = BLUE
 
-# 블록 좌표 설정
-blocks_positions = [
-    (150, 500),
-    (200, 400),
-    (500, 300),
-    (600, 200)
-]
-
 # 블록 클래스 정의
 class Block:
     def __init__(self, x, y):
@@ -46,7 +39,12 @@ class Block:
         self.y = y
 
 # 블록 리스트 초기화
-blocks = [Block(x, y) for x, y in blocks_positions]
+blocks = [
+    Block(50, 100),
+    Block(250, 400),
+    Block(500, 300),
+    Block(600, 200)
+    ]
 
 # 포탈 클래스 정의
 class Portal:
@@ -73,6 +71,13 @@ def check_portal_collision(character, portals):
         if character.colliderect(portal.rect):
             return portal
     return None
+
+# 바닥과 충돌시 초기 위치로
+def reset_game():
+    global character_x, character_y, vertical_momentum, is_on_ground
+    character_x, character_y = initial_character_x, initial_character_y
+    vertical_momentum = 0
+    is_on_ground = True
 
 # 게임 루프
 running = True
@@ -110,8 +115,7 @@ while running:
     character_y += vertical_momentum
     character_y = min(character_y, floor_y - character_height)
 
-    # 바닥 그리기
-    pygame.draw.rect(screen, FLOOR_COLOR, (0, floor_y, SCREEN_WIDTH, floor_height))
+    
 
     # 충돌 검사 및 처리
     block_collided = check_collision(character_rect, blocks)
@@ -133,6 +137,10 @@ while running:
         stage_module = importlib.import_module(portal_collided.target_stage)
         stage_module.run_stage()
         running = False
+    
+    # 바닥과 충돌하면 게임 리셋
+    if character_y >= floor_y - character_height:
+        reset_game()
 
     # 발판 그리기
     for block in blocks:
