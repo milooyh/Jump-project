@@ -29,7 +29,7 @@ gravity = 1.4
 
 # 바닥 속성 설정
 floor_height = 22  # 바닥 두께
-floor_y = SCREEN_HEIGHT - floor_height 
+floor_y = SCREEN_HEIGHT - floor_height
 
 # 발판 속성 설정
 platform_width, platform_height = 100, 20
@@ -39,7 +39,7 @@ platform_color = BLUE
 powerup_radius = 10
 
 # 적 속성 설정
-enemy_width, enemy_height = 40, 40
+enemy_width, enemy_height = 35, 35
 enemy_speed = 5
 
 # 스테이지 1 설정
