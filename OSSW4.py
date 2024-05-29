@@ -36,10 +36,19 @@ spike_width, spike_height = 10, 20
 spike_positions = [(x, floor_y - spike_height) for x in range(550, 600, spike_width)]
 
 # 맵의 최대 크기
-max_map_width = 1200  
+max_map_width = 1200
 
 # 바닥 구멍 정보 로드
 floor_holes = Map_1.floor_holes
+
+# 포탈 속성
+portal_position = Map_1.portal_position
+portal_size = 70
+
+# 포탈 이미지 로드
+portal_image = pygame.image.load('portal_image.png')
+portal_image = pygame.transform.scale(portal_image, (portal_size, portal_size))
+portal_angle = 0  # 포탈 회전 각도 초기화
 
 # trick_hole 속성 추가
 trick_hole_x, trick_hole_y = 700, floor_y
@@ -124,6 +133,11 @@ def check_falling_block_collision(character, block):
     if character.colliderect(block_rect):
         return True
     return False
+
+# 포탈 충돌 감지
+def check_portal_collision(character, portal_pos, portal_size):
+    portal_rect = pygame.Rect(portal_pos[0], portal_pos[1], portal_size, portal_size)
+    return character.colliderect(portal_rect)
 
 # 다음 맵 로드
 def load_next_map():
@@ -311,7 +325,7 @@ while running:
     for spike in spike_positions:
         pygame.draw.rect(screen, SPIKE_COLOR, (spike[0] - camera_x, spike[1], spike_width, spike_height))
 
-    # 트리거 영역 그리기 # 마지막에 삭제
+    # 트리거 영역 그리기
     pygame.draw.rect(screen, (0, 255, 0), trigger_falling_block_zone.move(-camera_x, 0), 2)
     pygame.draw.rect(screen, (0, 0, 0), del_block_1.move(-camera_x, 0), 2)
     pygame.draw.rect(screen, (0, 255, 0), add_block_1.move(-camera_x, 0), 2)
@@ -319,8 +333,16 @@ while running:
     pygame.draw.rect(screen, (0, 255, 0), trigger_zone.move(-camera_x, 0), 2)
     pygame.draw.rect(screen, (0, 0, 255), spike_trigger_zone.move(-camera_x, 0), 2)  
 
+    # 포탈 이미지 회전
+    portal_angle += 2  # 회전 속도 
+    rotated_portal_image = pygame.transform.rotate(portal_image, portal_angle)
+    portal_rect = rotated_portal_image.get_rect(center=(portal_position[0] - camera_x + portal_size // 2, portal_position[1] + portal_size // 2))
+    screen.blit(rotated_portal_image, portal_rect.topleft)
 
-    # 그리기
+    # 포탈 충돌 감지 및 다음 맵 로드
+    if check_portal_collision(character_rect, portal_position, portal_size):
+        load_next_map()
+
     pygame.draw.rect(screen, RED, character_rect.move(-camera_x, 0))
     pygame.display.update()
     clock.tick(60)
