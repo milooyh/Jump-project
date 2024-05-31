@@ -16,3 +16,4 @@ salom
 vabwe uynama
 semiz domla
 nega qiynavosa
+fyyuugi
