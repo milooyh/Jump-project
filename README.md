@@ -14,3 +14,4 @@ as
 ㅏㅣㄴㅇ
 salom
 vabwe uynama
+semiz domla
