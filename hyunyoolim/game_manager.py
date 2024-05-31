@@ -1,17 +1,14 @@
-# game_manager.py
-
 import pygame
 import sys
 from setting import *
 from character import Character
 from screen import Screen
-from block import Block
+from hyunyoolim.block import Block
 from obstacle import Obstacle
 from portal import Portal
+from item import *
 
 class GameManager:
-    
-    # 게임 초기화 함수
     def __init__(self):
         pygame.init()
         pygame.font.init()
@@ -21,38 +18,51 @@ class GameManager:
 
         self.clock = pygame.time.Clock()
 
-        # 게임 시작 페이지 표시
         Screen.show_start_screen(self.screen)
 
-        # 초기 설정
         self.floor_y = floor_y
 
         self.blocks = [Block(x, y) for x, y in blocks_positions]
         self.obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
 
-        # 포털 초기화
-        self.portal = Portal(700, 70)
+        highest_block_x = max([block.x for block in self.blocks])
+        highest_block_y = max([block.y for block in self.blocks])
 
-        # 캐릭터 초기화
-        self.character = Character(self.blocks, self.obstacles, self.portal)  # 포털도 전달
+        self.portal = Portal(highest_block_x, highest_block_y - 100)
 
+        self.character = Character(self.blocks, self.obstacles, self.portal)
+
+        # 아이템들의 초기 위치 설정
+        self.heart_item = HeartItem(100, 550)  # 고정 위치 (x, y) 값으로 변경
+        self.speed_item = SpeedItem(300, 450)  # 고정 위치 (x, y) 값으로 변경
+        self.invincibility_item = InvincibilityItem(400,450)  # 고정 위치 (x, y) 값으로 변경
+
+        # 아이템 효과 지속 시간을 기록할 변수들 추가
+        self.speed_item_effect_start_time = None
+        self.invincibility_item_effect_start_time = None
+        
         self.game_over = False
         self.game_clear = False
-        
+
     def reset_game(self):
         self.character.set_initial_position()
         self.character.life = 3
         self.character.game_over = False
         self.character.current_color_index = 0
         self.obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
-                
-    # 게임 시작 함수
+
+        # 아이템들의 초기 위치 재설정
+        self.heart_item.rect.x = 100
+        self.heart_item.rect.y = 550
+        self.speed_item.rect.x = 300
+        self.speed_item.rect.y = 450
+        self.invincibility_item.rect.x = 400
+        self.invincibility_item.rect.y = 450
+        
     def run_game(self):
         running = True
-        font = pygame.font.Font(None, 36)  # 라이프 개수를 표시할 폰트 설정    
-        obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]  # 장애물 객체 리스트 생성
-        
-        
+        font = pygame.font.Font(None, 36)
+
         while running:
             self.screen.fill(WHITE)
             character_rect = pygame.Rect(self.character.x, self.character.y, self.character.width, self.character.height)
@@ -60,44 +70,76 @@ class GameManager:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-                    print('게임 강제 종료')
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.character.space_pressed = True
-                        print('스페이스바 눌림')
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_SPACE:
                         self.character.space_pressed = False
-                        print('스페이스바 안 눌림')
 
             if not self.character.game_over and not self.character.game_clear:
-                self.character.update_game_state()  # 게임 상태 업데이트
-                print('게임 상태 업데이트')
+                self.character.update_game_state()
+                self.character.draw_game_elements(self.screen, self.blocks, self.obstacles, self.portal)
+                self.character.check_item_collision(self.heart_item, self.speed_item, self.invincibility_item)
 
-                self.character.draw_game_elements(self.screen, self.blocks, self.obstacles, self.portal)  # 게임 요소 그리기
-                print('게임 요소 그리기')
-                
-                # 장애물 위치 업데이트
                 for obstacle in self.obstacles:
                     obstacle.update_position()
                     if obstacle.x < -obstacle_width:
                         obstacle.x = SCREEN_WIDTH
-                    
+
                 life_text = font.render(f"Life: {self.character.life}", True, BLACK)
                 life_rect = life_text.get_rect(center=(SCREEN_WIDTH // 2, 30))
                 self.screen.blit(life_text, life_rect)
 
+                self.heart_item.draw(self.screen)
+                self.speed_item.draw(self.screen)
+                self.invincibility_item.draw(self.screen)
+
+                # 포털과 캐릭터의 충돌 감지
+                if character_rect.colliderect(self.portal.rect):
+                    self.character.game_clear = True
+                
                 if self.character.game_clear:
                     Screen.show_clear_screen(self.screen)
-                    print('게임 클리어')
-                elif self.character.game_over:
-                    Screen.show_game_over_screen(self.screen, self)
-                    print('게임오버')
-                    
+
+            elif self.character.game_over:
+                Screen.show_game_over_screen(self.screen, self)
                 
-                    
+            # 아이템 먹기
+            heart_item_eaten = self.character.check_item_collision(self.heart_item, self.speed_item, self.invincibility_item)
+            speed_item_eaten = self.character.check_item_collision(self.heart_item, self.speed_item, self.invincibility_item)
+            invincibility_item_eaten = self.character.check_item_collision(self.heart_item, self.speed_item, self.invincibility_item)
+                
+            if heart_item_eaten:
+                self.heart_item.rect.x = -1000  # 아이템 위치를 화면 밖으로 이동시켜 표시하지 않음
+                self.heart_item.rect.y = -1000
+                self.heart_item_eaten = True  # 아이템을 먹은 상태로 표시
+                
+            if speed_item_eaten:
+                self.speed_item.rect.x = -1000
+                self.speed_item.rect.y = -1000
+                self.speed_item_eaten = True
+                self.speed_item_effect_start_time = pygame.time.get_ticks()  # 아이템 효과 시작 시간 기록
+                
+            if invincibility_item_eaten:
+                self.invincibility_item.rect.x = -1000
+                self.invincibility_item.rect.y = -1000
+                self.invincibility_item_eaten = True
+                self.invincibility_item_effect_start_time = pygame.time.get_ticks()  # 아이템 효과 시작 시간 기록
+
+            # 아이템 효과 지속 시간 체크 및 효과 제거
+            current_time = pygame.time.get_ticks()
+            if self.speed_item_effect_start_time is not None and current_time - self.speed_item_effect_start_time > 5000:
+                self.speed_item_effect_start_time = None
+                for obstacle in self.obstacles:
+                    obstacle.speed *= 2  # 속도 다시 두배로
+            
+            if self.invincibility_item_effect_start_time is not None and current_time - self.invincibility_item_effect_start_time > 5000:
+                self.invincibility_item_effect_start_time = None
+                self.invincible = False
+    
             pygame.display.update()
-            self.clock.tick(60)
+            self.clock.tick(FPS)
 
         pygame.quit()
         sys.exit()
