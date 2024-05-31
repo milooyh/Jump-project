@@ -4,7 +4,7 @@ import pygame
 import sys
 from setting import *
 from obstacle import Obstacle
-from block import Block
+from hyunyoolim.block import Block
 from portal import Portal
 
 class Screen:
