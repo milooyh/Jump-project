@@ -11,6 +11,7 @@ from portal import Portal
 from item import *
 
 class GameManager:
+    
     def __init__(self):
         pygame.init()
         pygame.font.init()
@@ -19,11 +20,8 @@ class GameManager:
         pygame.display.set_caption("점프 점프")
 
         self.clock = pygame.time.Clock()
-
-        # 게임 시작 페이지 표시
         Screen.show_start_screen(self.screen)
 
-        # 초기 설정
         self.floor_y = floor_y
 
         self.blocks = [Block(x, y) for x, y in blocks_positions]
@@ -39,49 +37,23 @@ class GameManager:
         
         self.items = [self.heart_item, self.speed_item, self.invincibility_item]
         self.character = Character(self.blocks, self.obstacles, self.portal, self.items)
-        self.stage = 1 # 스테이지 번호
+
         
+                
         self.game_over = False
         self.game_clear = False
-
+        
     def reset_game(self):
         self.character.set_initial_position()
         self.character.life = 3
         self.character.game_over = False
         self.character.current_color_index = 0
         self.obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
-
-    def set_background_color(self):
-        """목숨 개수에 따라 배경색 설정"""
-        if self.character.life == 3:
-            self.screen.fill(WHITE)
-        elif self.character.life == 2:
-            self.screen.fill(ORANGE)
-        elif self.character.life == 1:
-            self.screen.fill(RED)    
-        else:
-            self.screen.fill(BLACK) #목숨 없으면 게임 오버 처리 함수 추가하기
-    
-    def reset_items_and_obstacles(self):
-        """아이템과 장애물 위치 재설정"""
-        self.heart_items = HeartItem(250,400)
-        self.speed_item = SpeedItem(650,400)
-        self.invincibility_item = InvincibilityItem(400,700)
-        self.obstacles = [Obstacle(x, y, speed) for x, y, speed in obstacles_positions]
-
-    def advance_stage(self):
-        """다음 스테이지로 이동"""
-        self.stage += 1
-        self.cahracter.reset()
-        self.reset_items_and_obstacles()
-        self.portal = Portal(750, 50 * self.stage) # 포털 위치 스테이지에 따라 변경해주기
-    
-    # 게임 시작 함수
+                
     def run_game(self):
         running = True
         font = pygame.font.Font(None, 36)
         obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
-
 
         while running:
             self.screen.fill(WHITE)
@@ -101,18 +73,18 @@ class GameManager:
                         print('스페이스바 안 눌림')
 
             if not self.character.game_over and not self.character.game_clear:
-                self.character.update_game_state()  # 게임 상태 업데이트
+                self.character.update_game_state()
                 print('게임 상태 업데이트')
 
-                self.character.draw_game_elements(self.screen, self.blocks, self.obstacles, self.portal)  # 게임 요소 그리기
+                self.character.draw_game_elements(self.screen, self.blocks, self.obstacles, self.portal)
                 print('게임 요소 그리기')
-
+                
                 # 장애물 위치 업데이트
                 for obstacle in self.obstacles:
                     obstacle.update_position()
                     if obstacle.x < -obstacle_width:
                         obstacle.x = SCREEN_WIDTH
-
+                    
                 life_text = font.render(f"Life: {self.character.life}", True, BLACK)
                 life_rect = life_text.get_rect(center=(SCREEN_WIDTH // 2, 30))
                 self.screen.blit(life_text, life_rect)
@@ -128,7 +100,9 @@ class GameManager:
                 elif self.character.game_over:
                     Screen.show_game_over_screen(self.screen, self)
                     print('게임오버')
-
+                    
+                
+                    
             pygame.display.update()
             self.clock.tick(60)
 
