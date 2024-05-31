@@ -60,4 +60,3 @@ def check_falling_block_collision(character, block):
 def check_portal_collision(character, portal_pos, portal_size):
     portal_rect = pygame.Rect(portal_pos[0], portal_pos[1], portal_size, portal_size)
     return character.colliderect(portal_rect)
-    
