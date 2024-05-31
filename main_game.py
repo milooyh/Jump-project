@@ -34,6 +34,7 @@ def load_next_map():
         camera_x = 0
         blocks = load_map(map_modules[current_map_index])
     else:
+        print("게임 클리어!")
         pygame.quit()
         sys.exit()
 
@@ -154,7 +155,7 @@ while running:
             character_y = block_collided.y - character_height
             vertical_momentum = 0
             is_on_ground = True
-        elif check_top_collision(character_rect, block_collided):  # 이 부분 수정
+        elif check_top_collision(character_rect, block_collided):
             character_y = block_collided.y + platform_height
             vertical_momentum = gravity
             is_on_ground = False
@@ -231,7 +232,7 @@ while running:
     if check_portal_collision(character_rect, portal_position, portal_size):
         load_next_map()
 
-    pygame.draw.rect(screen, RED, character_rect.move(-camera_x, 0))
+    screen.blit(character_image, (character_x - camera_x, character_y)) 
     pygame.display.update()
     clock.tick(60)
 
