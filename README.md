@@ -15,3 +15,4 @@ as
 salom
 vabwe uynama
 semiz domla
+nega qiynavosa
