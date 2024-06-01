@@ -106,6 +106,10 @@ while running:
     character_x = max(0, character_x)
     character_x = min(character_x, max_map_width - character_width)
 
+    if space_pressed and is_on_ground:
+        vertical_momentum = -jump_speed
+        is_on_ground = False
+
     if not on_jumping_block:
         vertical_momentum += gravity
     character_y += vertical_momentum
