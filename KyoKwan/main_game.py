@@ -74,7 +74,7 @@ camera_x = 0
 on_jumping_block = False
 jump_timer = 0
 down_key_count = 0
-teleport_zone = pygame.Rect(0, floor_y - 10 - character_height, 10, 10)  # Y 좌표를 바닥 바로 위로 설정
+teleport_zone = pygame.Rect(0, floor_y  - character_height, 10, 10)  
 
 while running:
     screen.fill(WHITE)
