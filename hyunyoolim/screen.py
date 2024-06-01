@@ -1,5 +1,3 @@
-# screen.py
-
 import pygame
 import sys
 from setting import *
@@ -13,6 +11,7 @@ class Screen:
 
     @staticmethod
     def show_start_screen(screen):
+        """게임 시작 화면 표시"""
         screen.fill(WHITE)
         font = pygame.font.Font(None, 64)
         text = font.render("Press SPACE to Start", True, BLACK)
@@ -23,6 +22,7 @@ class Screen:
 
     @staticmethod
     def wait_for_space():
+        """SPACE 키 입력을 대기"""
         waiting = True
         while waiting:
             for event in pygame.event.get():
@@ -34,6 +34,7 @@ class Screen:
 
     @staticmethod
     def show_clear_screen(screen):
+        """게임 클리어 화면 표시"""
         screen.fill(WHITE)
         font = pygame.font.Font(None, 64)
         text = font.render("Game Clear!", True, GREEN)
@@ -44,6 +45,7 @@ class Screen:
 
     @staticmethod
     def show_game_over_screen(screen, game_manager):
+        """게임 오버 화면 표시 및 재시작/종료 선택"""
         screen.fill(WHITE)
         font = pygame.font.Font(None, 64)
         text = font.render("Game Over", True, RED)
@@ -80,11 +82,12 @@ class Screen:
                         sys.exit()
 
     @staticmethod
-    def draw_game_elements(screen, character_rect):
-        pygame.draw.rect(screen, RED, character_rect)
-        for block in Block:
-            pygame.draw.rect(screen, platform_color, pygame.Rect(block.x, block.y, platform_width, platform_height))
-        for obstacle in Obstacle:
-            pygame.draw.rect(screen, obstacle_color, pygame.Rect(obstacle.x, obstacle.y, obstacle_width, obstacle_height))
-        if Portal:
-            pygame.draw.rect(screen, PORTAL_COLOR, Portal.rect)
+    def draw_game_elements(screen, character, blocks, obstacles, portal):
+        """게임 요소를 화면에 그림"""
+        pygame.draw.rect(screen, RED, pygame.Rect(character.x, character.y, character.width, character.height))
+        for block in blocks:
+            block.draw(screen)
+        for obstacle in obstacles:
+            obstacle.draw(screen)
+        if portal:
+            portal.draw(screen)
