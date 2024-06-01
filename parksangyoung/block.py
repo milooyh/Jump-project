@@ -1,15 +1,19 @@
 class Block:
-    def __init__(self, x, y):
+    def __init__(self, x, y, width=100, height=20, color=(0, 0, 255)):
         self.x = x
         self.y = y
-    
+        self.width = width
+        self.height = height
+        self.color = color
+
     def move(self):
         pass
 
+
 # 움직이는 블록 클래스 정의 (Block 클래스 상속)
 class MovingBlock(Block):
-    def __init__(self, x, y, move_range=100, speed=2):
-        super().__init__(x, y)
+    def __init__(self, x, y, width=100, height=20, color=(0, 0, 255), move_range=100, speed=2):
+        super().__init__(x, y, width, height, color)
         self.move_range = move_range
         self.speed = speed
         self.initial_x = x
