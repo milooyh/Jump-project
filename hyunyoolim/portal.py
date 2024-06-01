@@ -13,4 +13,3 @@ class Portal:
 
     def draw(self, screen):
         pygame.draw.rect(screen, (0, 255, 0), self.rect)
-
