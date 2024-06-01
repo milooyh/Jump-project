@@ -1,6 +1,7 @@
+# character.py
+
 import pygame
 from setting import *
-from screen import Screen
 from block import Block
 from obstacle import Obstacle
 from portal import Portal
@@ -29,12 +30,10 @@ class Character:
         self.life_counter = 0
 
     def set_initial_position(self):
-        """장애물에 닿으면 초기 위치로 돌아옴"""
         self.x = SCREEN_WIDTH // 2
         self.y = SCREEN_HEIGHT - self.height * 2
 
     def update_game_state(self):
-        """게임 상태를 업데이트"""
         current_time = pygame.time.get_ticks()
         print("스페이스 바 눌림 여부:", self.space_pressed)
 
@@ -87,7 +86,6 @@ class Character:
             self.game_clear = True
 
     def draw_game_elements(self, screen):
-        """게임 요소를 화면에 그림"""
         pygame.draw.rect(screen, self.colors[self.current_color_index], pygame.Rect(self.x, self.y, self.width, self.height))
         for block in self.blocks:
             block.draw(screen)
@@ -100,5 +98,5 @@ class Character:
             text = font.render(f"Life: {self.life}", True, BLACK)
             screen.blit(text, (10, 10))
             current_time = pygame.time.get_ticks()
-            if current_time - self.life_counter >= 1000:  # 1초 동안만 표시
+            if current_time - self.life_counter >= 1000:
                 self.show_life = False
