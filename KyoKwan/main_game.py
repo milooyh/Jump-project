@@ -74,7 +74,7 @@ camera_x = 0
 on_jumping_block = False
 jump_timer = 0
 down_key_count = 0
-teleport_zone = pygame.Rect(5, 540, 10, 10)  
+teleport_zone = pygame.Rect(5, 540, 10, 10)
 
 while running:
     screen.fill(WHITE)
@@ -86,11 +86,13 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 space_pressed = True
-            if event.key == pygame.K_DOWN and teleport_zone.colliderect(character_rect):
-                down_key_count += 1
-                if down_key_count >= 20:
-                    character_x = 1000
-                    down_key_count = 0  # 카운트 초기화
+            if event.key == pygame.K_DOWN:
+                if teleport_zone.colliderect(character_rect):
+                    down_key_count += 1
+                    if down_key_count >= 20:
+                        character_x = 1000
+                        character_y = 540  # y 좌표도 변경
+                        down_key_count = 0  # 카운트 초기화
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
