@@ -10,8 +10,6 @@ from obstacle import Obstacle
 from portal import Portal
 
 class GameManager:
-    
-    # 게임 초기화 함수
     def __init__(self):
         pygame.init()
         pygame.font.init()
@@ -38,21 +36,19 @@ class GameManager:
 
         self.game_over = False
         self.game_clear = False
-        
+
     def reset_game(self):
         self.character.set_initial_position()
         self.character.life = 3
         self.character.game_over = False
         self.character.current_color_index = 0
         self.obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
-                
+
     # 게임 시작 함수
     def run_game(self):
         running = True
-        font = pygame.font.Font(None, 36)  # 라이프 개수를 표시할 폰트 설정    
-        obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]  # 장애물 객체 리스트 생성
-        
-        
+        font = pygame.font.Font(None, 36)  # 라이프 개수를 표시할 폰트 설정
+
         while running:
             self.screen.fill(WHITE)
             character_rect = pygame.Rect(self.character.x, self.character.y, self.character.width, self.character.height)
@@ -74,15 +70,15 @@ class GameManager:
                 self.character.update_game_state()  # 게임 상태 업데이트
                 print('게임 상태 업데이트')
 
-                self.character.draw_game_elements(self.screen, self.blocks, self.obstacles, self.portal)  # 게임 요소 그리기
+                self.character.draw_game_elements(self.screen)  # 게임 요소 그리기
                 print('게임 요소 그리기')
-                
+
                 # 장애물 위치 업데이트
                 for obstacle in self.obstacles:
                     obstacle.update_position()
                     if obstacle.x < -obstacle_width:
                         obstacle.x = SCREEN_WIDTH
-                    
+
                 life_text = font.render(f"Life: {self.character.life}", True, BLACK)
                 life_rect = life_text.get_rect(center=(SCREEN_WIDTH // 2, 30))
                 self.screen.blit(life_text, life_rect)
@@ -93,9 +89,7 @@ class GameManager:
                 elif self.character.game_over:
                     Screen.show_game_over_screen(self.screen, self)
                     print('게임오버')
-                    
-                
-                    
+
             pygame.display.update()
             self.clock.tick(60)
 
