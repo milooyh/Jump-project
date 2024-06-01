@@ -1,6 +1,8 @@
 import pygame
 import sys
 import importlib
+from map import blocks
+from obstacle import Spike
 
 def run_stage():
     pygame.init()
@@ -32,52 +34,12 @@ floor_y = SCREEN_HEIGHT - floor_height
 platform_width, platform_height = 100, 20
 platform_color = BLUE
 
-# 블록 좌표 설정
-blocks_positions = [
-    (0, 300),
-    (100, 300),
-    (200, 300),
-    (300, 300),
-    (400, 300),
-    (500, 300),
-    (600, 300),
-    (700, 300)
-]
-
-
-
-
-
-# 포탈 클래스 정의
-class Portal:
-    def __init__(self, x, y, width, height, target_stage):
-        self.rect = pygame.Rect(x, y, width, height)
-        self.target_stage = target_stage
 
 # 포탈 리스트 초기화
 portal_width, portal_height = 40, 40
 portals = [Portal(700,  275 - portal_height - 10, portal_width, portal_height, 'stage4')]
 
 clock = pygame.time.Clock()
-
-# 가시 클래스 정의
-class Spike:
-    def __init__(self, x, y, width, height):
-        self.rect = pygame.Rect(x, y, width, height)
-
-spike_width, spike_height = 20, 20
-
-
-spikes = [
-    Spike(150, 250, spike_width, spike_height),
-    Spike(225, 150, spike_width, spike_height),
-    Spike(300, 250, spike_width, spike_height),
-    Spike(375, 150, spike_width, spike_height),
-    Spike(450, 250, spike_width, spike_height),
-    Spike(525, 150, spike_width, spike_height),
-    Spike(600, 250, spike_width, spike_height),
-    Spike(675, 150, spike_width, spike_height)
-    ]
 
 
 # 충돌 감지

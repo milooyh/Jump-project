@@ -1,6 +1,7 @@
 import pygame
 import sys
 import importlib
+from map import blocks
 
 pygame.init()
 

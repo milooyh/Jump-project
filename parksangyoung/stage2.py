@@ -1,6 +1,7 @@
 import pygame
 import sys
 import importlib
+from map import blocks
 
 def run_stage():
     pygame.init()
@@ -31,14 +32,6 @@ floor_y = SCREEN_HEIGHT - floor_height
 # 발판 속성 설정
 platform_width, platform_height = 100, 20
 platform_color = BLUE
-
-# 블록 리스트 초기화
-blocks = [
-    Block(50, 100),
-    Block(250, 400),
-    Block(500, 300),
-    Block(600, 200)
-    ]
 
 
 
