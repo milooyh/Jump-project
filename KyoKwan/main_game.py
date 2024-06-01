@@ -62,6 +62,10 @@ def reset_game():
     jumping_block.is_visible = False
     on_jumping_block = False
     jump_timer = 0
+    
+def teleport_to_portal():
+    global character_x, character_y
+    character_x, character_y = portal_position[0], portal_position[1] - character_height
 
 running = True
 vertical_momentum = 0
@@ -74,6 +78,8 @@ block_spawned = False
 camera_x = 0
 on_jumping_block = False
 jump_timer = 0
+key_down_count = 0
+
 
 while running:
     screen.fill(WHITE)
@@ -85,23 +91,15 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 space_pressed = True
+            if event.key == pygame.K_DOWN:
+                key_down_count += 1
+                if key_down_count == 20 and character_x == 0:  # 왼쪽 끝에 붙어 있을 때
+                    teleport_to_portal()
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
                 space_pressed = False
-
-    if space_pressed and is_on_ground:
-        vertical_momentum = -jump_speed
-        is_on_ground = False
-
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
-        character_x -= character_speed
-    if keys[pygame.K_RIGHT]:
-        character_x += character_speed
-
-    character_x = max(0, character_x)
-    character_x = min(character_x, max_map_width - character_width)
-
+            if event.key == pygame.K_DOWN:
+                key_down_count = 0
     if not on_jumping_block:
         vertical_momentum += gravity
     character_y += vertical_momentum
