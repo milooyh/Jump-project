@@ -50,7 +50,7 @@ portal_position = Map_1.portal_position
 portal_size = 70
 
 # 포탈 이미지 로드
-portal_image = pygame.image.load('KyoKwan\portal_image.png')
+portal_image = pygame.image.load('C:\OSSW_Kyo\KyoKwan\portal_image.png')
 portal_image = pygame.transform.scale(portal_image, (portal_size, portal_size))
 portal_angle = 0
 
