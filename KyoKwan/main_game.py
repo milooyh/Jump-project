@@ -92,10 +92,10 @@ while running:
                     down_key_count += 1
                     if down_key_count >= 20:
                         character_x = 1000
-                        character_y = 540  # y 좌표도 변경
-                        down_key_count = 0  # 카운트 초기화
+                        character_y = 540  
+                        down_key_count = 0  
                 else:
-                    down_key_count = 0  # 텔레포트 구역이 아닐 때는 카운트 초기화
+                    down_key_count = 0  
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
