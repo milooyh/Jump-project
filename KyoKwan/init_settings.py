@@ -24,7 +24,7 @@ jump_speed = 20
 gravity = 1.4
 
 # 캐릭터 이미지 로드
-character_image = pygame.image.load('KyoKwan\User.png')
+character_image = pygame.image.load('C:\OSSW_Kyo\KyoKwan\User.png')
 character_image = pygame.transform.scale(character_image, (character_width, character_height))
 
 # 바닥 속성
