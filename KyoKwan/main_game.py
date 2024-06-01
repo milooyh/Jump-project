@@ -34,7 +34,6 @@ def load_next_map():
         camera_x = 0
         blocks = load_map(map_modules[current_map_index])
     else:
-
         pygame.quit()
         sys.exit()
 
@@ -74,6 +73,7 @@ block_spawned = False
 camera_x = 0
 on_jumping_block = False
 jump_timer = 0
+down_key_count = 0
 
 while running:
     screen.fill(WHITE)
@@ -85,13 +85,17 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 space_pressed = True
+            if event.key == pygame.K_DOWN:
+                down_key_count += 1
+                if down_key_count >= 20:
+                    character_x = 1000
+                    down_key_count = 0  # 카운트 초기화
+
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
                 space_pressed = False
-
-    if space_pressed and is_on_ground:
-        vertical_momentum = -jump_speed
-        is_on_ground = False
+            if event.key == pygame.K_DOWN:
+                down_key_count = 0  # 키를 떼면 카운트 초기화
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
