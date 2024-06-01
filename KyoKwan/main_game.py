@@ -74,7 +74,7 @@ camera_x = 0
 on_jumping_block = False
 jump_timer = 0
 down_key_count = 0
-teleport_zone = pygame.Rect(1, 570, 10, 10)  
+teleport_zone = pygame.Rect(1, 540, 10, 10)  
 
 while running:
     screen.fill(WHITE)
