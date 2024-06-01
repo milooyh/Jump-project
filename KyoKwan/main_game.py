@@ -61,7 +61,7 @@ def reset_game():
     jumping_block.is_visible = False
     on_jumping_block = False
     jump_timer = 0
-    down_key_count = 0  # 텔레포트 카운트 초기화
+    down_key_count = 0  
 
 running = True
 vertical_momentum = 0
