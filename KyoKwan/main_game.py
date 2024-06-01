@@ -241,6 +241,9 @@ while running:
     if check_portal_collision(character_rect, portal_position, portal_size):
         load_next_map()
 
+    # 텔레포트 존 그리기
+    pygame.draw.rect(screen, (255, 0, 0), teleport_zone, 2)  # 빨간색으로 테두리 그림
+
     screen.blit(character_image, (character_x - camera_x, character_y))  # 이 부분을 수정하여 캐릭터 이미지를 그림
     pygame.display.update()
     clock.tick(60)
