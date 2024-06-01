@@ -1,6 +1,10 @@
 import pygame
 import sys
 import importlib
+from block import Block, MovingBlock
+from obstacle import Spike
+from portal import Portal
+import map
 
 pygame.init()
 
@@ -31,58 +35,15 @@ floor_y = SCREEN_HEIGHT - floor_height
 platform_width, platform_height = 100, 20
 platform_color = BLUE
 
+# 맵 불러오기 (예시로 Map4 사용)
+current_map = map.Map4
 
-# 블록 클래스 정의
-class Block:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-    def move(self):
-        pass
-
-# 움직이는 블록 클래스 정의 (Block 클래스 상속)
-class MovingBlock(Block):
-    def __init__(self, x, y, move_range=100, speed=2):
-        super().__init__(x, y)
-        self.move_range = move_range
-        self.speed = speed
-        self.initial_x = x
-        self.direction = 1
-
-    def move(self):
-        self.x += self.speed * self.direction
-        if self.x > self.initial_x + self.move_range or self.x < self.initial_x - self.move_range:
-            self.direction *= -1
-# 블록 리스트 초기화
-blocks = [
-    Block(0, 550),
-    MovingBlock(400, 525, move_range=200, speed=2),
-    Block(700, 425),
-    MovingBlock(400, 300, move_range=200, speed=3),
-    Block(0, 200),
-    MovingBlock(400, 100, move_range=200, speed=4)
-]
-
-# 포탈 클래스 정의
-class Portal:
-    def __init__(self, x, y, width, height, target_stage):
-        self.rect = pygame.Rect(x, y, width, height)
-        self.target_stage = target_stage
-
-# 포탈 리스트 초기화
+blocks = current_map.blocks
+spikes = getattr(current_map, 'spikes', [])
 portal_width, portal_height = 40, 40
-portals = Portal(745, 50, portal_width, portal_height, 'stage5'),
+portals = [Portal(745, 50, portal_width, portal_height, 'stage5')]
 
 clock = pygame.time.Clock()
-
-# 가시 클래스 정의
-class Spike:
-    def __init__(self, x, y, width, height):
-        self.rect = pygame.Rect(x, y, width, height)
-
-spike_width, spike_height = 20, 20
-
-spikes = []
 
 # 충돌 감지
 def check_collision(character, blocks):
@@ -173,9 +134,7 @@ while running:
     spike_collided = check_spike_collision(character_rect, spikes)
     if spike_collided:
         print("Character hit a spike! Respawning...")
-        character_x, character_y = initial_character_x, initial_character_y
-        vertical_momentum = 0
-        is_on_ground = True
+        reset_game()
     
     # 바닥과 충돌하면 게임 리셋
     if character_y >= floor_y - character_height:
@@ -186,7 +145,6 @@ while running:
         block.move()
         pygame.draw.rect(screen, platform_color, (block.x, block.y, platform_width, platform_height))
 
-    
     # 포탈 그리기
     for portal in portals:
         pygame.draw.rect(screen, (255, 0, 255), portal.rect)  # 포탈 색상은 보라색으로 설정
