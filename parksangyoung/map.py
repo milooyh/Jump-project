@@ -1,4 +1,5 @@
 from block import Block, MovingBlock
+from obstacle import Spike
 
 blocks = [  
     Block(100, 500),
@@ -15,16 +16,26 @@ blocks = [
     ]
 
 # 블록 좌표 설정
-blocks_positions = [
-    (0, 300),
-    (100, 300),
-    (200, 300),
-    (300, 300),
-    (400, 300),
-    (500, 300),
-    (600, 300),
-    (700, 300)
+blocks = [
+    Block(0, 300),
+    Block(100, 300),
+    Block(200, 300),
+    Block(300, 300),
+    Block(400, 300),
+    Block(500, 300),
+    Block(600, 300),
+    Block(700, 300)
 ]
+spikes = [
+    Spike(150, 250,),
+    Spike(225, 150,),
+    Spike(300, 250),
+    Spike(375, 150),
+    Spike(450, 250),
+    Spike(525, 150),
+    Spike(600, 250),
+    Spike(675, 150)
+    ]
 
 blocks = [
     Block(0, 550),
