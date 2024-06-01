@@ -32,12 +32,6 @@ floor_y = SCREEN_HEIGHT - floor_height
 platform_width, platform_height = 100, 20
 platform_color = BLUE
 
-# 블록 클래스 정의
-class Block:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
 # 블록 리스트 초기화
 blocks = [
     Block(50, 100),
@@ -46,11 +40,7 @@ blocks = [
     Block(600, 200)
     ]
 
-# 포탈 클래스 정의
-class Portal:
-    def __init__(self, x, y, width, height, target_stage):
-        self.rect = pygame.Rect(x, y, width, height)
-        self.target_stage = target_stage
+
 
 # 포탈 리스트 초기화
 portal_width, portal_height = 40, 40

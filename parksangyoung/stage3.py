@@ -44,14 +44,9 @@ blocks_positions = [
     (700, 300)
 ]
 
-# 블록 클래스 정의
-class Block:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
 
-# 블록 리스트 초기화
-blocks = [Block(x, y) for x, y in blocks_positions]
+
+
 
 # 포탈 클래스 정의
 class Portal:
