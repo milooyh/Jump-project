@@ -74,7 +74,7 @@ camera_x = 0
 on_jumping_block = False
 jump_timer = 0
 down_key_count = 0
-teleport_zone = pygame.Rect(0, 0, 10, 10)
+teleport_zone = pygame.Rect(0, floor_y - 10 - character_height, 10, 10)  # Y 좌표를 바닥 바로 위로 설정
 
 while running:
     screen.fill(WHITE)
@@ -232,7 +232,8 @@ while running:
     pygame.draw.rect(screen, (0, 0, 255), trigger_moving_block_zone.move(-camera_x, 0), 2)
     pygame.draw.rect(screen, (0, 255, 0), trigger_zone.move(-camera_x, 0), 2)
     pygame.draw.rect(screen, (0, 0, 255), spike_trigger_zone.move(-camera_x, 0), 2)
-
+    pygame.draw.rect(screen, (255, 0, 0), teleport_zone, 2)  
+    
     portal_angle += 2
     rotated_portal_image = pygame.transform.rotate(portal_image, portal_angle)
     portal_rect = rotated_portal_image.get_rect(center=(portal_position[0] - camera_x + portal_size // 2, portal_position[1] + portal_size // 2))
@@ -241,10 +242,7 @@ while running:
     if check_portal_collision(character_rect, portal_position, portal_size):
         load_next_map()
 
-    # 텔레포트 존 그리기
-    pygame.draw.rect(screen, (255, 0, 0), teleport_zone, 2)  # 빨간색으로 테두리 그림
-
-    screen.blit(character_image, (character_x - camera_x, character_y))  # 이 부분을 수정하여 캐릭터 이미지를 그림
+    screen.blit(character_image, (character_x - camera_x, character_y))  
     pygame.display.update()
     clock.tick(60)
 
