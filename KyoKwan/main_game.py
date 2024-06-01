@@ -38,7 +38,7 @@ def load_next_map():
         sys.exit()
 
 def reset_game():
-    global character_x, character_y, vertical_momentum, is_on_ground, blocks, additional_block_added_1, additional_block_added_2, moving_block_triggered, block_spawn_time, block_spawned, camera_x, trick_hole_visible, trick_hole_y, falling_block, spike_height, spike_positions, spike_triggered, on_jumping_block, jump_timer
+    global character_x, character_y, vertical_momentum, is_on_ground, blocks, additional_block_added_1, additional_block_added_2, moving_block_triggered, block_spawn_time, block_spawned, camera_x, trick_hole_visible, trick_hole_y, falling_block, spike_height, spike_positions, spike_triggered, on_jumping_block, jump_timer, down_key_count
     character_x, character_y = 30, SCREEN_HEIGHT - character_height * 2
     vertical_momentum = 0
     is_on_ground = True
@@ -61,6 +61,7 @@ def reset_game():
     jumping_block.is_visible = False
     on_jumping_block = False
     jump_timer = 0
+    down_key_count = 0  # 텔레포트 카운트 초기화
 
 running = True
 vertical_momentum = 0
@@ -93,12 +94,12 @@ while running:
                         character_x = 1000
                         character_y = 540  # y 좌표도 변경
                         down_key_count = 0  # 카운트 초기화
+                else:
+                    down_key_count = 0  # 텔레포트 구역이 아닐 때는 카운트 초기화
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
                 space_pressed = False
-            if event.key == pygame.K_DOWN:
-                down_key_count = 0  # 키를 떼면 카운트 초기화
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
