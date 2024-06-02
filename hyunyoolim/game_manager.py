@@ -8,6 +8,7 @@ from screen import Screen
 from block import Block
 from obstacle import Obstacle
 from portal import Portal
+from item import *
 
 class GameManager:
     def __init__(self):
