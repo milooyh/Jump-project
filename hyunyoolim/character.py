@@ -5,6 +5,7 @@ from setting import *
 from block import Block
 from obstacle import Obstacle
 from portal import Portal
+from screen import Screen
 
 class Character:
     def __init__(self, blocks, obstacles, portal):

@@ -8,6 +8,9 @@ from portal import Portal
 class Screen:
     def __init__(self):
         pass
+    
+    
+    
 
     @staticmethod
     def show_start_screen(screen):
