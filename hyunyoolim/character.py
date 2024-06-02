@@ -34,6 +34,7 @@ class Character:
         self.life_counter = 0
         self.invincible = False
         self.invincible_timer = 0
+        self.speed_boost_timer = 0
 
     def set_initial_position(self):
         self.x = SCREEN_WIDTH // 2
