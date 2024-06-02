@@ -32,6 +32,7 @@ class Character:
         self.current_color_index = 0
         self.show_life = False
         self.life_counter = 0
+        self.invincible = False
 
     def set_initial_position(self):
         self.x = SCREEN_WIDTH // 2
