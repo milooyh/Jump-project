@@ -7,6 +7,7 @@ from obstacle import Obstacle
 from portal import Portal
 from screen import Screen
 from portal import Portal
+from item import *
 
 class Character:
     def __init__(self, blocks, obstacles, portal):
