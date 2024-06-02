@@ -106,6 +106,8 @@ class Character:
             for obstacle in self.obstacles:
                 obstacle.speed *= 2
             self.speed_boost_timer = 0
+            
+        self.check_item_collision()
 
     def draw_game_elements(self, screen):
         pygame.draw.rect(screen, self.colors[self.current_color_index], pygame.Rect(self.x, self.y, self.width, self.height))
