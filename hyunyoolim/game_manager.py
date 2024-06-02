@@ -53,7 +53,9 @@ class GameManager:
     # 게임 시작 함수
     def run_game(self):
         running = True
-        font = pygame.font.Font(None, 36)  # 라이프 개수를 표시할 폰트 설정
+        font = pygame.font.Font(None, 36)
+        obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
+
 
         while running:
             self.screen.fill(WHITE)
