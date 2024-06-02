@@ -123,7 +123,20 @@ class Character:
         if self.show_life:
             font = pygame.font.Font(None, 36)
             text = font.render(f"Life: {self.life}", True, BLACK)
-            screen.blit(text, (10, 10))
+
             current_time = pygame.time.get_ticks()
             if current_time - self.life_counter >= 1000:
                 self.show_life = False
+
+        # 남은 시간 표시
+        if self.invincible:
+            remaining_time = 5 - (pygame.time.get_ticks() - self.invincible_timer) // 1000
+            font = pygame.font.Font(None, 36)
+            text = font.render(f"Invincible: {remaining_time}", True, BLACK)
+            screen.blit(text, (10, 50))
+
+        if self.speed_boost_timer:
+            remaining_time = 5 - (pygame.time.get_ticks() - self.speed_boost_timer) // 1000
+            font = pygame.font.Font(None, 36)
+            text = font.render(f"Speed Boost: {remaining_time}", True, BLACK)
+            screen.blit(text, (10, 80))
