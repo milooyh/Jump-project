@@ -82,12 +82,11 @@ class Screen:
                         sys.exit()
 
     @staticmethod
-    def draw_game_elements(screen, character, blocks, obstacles, portal):
-        """게임 요소를 화면에 그림"""
-        pygame.draw.rect(screen, RED, pygame.Rect(character.x, character.y, character.width, character.height))
-        for block in blocks:
-            block.draw(screen)
-        for obstacle in obstacles:
-            obstacle.draw(screen)
-        if portal:
-            portal.draw(screen)
+    def draw_game_elements(screen, character_rect):
+        pygame.draw.rect(screen, RED, character_rect)
+        for block in Block:
+            pygame.draw.rect(screen, platform_color, pygame.Rect(block.x, block.y, platform_width, platform_height))
+        for obstacle in Obstacle:
+            pygame.draw.rect(screen, obstacle_color, pygame.Rect(obstacle.x, obstacle.y, obstacle_width, obstacle_height))
+        if Portal:
+            pygame.draw.rect(screen, PORTAL_COLOR, Portal.rect)
