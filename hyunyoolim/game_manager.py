@@ -29,8 +29,9 @@ class GameManager:
         self.blocks = [Block(x, y) for x, y in blocks_positions]
         self.obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
 
-        # 포털 초기화
-        self.portal = Portal(700, 70)
+        highest_block_x = max([block.x for block in self.blocks])
+        highest_block_y = max([block.y for block in self.blocks])
+        self.portal = Portal(highest_block_x, highest_block_y - 100)
 
         # 캐릭터 초기화
         self.character = Character(self.blocks, self.obstacles, self.portal)  # 포털도 전달
