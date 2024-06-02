@@ -140,3 +140,9 @@ class Character:
             font = pygame.font.Font(None, 36)
             text = font.render(f"Speed Boost: {remaining_time}", True, BLACK)
             screen.blit(text, (10, 80))
+
+    def check_item_collision(self):
+        character_rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        for item in self.items:
+            if character_rect.colliderect(item.rect):
+                self.handle_item_collision(item)
