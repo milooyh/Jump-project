@@ -33,8 +33,12 @@ class GameManager:
         highest_block_y = max([block.y for block in self.blocks])
         self.portal = Portal(highest_block_x, highest_block_y - 100)
 
-        # 캐릭터 초기화
-        self.character = Character(self.blocks, self.obstacles, self.portal)  # 포털도 전달
+        self.heart_item = HeartItem(350, 350)  # 예시 좌표로 설정
+        self.speed_item = SpeedItem(600, 250)  # 예시 좌표로 설정
+        self.invincibility_item = InvincibilityItem(500, 150)  # 예시 좌표로 설정
+        
+        self.items = [self.heart_item, self.speed_item, self.invincibility_item]
+        self.character = Character(self.blocks, self.obstacles, self.portal, self.items)
 
         self.game_over = False
         self.game_clear = False
