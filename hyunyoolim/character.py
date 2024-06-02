@@ -111,9 +111,14 @@ class Character:
 
     def draw_game_elements(self, screen, blocks, obstacles, portal):
         screen.blit(self.image, (self.x, self.y))
+        
+        for block in blocks:
+            block.draw(screen)
+            
         for obstacle in self.obstacles:
             obstacle.draw(screen)
-        self.portal.draw(screen)
+        
+        portal.draw(screen)
         
         if self.show_life:
             font = pygame.font.Font(None, 36)
