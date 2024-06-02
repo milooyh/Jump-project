@@ -90,6 +90,11 @@ class GameManager:
                 life_text = font.render(f"Life: {self.character.life}", True, BLACK)
                 life_rect = life_text.get_rect(center=(SCREEN_WIDTH // 2, 30))
                 self.screen.blit(life_text, life_rect)
+                
+                self.heart_item.draw(self.screen)
+                self.speed_item.draw(self.screen)
+                self.invincibility_item.draw(self.screen)
+                print('아이템 그리기')
 
                 if self.character.game_clear:
                     Screen.show_clear_screen(self.screen)
