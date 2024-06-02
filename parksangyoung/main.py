@@ -74,9 +74,6 @@ class Game:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.character.jump()
-                if event.type == pygame.KEYUP:
-                    if event.key == pygame.K_SPACE:
-                        self.character.is_on_ground = False
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
