@@ -146,3 +146,19 @@ class Character:
         for item in self.items:
             if character_rect.colliderect(item.rect):
                 self.handle_item_collision(item)
+    
+    def handle_item_collision(self, item):
+        if isinstance(item, HeartItem):
+            if not self.heart_item_eaten:
+                self.life += 1
+                self.heart_item_eaten = True
+                item.x = -100  # Move off-screen
+        elif isinstance(item, SpeedItem):
+            for obstacle in self.obstacles:
+                obstacle.speed /= 2  # Halve speed
+            self.speed_boost_timer = pygame.time.get_ticks()  # Start timer
+            item.x = -100  # Move off-screen
+        elif isinstance(item, InvincibilityItem):
+            self.invincible = True
+            self.invincible_timer = pygame.time.get_ticks()  # Start timer
+            item.x = -100  # Move off-screen
