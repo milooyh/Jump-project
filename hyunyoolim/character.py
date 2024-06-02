@@ -109,7 +109,7 @@ class Character:
             
         self.check_item_collision()
 
-    def draw_game_elements(self, screen):
+    def draw_game_elements(self, screen, blocks, obstacles, portal):
         pygame.draw.rect(screen, self.colors[self.current_color_index], pygame.Rect(self.x, self.y, self.width, self.height))
         for block in self.blocks:
             block.draw(screen)
