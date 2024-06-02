@@ -38,6 +38,9 @@ class Character:
         self.invincible_remaining_time = 0
         self.speed_boost_remaining_time = 0
         self.heart_item_eaten = False
+        
+        self.image = pygame.image.load('hyunyoolim\character.png').convert_alpha()
+        self.image = pygame.transform.scale(self.image, (self.width, self.height))
 
     def set_initial_position(self):
         self.x = SCREEN_WIDTH // 2
