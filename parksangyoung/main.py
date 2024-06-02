@@ -1,11 +1,11 @@
 import pygame
 import sys
 import importlib
-from block import Block, MovingBlock  # MovingBlock 추가
+from block import Block, MovingBlock
 from obstacle import Spike
 from portal import Portal
-import map
 from character import Character
+import map
 
 pygame.init()
 
@@ -42,7 +42,8 @@ class Game:
         self.spikes = []
         self.portals = []
 
-        self.load_map(map.Map4)
+        self.map_index = 0
+        self.load_map(map.maps[self.map_index])
 
         self.clock = pygame.time.Clock()
 
@@ -50,7 +51,17 @@ class Game:
         self.blocks = [block if isinstance(block, MovingBlock) else Block(block.x, block.y) for block in game_map.blocks]
         self.spikes = getattr(game_map, 'spikes', [])
         portal_width, portal_height = 40, 40
-        self.portals = [Portal(745, 50, portal_width, portal_height, 'stage5')]
+        self.portals = [Portal(745, 50, portal_width, portal_height, 'next_stage')]
+
+    def next_stage(self):
+        self.map_index += 1
+        if self.map_index < len(map.maps):
+            self.load_map(map.maps[self.map_index])
+            self.character.reset(initial_character_x, initial_character_y)
+        else:
+            print("All stages completed!")
+            pygame.quit()
+            sys.exit()
 
     def run(self):
         running = True
@@ -94,9 +105,8 @@ class Game:
             # 포탈 충돌 검사 및 처리
             portal_collided = self.character.rect.collidelist([portal.rect for portal in self.portals])
             if portal_collided != -1:
-                stage_module = importlib.import_module(self.portals[portal_collided].target_stage)
-                stage_module.run_stage()
-                running = False
+                self.next_stage()
+                continue
 
             # 가시 충돌 검사 및 처리
             spike_collided = self.character.rect.collidelist([spike.rect for spike in self.spikes])
@@ -116,6 +126,10 @@ class Game:
             # 포탈 그리기
             for portal in self.portals:
                 pygame.draw.rect(self.screen, (255, 0, 255), portal.rect)
+
+            # 가시 그리기
+            for spike in self.spikes:
+                pygame.draw.rect(self.screen, (0, 0, 0), spike.rect)  # 가시 색상은 검정색으로 설정
 
             # 캐릭터 생성
             pygame.draw.rect(self.screen, RED, self.character.rect)
