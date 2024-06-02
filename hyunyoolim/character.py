@@ -27,6 +27,7 @@ class Character:
         self.blocks = blocks
         self.obstacles = obstacles
         self.portal = portal
+        self.items = items
         self.colors = [RED, ORANGE, YELLOW]
         self.current_color_index = 0
         self.show_life = False
