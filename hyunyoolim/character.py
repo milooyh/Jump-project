@@ -101,6 +101,11 @@ class Character:
         
         if self.invincible and current_time - self.invincible_timer > 5000:
             self.invincible = False
+        
+        if self.speed_boost_timer and current_time - self.speed_boost_timer > 5000:
+            for obstacle in self.obstacles:
+                obstacle.speed *= 2
+            self.speed_boost_timer = 0
 
     def draw_game_elements(self, screen):
         pygame.draw.rect(screen, self.colors[self.current_color_index], pygame.Rect(self.x, self.y, self.width, self.height))
