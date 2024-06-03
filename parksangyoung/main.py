@@ -27,9 +27,6 @@ gravity = 1
 floor_height = 22
 floor_y = SCREEN_HEIGHT - floor_height
 
-# 발판 속성 설정
-platform_color = BLUE
-
 class Game:
     def __init__(self):
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
