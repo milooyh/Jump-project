@@ -1,5 +1,6 @@
 from block import Block, MovingBlock
 from obstacle import Spike
+from portal import Portal
 
 class Map1:
     initial_character_x = 100
@@ -10,6 +11,9 @@ class Map1:
         Block(500, 300),
         Block(700, 200)
     ]
+    portals = [
+        Portal(745, 50, 40, 40, 'stage2')
+    ]
 
 class Map2:
     initial_character_x = 50
@@ -19,6 +23,9 @@ class Map2:
         Block(250, 400),
         Block(500, 300),
         Block(600, 200)
+    ]
+    portals = [
+        Portal(745, 50, 40, 40, 'stage3')
     ]
 
 class Map3:
@@ -44,6 +51,9 @@ class Map3:
         Spike(600, 250),
         Spike(675, 150)
     ]
+    portals = [
+        Portal(745, 50, 40, 40, 'stage4')
+    ]
 
 class Map4:
     initial_character_x = 0
@@ -55,6 +65,9 @@ class Map4:
         MovingBlock(400, 300, move_range=200, speed=3),
         Block(0, 200),
         MovingBlock(400, 100, move_range=200, speed=4)
+    ]
+    portals = [
+        Portal(745, 50, 40, 40, 'stage5')
     ]
 
 maps = [Map1, Map2, Map3, Map4]

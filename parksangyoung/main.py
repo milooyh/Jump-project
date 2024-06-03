@@ -49,8 +49,7 @@ class Game:
     def load_map(self, game_map):
         self.blocks = [block if isinstance(block, MovingBlock) else Block(block.x, block.y) for block in game_map.blocks]
         self.spikes = getattr(game_map, 'spikes', [])
-        portal_width, portal_height = 40, 40
-        self.portals = [Portal(745, 50, portal_width, portal_height, 'next_stage')]
+        self.portals = game_map.portals
         
         self.initial_character_x = game_map.initial_character_x
         self.initial_character_y = game_map.initial_character_y
