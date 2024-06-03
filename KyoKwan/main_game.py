@@ -3,6 +3,20 @@ import sys
 from init_settings import *
 from game_objects import *
 
+# 이미지 로드
+left_walk = pygame.image.load('C:/OSSW_Kyo/KyoKwan/Left_W.png')
+left_jump = pygame.image.load('Left_J.png')
+right_walk = pygame.image.load('Right_W.png')
+right_jump = pygame.image.load('Right_J.png')
+user_image = pygame.image.load('User.png')
+
+# 크기 조정
+left_walk = pygame.transform.scale(left_walk, (character_width, character_height))
+left_jump = pygame.transform.scale(left_jump, (character_width, character_height))
+right_walk = pygame.transform.scale(right_walk, (character_width, character_height))
+right_jump = pygame.transform.scale(right_jump, (character_width, character_height))
+user_image = pygame.transform.scale(user_image, (character_width, character_height))
+
 map_modules = [Map_1]
 current_map_index = 0
 blocks = load_map(map_modules[current_map_index])
@@ -102,10 +116,23 @@ while running:
                 space_pressed = False
 
     keys = pygame.key.get_pressed()
+    
+    # 기본 이미지 설정
+    character_image = user_image
+
     if keys[pygame.K_LEFT]:
         character_x -= character_speed
+        if not is_on_ground:
+            character_image = left_jump
+        else:
+            character_image = left_walk
+
     if keys[pygame.K_RIGHT]:
         character_x += character_speed
+        if not is_on_ground:
+            character_image = right_jump
+        else:
+            character_image = right_walk
 
     character_x = max(0, character_x)
     character_x = min(character_x, max_map_width - character_width)
