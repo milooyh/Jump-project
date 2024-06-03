@@ -42,13 +42,13 @@ class Map3:
         Block(700, 300)
     ]
     spikes = [
-        Spike(150, 250),
+        Spike(150, 270),
         Spike(225, 150),
-        Spike(300, 250),
+        Spike(300, 270),
         Spike(375, 150),
-        Spike(450, 250),
+        Spike(450, 270),
         Spike(525, 150),
-        Spike(600, 250),
+        Spike(600, 270),
         Spike(675, 150)
     ]
     portals = [
