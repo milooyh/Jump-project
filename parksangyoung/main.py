@@ -15,7 +15,6 @@ SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
 # 색깔 정의
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
-BLUE = (0, 0, 255)
 FLOOR_COLOR = (144, 228, 144)
 
 # 캐릭터 속성 설정
