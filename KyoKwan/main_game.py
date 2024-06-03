@@ -6,7 +6,7 @@ from game_objects import *
 # 이미지 로드
 left_walk = pygame.image.load('C:/OSSW_Kyo/KyoKwan/Left_W.png')
 left_jump = pygame.image.load('C:/OSSW_Kyo/KyoKwan/Left_J.png')
-right_walk = pygame.image.load('Right_W.png')
+right_walk = pygame.image.load('C:/OSSW_Kyo/KyoKwan/Right_W.png')
 right_jump = pygame.image.load('Right_J.png')
 user_image = pygame.image.load('User.png')
 
