@@ -52,7 +52,7 @@ class Map3:
         Spike(675, 150)
     ]
     portals = [
-        Portal(745, 50, 40, 40, 'stage4')
+        Portal(745, 200, 40, 40, 'stage4')
     ]
 
 class Map4:
