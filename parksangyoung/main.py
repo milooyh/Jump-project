@@ -19,7 +19,6 @@ BLUE = (0, 0, 255)
 FLOOR_COLOR = (144, 228, 144)
 
 # 캐릭터 속성 설정
-initial_character_x, initial_character_y = 50, 500
 character_speed = 6
 jump_speed = 16
 gravity = 1
@@ -36,14 +35,14 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption("점프 점프")
 
-        self.character = Character(initial_character_x, initial_character_y, speed=character_speed, jump_speed=jump_speed)
-
         self.blocks = []
         self.spikes = []
         self.portals = []
 
         self.map_index = 0
         self.load_map(map.maps[self.map_index])
+
+        self.character = Character(self.initial_character_x, self.initial_character_y, speed=character_speed, jump_speed=jump_speed)
 
         self.clock = pygame.time.Clock()
 
@@ -52,12 +51,15 @@ class Game:
         self.spikes = getattr(game_map, 'spikes', [])
         portal_width, portal_height = 40, 40
         self.portals = [Portal(745, 50, portal_width, portal_height, 'next_stage')]
+        
+        self.initial_character_x = game_map.initial_character_x
+        self.initial_character_y = game_map.initial_character_y
 
     def next_stage(self):
         self.map_index += 1
         if self.map_index < len(map.maps):
             self.load_map(map.maps[self.map_index])
-            self.character.reset(initial_character_x, initial_character_y)
+            self.character.reset(self.initial_character_x, self.initial_character_y)
         else:
             print("All stages completed!")
             pygame.quit()
@@ -109,11 +111,11 @@ class Game:
             spike_collided = self.character.rect.collidelist([spike.rect for spike in self.spikes])
             if spike_collided != -1:
                 print("Character hit a spike! Respawning...")
-                self.character.reset(initial_character_x, initial_character_y)
+                self.character.reset(self.initial_character_x, self.initial_character_y)
 
             # 바닥과 충돌하면 게임 리셋
             if self.character.y >= floor_y - self.character.height:
-                self.character.reset(initial_character_x, initial_character_y)
+                self.character.reset(self.initial_character_x, self.initial_character_y)
 
             # 발판 그리기
             for block in self.blocks:

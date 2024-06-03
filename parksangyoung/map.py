@@ -2,6 +2,8 @@ from block import Block, MovingBlock
 from obstacle import Spike
 
 class Map1:
+    initial_character_x = 100
+    initial_character_y = 500
     blocks = [  
         Block(100, 500),
         Block(300, 400),
@@ -10,6 +12,8 @@ class Map1:
     ]
 
 class Map2:
+    initial_character_x = 50
+    initial_character_y = 100
     blocks = [
         Block(50, 100),
         Block(250, 400),
@@ -18,6 +22,8 @@ class Map2:
     ]
 
 class Map3:
+    initial_character_x = 0
+    initial_character_y = 300
     blocks = [
         Block(0, 300),
         Block(100, 300),
@@ -40,6 +46,8 @@ class Map3:
     ]
 
 class Map4:
+    initial_character_x = 0
+    initial_character_y = 550
     blocks = [
         Block(0, 550),
         MovingBlock(400, 525, move_range=200, speed=2),
