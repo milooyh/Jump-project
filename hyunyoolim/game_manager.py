@@ -62,6 +62,7 @@ class GameManager:
         self.stage += 1
         self.cahracter.reset()
         self.reset_items_and_obstacles()
+        self.portal = Portal(750, 50 * self.stage)
     
     # 게임 시작 함수
     def run_game(self):
