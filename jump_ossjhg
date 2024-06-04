@@ -18,7 +18,7 @@ YELLOW = (255, 223, 0)
 PURPLE = (128, 0, 128)
 FLOOR_COLOR = (144, 228, 144)
 BLACK = (0, 0, 0)
-ORANGE = (255, 165, 0)  # 새로운 적 색깔
+ORANGE = (255, 165, 0)
 
 # 캐릭터 속성 설정
 character_width, character_height = 20, 20
