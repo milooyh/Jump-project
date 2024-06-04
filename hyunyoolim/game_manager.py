@@ -52,6 +52,7 @@ class GameManager:
 
     def reset_items_and_obstacles(self):
         """아이템과 장애물 위치 재설정"""
+        self.heart_items = HeartItem(250,400)
     # 게임 시작 함수
     def run_game(self):
         running = True
