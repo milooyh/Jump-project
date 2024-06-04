@@ -1,3 +1,4 @@
+import os
 import pygame
 import sys
 import importlib
@@ -15,6 +16,7 @@ SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
 # 색깔 정의
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
+BLUE = (0, 0, 255)
 FLOOR_COLOR = (144, 228, 144)
 
 # 캐릭터 속성 설정
@@ -25,6 +27,9 @@ gravity = 1
 # 바닥 속성 설정
 floor_height = 22
 floor_y = SCREEN_HEIGHT - floor_height
+
+# 발판 속성 설정
+platform_color = BLUE
 
 class Game:
     def __init__(self):
@@ -38,7 +43,8 @@ class Game:
         self.map_index = 0
         self.load_map(map.maps[self.map_index])
 
-        self.character = Character(self.initial_character_x, self.initial_character_y, speed=character_speed, jump_speed=jump_speed)
+        character_image_path = os.path.join(os.path.dirname(__file__), "images", "default.png")  # 캐릭터 이미지 파일 경로
+        self.character = Character(self.initial_character_x, self.initial_character_y, speed=character_speed, jump_speed=jump_speed, image_path=character_image_path)
 
         self.clock = pygame.time.Clock()
 
@@ -126,7 +132,7 @@ class Game:
                 pygame.draw.rect(self.screen, (0, 0, 0), spike.rect)  # 가시 색상은 검정색으로 설정
 
             # 캐릭터 생성
-            pygame.draw.rect(self.screen, RED, self.character.rect)
+            self.character.draw(self.screen)
 
             pygame.display.update()
             self.clock.tick(60)
