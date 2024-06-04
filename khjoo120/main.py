@@ -5,7 +5,7 @@ from block import Block
 from obstacle import Spike
 from portal import Portal
 from character import Character
-import map as map
+import map 
 
 pygame.init()
 
