@@ -57,6 +57,9 @@ class GameManager:
         self.invincibility_item = InvincibilityItem(400,700)
         self.obstacles = [Obstacle(x, y, speed) for x, y, speed in obstacles_positions]
 
+    def advance_stage(self):
+        
+    
     # 게임 시작 함수
     def run_game(self):
         running = True
