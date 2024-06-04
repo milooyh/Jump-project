@@ -39,7 +39,7 @@ platform_color = BLUE
 powerup_radius = 10
 
 # 적 속성 설정
-enemy_width, enemy_height = 30, 30
+enemy_width, enemy_height = 35, 35
 enemy_speed = 5
 
 # 스테이지 1 설정
