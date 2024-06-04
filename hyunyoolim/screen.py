@@ -42,6 +42,7 @@ class Screen:
         screen.blit(text, text_rect)
         pygame.display.update()
         pygame.time.wait(2000)
+        game_manager.advance_stage()
 
     @staticmethod
     def show_game_over_screen(screen, game_manager):
