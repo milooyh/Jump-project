@@ -1,7 +1,7 @@
 import pygame
 
 class Character:
-    def __init__(self, x, y, width=20, height=20, speed=6, jump_speed=16):
+    def __init__(self, x, y, width = 20, height = 20, speed = 6, jump_speed = 16):
         self.x = x
         self.y = y
         self.width = width
