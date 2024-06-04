@@ -39,7 +39,7 @@ platform_color = BLUE
 powerup_radius = 10
 
 # 적 속성 설정
-enemy_width, enemy_height = 35, 35
+enemy_width, enemy_height = 30, 30
 enemy_speed = 5
 
 # 스테이지 1 설정
@@ -215,19 +215,6 @@ while running:
         character_x -= character_speed
     if keys[pygame.K_RIGHT]:
         character_x += character_speed
-
-    # 파워업 효과 적용
-    if powerup_effect:
-        if powerup_effect == "speed":
-            character_speed = 10  # 속도 증가 효과
-        elif powerup_effect == "jump":
-            jump_speed = 25  # 점프 높이 증가 효과
-        
-        # 파워업 효과 지속 시간 체크
-        if (pygame.time.get_ticks() - powerup_effect_start_time) / 1000 > powerup_effect_duration:
-            character_speed = 7.5
-            jump_speed = 20
-            powerup_effect = None
 
     # 화면 범위 제한 및 바닥 충돌 처리
     character_x = max(0, min(SCREEN_WIDTH - character_width, character_x))
