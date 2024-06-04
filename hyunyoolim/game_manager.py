@@ -50,6 +50,8 @@ class GameManager:
         self.character.current_color_index = 0
         self.obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
 
+    def reset_items_and_obstacles(self):
+        """아이템과 장애물 위치 재설정"""
     # 게임 시작 함수
     def run_game(self):
         running = True
