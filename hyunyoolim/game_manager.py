@@ -58,7 +58,7 @@ class GameManager:
         self.obstacles = [Obstacle(x, y, speed) for x, y, speed in obstacles_positions]
 
     def advance_stage(self):
-        
+        """다음 스테이지로 이동"""
     
     # 게임 시작 함수
     def run_game(self):
