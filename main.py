@@ -293,3 +293,4 @@ while running:
 
 
 sys.exit()
+pygame.quit()
