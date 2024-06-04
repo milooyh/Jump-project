@@ -62,7 +62,7 @@ class GameManager:
         self.stage += 1
         self.cahracter.reset()
         self.reset_items_and_obstacles()
-        self.portal = Portal(750, 50 * self.stage)
+        self.portal = Portal(750, 50 * self.stage) # 포털 위치 스테이지에 따라 변경해주기
     
     # 게임 시작 함수
     def run_game(self):
