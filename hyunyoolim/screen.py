@@ -34,7 +34,7 @@ class Screen:
 
     @staticmethod
     def show_clear_screen(screen):
-        """게임 클리어 화면 표시"""
+        """게임 클리어 화면 표시 및 다음 스테이지로 이동"""
         screen.fill(WHITE)
         font = pygame.font.Font(None, 64)
         text = font.render("Game Clear!", True, GREEN)
