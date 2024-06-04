@@ -60,6 +60,7 @@ class GameManager:
     def advance_stage(self):
         """다음 스테이지로 이동"""
         self.stage += 1
+        self.cahracter.reset()
     
     # 게임 시작 함수
     def run_game(self):
