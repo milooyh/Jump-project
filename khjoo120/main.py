@@ -2,10 +2,10 @@ import pygame
 import sys
 import importlib
 from block import Block
-from khjoo120.obstacle import Spike
-from khjoo120.portal import Portal
-from khjoo120.character import Character
-import khjoo120.map as map
+from obstacle import Spike
+from portal import Portal
+from character import Character
+import map as map
 
 pygame.init()
 
