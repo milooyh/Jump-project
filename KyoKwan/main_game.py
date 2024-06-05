@@ -72,12 +72,12 @@ def reset_game():
     falling_block = Block(800, 0, speed=10)
     falling_block.is_visible = False
     spike_height = 20
-    spike_positions = [(x, floor_y - spike_height) for x in range(550, 600, spike_width)]
+    spike_positions = [(x, floor_y - spike_height) for x in range(550, 600, spike_width)]  # 가시 위치 초기화
     spike_triggered = False
     jumping_block.is_visible = False
     on_jumping_block = False
     jump_timer = 0
-    down_key_count = 0  
+    down_key_count = 0
 
 running = True
 vertical_momentum = 0
