@@ -1,4 +1,4 @@
-
+import pygame
 import sys
 
 def show_game_over_screen(screen, score):
