@@ -39,6 +39,8 @@ block_spawn_delay = 2
 falling_block = Block(800, 0, speed=10)
 falling_block.is_visible = False
 
+attempt_count = 0  # 도전 횟수 추적
+
 def load_next_map():
     global current_map_index, character_x, character_y, blocks, camera_x
     current_map_index += 1
@@ -51,7 +53,8 @@ def load_next_map():
         sys.exit()
 
 def reset_game():
-    global character_x, character_y, vertical_momentum, is_on_ground, blocks, additional_block_added_1, additional_block_added_2, moving_block_triggered, block_spawn_time, block_spawned, camera_x, trick_hole_visible, trick_hole_y, falling_block, spike_height, spike_positions, spike_triggered, on_jumping_block, jump_timer, down_key_count
+    global character_x, character_y, vertical_momentum, is_on_ground, blocks, additional_block_added_1, additional_block_added_2, moving_block_triggered, block_spawn_time, block_spawned, camera_x, trick_hole_visible, trick_hole_y, falling_block, spike_height, spike_positions, spike_triggered, on_jumping_block, jump_timer, down_key_count, attempt_count
+    attempt_count += 1  # 도전 횟수 증가
     character_x, character_y = 30, SCREEN_HEIGHT - character_height * 2
     vertical_momentum = 0
     is_on_ground = True
@@ -145,7 +148,6 @@ while running:
     character_y += vertical_momentum
 
     if character_y > SCREEN_HEIGHT:
-        pygame.time.delay(1000)  # 1초 대기
         reset_game()
 
     is_on_ground = False
@@ -186,7 +188,6 @@ while running:
         pygame.draw.rect(screen, platform_color, (falling_block.x - camera_x, falling_block.y, platform_width, platform_height))
 
     if check_falling_block_collision(character_rect, falling_block):
-        pygame.time.delay(1000)  # 1초 대기
         reset_game()
 
     block_collided = check_collision(character_rect, blocks)
@@ -201,7 +202,6 @@ while running:
             is_on_ground = False
 
     if check_spike_collision(character_rect, spike_positions):
-        pygame.time.delay(1000)  # 1초 대기
         reset_game()
 
     if check_trigger_zone_collision(character_rect, trigger_zone):
@@ -237,14 +237,12 @@ while running:
         if elapsed_time < 2000:
             vertical_momentum = -5
         else:
-            pygame.time.delay(1000)  # 1초 대기
             reset_game()
 
     for block in blocks:
         if block.speed != 0:
             block.move()
             if block.is_visible and character_rect.colliderect(pygame.Rect(block.x, block.y, platform_width, platform_height)):
-                pygame.time.delay(1000)  # 1초 대기
                 reset_game()
 
     for block in blocks:
@@ -277,6 +275,11 @@ while running:
         load_next_map()
 
     screen.blit(character_image, (character_x - camera_x, character_y))  
+
+    # 도전 횟수 화면에 표시
+    attempt_text = font.render(f"Try: {attempt_count}", True, RED)
+    screen.blit(attempt_text, (10, 10))
+
     pygame.display.update()
     clock.tick(60)
 
