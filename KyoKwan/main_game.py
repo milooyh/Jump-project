@@ -276,8 +276,8 @@ while running:
 
     screen.blit(character_image, (character_x - camera_x, character_y))  
 
-    # 도전 횟수 화면에 표시
-    attempt_text = font.render(f"Attempt: {attempt_count}", True, RED)
+
+    attempt_text = font.render(f"Die: {attempt_count}", True, RED)
     screen.blit(attempt_text, (10, 10))
 
     pygame.display.update()
