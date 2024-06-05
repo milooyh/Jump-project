@@ -27,9 +27,9 @@ class Character:
         self.rect = pygame.Rect(x, y, self.width, self.height)
 
     def load_image(self, filename):
-        path = os.path.join("images", filename)
+        path = os.path.join(os.path.dirname(__file__), "images", filename)
         if not os.path.isfile(path):
-            raise FileNotFoundError(f"No file '{filename}' found in 'images' directory")
+            raise FileNotFoundError(f"No file '{path}' found")
         return pygame.image.load(path)
 
     def move_left(self):
