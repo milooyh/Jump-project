@@ -15,7 +15,6 @@ SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
 
 # 색깔 정의
 WHITE = (255, 255, 255)
-RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 FLOOR_COLOR = (144, 228, 144)
 
@@ -43,8 +42,7 @@ class Game:
         self.map_index = 0
         self.load_map(map.maps[self.map_index])
 
-        character_image_path = os.path.join(os.path.dirname(__file__), "images", "default.png")  # 캐릭터 이미지 파일 경로
-        self.character = Character(self.initial_character_x, self.initial_character_y, speed=character_speed, jump_speed=jump_speed, image_path=character_image_path)
+        self.character = Character(self.initial_character_x, self.initial_character_y, speed=character_speed, jump_speed=jump_speed)
 
         self.clock = pygame.time.Clock()
 
@@ -52,7 +50,7 @@ class Game:
         self.blocks = [block if isinstance(block, MovingBlock) else Block(block.x, block.y) for block in game_map.blocks]
         self.spikes = getattr(game_map, 'spikes', [])
         self.portals = game_map.portals
-        
+
         self.initial_character_x = game_map.initial_character_x
         self.initial_character_y = game_map.initial_character_y
 
@@ -81,8 +79,10 @@ class Game:
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
                 self.character.move_left()
-            if keys[pygame.K_RIGHT]:
+            elif keys[pygame.K_RIGHT]:
                 self.character.move_right()
+            else:
+                self.character.image_state = "idle"
 
             self.character.apply_gravity(gravity)
             self.character.apply_movement()
