@@ -1,4 +1,4 @@
-
+import pygame
 
 class Portal:
     def __init__(self, x, y):
