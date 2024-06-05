@@ -14,17 +14,23 @@ class Character:
 
         # 이미지 로드
         self.images = {
-            "idle": pygame.image.load(os.path.join("images", "idle.png")),
-            "walk_left": pygame.image.load(os.path.join("images", "walk_left.png")),
-            "walk_right": pygame.image.load(os.path.join("images", "walk_right.png")),
-            "jump_left": pygame.image.load(os.path.join("images", "jump_left.png")),
-            "jump_right": pygame.image.load(os.path.join("images", "jump_right.png")),
+            "idle": self.load_image("idle.png"),
+            "walk_left": self.load_image("walk_left.png"),
+            "walk_right": self.load_image("walk_right.png"),
+            "jump_left": self.load_image("jump_left.png"),
+            "jump_right": self.load_image("jump_right.png"),
         }
 
         self.image = self.images["idle"]
         self.width = self.image.get_width()
         self.height = self.image.get_height()
         self.rect = pygame.Rect(x, y, self.width, self.height)
+
+    def load_image(self, filename):
+        path = os.path.join("images", filename)
+        if not os.path.isfile(path):
+            raise FileNotFoundError(f"No file '{filename}' found in 'images' directory")
+        return pygame.image.load(path)
 
     def move_left(self):
         self.x -= self.speed
