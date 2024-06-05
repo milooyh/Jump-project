@@ -2,7 +2,6 @@ import pygame
 import sys
 from init_settings import *
 from game_objects import *
-#
 
 left_walk = pygame.image.load('C:/OSSW_Kyo/KyoKwan/Left_W.png')
 left_jump = pygame.image.load('C:/OSSW_Kyo/KyoKwan/Left_J.png')
@@ -146,6 +145,7 @@ while running:
     character_y += vertical_momentum
 
     if character_y > SCREEN_HEIGHT:
+        pygame.time.delay(1000)  # 1초 대기
         reset_game()
 
     is_on_ground = False
@@ -186,6 +186,7 @@ while running:
         pygame.draw.rect(screen, platform_color, (falling_block.x - camera_x, falling_block.y, platform_width, platform_height))
 
     if check_falling_block_collision(character_rect, falling_block):
+        pygame.time.delay(1000)  # 1초 대기
         reset_game()
 
     block_collided = check_collision(character_rect, blocks)
@@ -200,6 +201,7 @@ while running:
             is_on_ground = False
 
     if check_spike_collision(character_rect, spike_positions):
+        pygame.time.delay(1000)  # 1초 대기
         reset_game()
 
     if check_trigger_zone_collision(character_rect, trigger_zone):
@@ -235,12 +237,14 @@ while running:
         if elapsed_time < 2000:
             vertical_momentum = -5
         else:
+            pygame.time.delay(1000)  # 1초 대기
             reset_game()
 
     for block in blocks:
         if block.speed != 0:
             block.move()
             if block.is_visible and character_rect.colliderect(pygame.Rect(block.x, block.y, platform_width, platform_height)):
+                pygame.time.delay(1000)  # 1초 대기
                 reset_game()
 
     for block in blocks:
