@@ -39,7 +39,8 @@ class GameManager:
         
         self.items = [self.heart_item, self.speed_item, self.invincibility_item]
         self.character = Character(self.blocks, self.obstacles, self.portal, self.items)
-
+        self.stage = 1 # 스테이지 번호
+        
         self.game_over = False
         self.game_clear = False
 
