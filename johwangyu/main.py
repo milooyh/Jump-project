@@ -22,6 +22,7 @@ def main():
     FLOOR_COLOR = (144, 228, 144)
     BLACK = (0, 0, 0)
     ORANGE = (255, 165, 0)
+    BROWN = (139, 69, 19)
 
     # 캐릭터 속성 설정
     character_width, character_height = 20, 20
@@ -33,6 +34,7 @@ def main():
     # 바닥 속성 설정
     floor_height = 22  # 바닥 두께
     floor_y = SCREEN_HEIGHT - floor_height
+    FLOOR_COLOR = (139, 69, 19)
 
     # 발판 속성 설정
     platform_width, platform_height = 100, 20
