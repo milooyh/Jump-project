@@ -39,7 +39,12 @@ block_spawn_delay = 2
 falling_block = Block(800, 0, speed=10)
 falling_block.is_visible = False
 
-attempt_count = 0  # 도전 횟수 추적
+attempt_count = 0
+
+# 텔레포트 효과를 위한 변수들
+teleporting = False
+teleport_frames = 60  # 텔레포트 이펙트 프레임 수
+teleport_frame_count = 0
 
 def load_next_map():
     global current_map_index, character_x, character_y, blocks, camera_x
@@ -54,7 +59,7 @@ def load_next_map():
 
 def reset_game():
     global character_x, character_y, vertical_momentum, is_on_ground, blocks, additional_block_added_1, additional_block_added_2, moving_block_triggered, block_spawn_time, block_spawned, camera_x, trick_hole_visible, trick_hole_y, falling_block, spike_height, spike_positions, spike_triggered, on_jumping_block, jump_timer, down_key_count, attempt_count
-    attempt_count += 1  # 도전 횟수 증가
+    attempt_count += 1
     character_x, character_y = 30, SCREEN_HEIGHT - character_height * 2
     vertical_momentum = 0
     is_on_ground = True
@@ -72,7 +77,7 @@ def reset_game():
     falling_block = Block(800, 0, speed=10)
     falling_block.is_visible = False
     spike_height = 20
-    spike_positions = [(x, floor_y - spike_height) for x in range(550, 600, spike_width)]  # 가시 위치 초기화
+    spike_positions = [(x, floor_y - spike_height) for x in range(550, 600, spike_width)]
     spike_triggered = False
     jumping_block.is_visible = False
     on_jumping_block = False
@@ -106,20 +111,38 @@ while running:
             if event.key == pygame.K_DOWN:
                 if teleport_zone.colliderect(character_rect):
                     down_key_count += 1
-                    if down_key_count >= 20:
-                        character_x = 1000
-                        character_y = 540  
-                        down_key_count = 0  
+                    if down_key_count >= 20 and not teleporting:
+                        teleporting = True
+                        teleport_frame_count = 0
                 else:
-                    down_key_count = 0  
+                    down_key_count = 0
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
                 space_pressed = False
 
+    if teleporting:
+        teleport_frame_count += 1
+        angle = 360 * (teleport_frame_count / teleport_frames)
+        scale = 1 - 0.9 * (teleport_frame_count / teleport_frames)
+        if teleport_frame_count >= teleport_frames // 2:
+            scale = 0.1 + 0.9 * ((teleport_frame_count - teleport_frames // 2) / (teleport_frames // 2))
+
+        transformed_character_image = pygame.transform.rotozoom(user_image, angle, scale)
+        screen.blit(transformed_character_image, (character_x - camera_x - transformed_character_image.get_width() // 2 + character_width // 2, character_y - transformed_character_image.get_height() // 2 + character_height // 2))
+
+        if teleport_frame_count >= teleport_frames:
+            teleporting = False
+            character_x = 1000
+            character_y = 540
+            down_key_count = 0
+
+        pygame.display.update()
+        clock.tick(60)
+        continue
+
     keys = pygame.key.get_pressed()
-    
-    # 기본 이미지 설정
+
     character_image = user_image
 
     if keys[pygame.K_LEFT]:
@@ -264,8 +287,8 @@ while running:
     # pygame.draw.rect(screen, (0, 0, 255), trigger_moving_block_zone.move(-camera_x, 0), 2)
     # pygame.draw.rect(screen, (0, 255, 0), trigger_zone.move(-camera_x, 0), 2)
     # pygame.draw.rect(screen, (0, 0, 255), spike_trigger_zone.move(-camera_x, 0), 2)
-    # pygame.draw.rect(screen, (255, 0, 0), teleport_zone, 2)  
-    
+    # pygame.draw.rect(screen, (255, 0, 0), teleport_zone, 2)
+
     portal_angle += 2
     rotated_portal_image = pygame.transform.rotate(portal_image, portal_angle)
     portal_rect = rotated_portal_image.get_rect(center=(portal_position[0] - camera_x + portal_size // 2, portal_position[1] + portal_size // 2))
@@ -274,8 +297,7 @@ while running:
     if check_portal_collision(character_rect, portal_position, portal_size):
         load_next_map()
 
-    screen.blit(character_image, (character_x - camera_x, character_y))  
-
+    screen.blit(character_image, (character_x - camera_x, character_y))
 
     attempt_text = font.render(f"Die: {attempt_count}", True, RED)
     screen.blit(attempt_text, (10, 10))
@@ -283,5 +305,5 @@ while running:
     pygame.display.update()
     clock.tick(60)
 
-pygame.quit() 
+pygame.quit()
 sys.exit()
