@@ -55,7 +55,9 @@ class GameManager:
         """목숨 개수에 따라 배경색 설정"""
         if self.character.life == 3:
             self.screen.fill(WHITE)
-        
+        elif self.character.life == 2:
+            self.screen.fill(ORANGE)
+            
     
     def reset_items_and_obstacles(self):
         """아이템과 장애물 위치 재설정"""
