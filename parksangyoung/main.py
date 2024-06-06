@@ -1,20 +1,19 @@
-import os
 import pygame
 import sys
 import importlib
-from block import Block, MovingBlock
-from obstacle import Spike
-from portal import Portal
 from character import Character
-import map
+from map import Map1, Map2, Map3, Map4
 
 pygame.init()
 
 # 화면 크기 설정
 SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("점프 점프")
 
 # 색깔 정의
 WHITE = (255, 255, 255)
+RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 FLOOR_COLOR = (144, 228, 144)
 
@@ -27,72 +26,88 @@ gravity = 1
 floor_height = 22
 floor_y = SCREEN_HEIGHT - floor_height
 
-# 발판 속성 설정
-platform_color = BLUE
+# 발판 속성 설정을 block.py로 이동
 
+# 충돌 감지
+def check_collision(character, blocks):
+    for block in blocks:
+        if character.rect.colliderect(pygame.Rect(block.x, block.y, block.width, block.height)):
+            return block
+    return None
+
+# 포탈 충돌 감지
+def check_portal_collision(character, portal):
+    if character.rect.colliderect(portal.rect):
+        return portal
+    return None
+
+# 바닥과 충돌 시 초기 위치로
+def reset_game(initial_x, initial_y):
+    Character.reset(initial_x, initial_y)
+
+# 가시 충돌 감지
+def check_spike_collision(character, spikes):
+    for spike in spikes:
+        if character.rect.colliderect(spike.rect):
+            return spike
+    return None
+
+# 게임 클래스
 class Game:
     def __init__(self):
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-        pygame.display.set_caption("점프 점프")
+        self.stage_index = 0
+        self.stages = [Map1, Map2, Map3, Map4]
+        self.load_stage(self.stage_index)
 
-        self.blocks = []
-        self.spikes = []
-        self.portals = []
-
-        self.map_index = 0
-        self.load_map(map.maps[self.map_index])
-
-        self.character = Character(self.initial_character_x, self.initial_character_y, speed=character_speed, jump_speed=jump_speed)
-
-        self.clock = pygame.time.Clock()
-
-    def load_map(self, game_map):
-        self.blocks = [block if isinstance(block, MovingBlock) else Block(block.x, block.y) for block in game_map.blocks]
-        self.spikes = getattr(game_map, 'spikes', [])
-        self.portals = game_map.portals
-
-        self.initial_character_x = game_map.initial_character_x
-        self.initial_character_y = game_map.initial_character_y
+    def load_stage(self, index):
+        self.stage = self.stages[index]()
+        self.blocks = self.stage.blocks
+        self.spikes = getattr(self.stage, 'spikes', [])
+        self.portal = self.stage.portal
+        self.character = Character(self.stage.initial_character_x, self.stage.initial_character_y, speed=character_speed, jump_speed=jump_speed)
 
     def next_stage(self):
-        self.map_index += 1
-        if self.map_index < len(map.maps):
-            self.load_map(map.maps[self.map_index])
-            self.character.reset(self.initial_character_x, self.initial_character_y)
-        else:
-            print("All stages completed!")
-            pygame.quit()
-            sys.exit()
+        self.stage_index = (self.stage_index + 1) % len(self.stages)
+        self.load_stage(self.stage_index)
 
     def run(self):
+        clock = pygame.time.Clock()
         running = True
+        space_pressed = False
+
         while running:
-            self.screen.fill(WHITE)
+            screen.fill(WHITE)
+            character_rect = self.character.rect
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        self.character.jump()
+                        space_pressed = True
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_SPACE:
+                        space_pressed = False
+
+            if space_pressed and self.character.is_on_ground:
+                self.character.jump()
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
                 self.character.move_left()
-            elif keys[pygame.K_RIGHT]:
+            if keys[pygame.K_RIGHT]:
                 self.character.move_right()
-            else:
-                self.character.image_state = "idle"
 
+            # 화면 범위 제한 및 바닥 충돌 처리
             self.character.apply_gravity(gravity)
             self.character.apply_movement()
             self.character.apply_bounds(SCREEN_WIDTH, SCREEN_HEIGHT)
 
             # 충돌 검사 및 처리
-            block_collided = self.character.rect.collidelist([pygame.Rect(block.x, block.y, block.width, block.height) for block in self.blocks])
-            if block_collided != -1:
+            block_collided = check_collision(self.character, self.blocks)
+            if block_collided:
                 if self.character.vertical_momentum > 0:
-                    self.character.y = self.blocks[block_collided].y - self.character.height
+                    self.character.y = block_collided.y - self.character.height
                     self.character.vertical_momentum = 0
                     self.character.is_on_ground = True
             elif self.character.y >= floor_y - self.character.height:
@@ -103,39 +118,37 @@ class Game:
                 self.character.is_on_ground = False
 
             # 포탈 충돌 검사 및 처리
-            portal_collided = self.character.rect.collidelist([portal.rect for portal in self.portals])
-            if portal_collided != -1:
+            if check_portal_collision(self.character, self.portal):
                 self.next_stage()
                 continue
 
             # 가시 충돌 검사 및 처리
-            spike_collided = self.character.rect.collidelist([spike.rect for spike in self.spikes])
-            if spike_collided != -1:
+            spike_collided = check_spike_collision(self.character, self.spikes)
+            if spike_collided:
                 print("Character hit a spike! Respawning...")
-                self.character.reset(self.initial_character_x, self.initial_character_y)
+                reset_game(self.stage.initial_character_x, self.stage.initial_character_y)
 
             # 바닥과 충돌하면 게임 리셋
             if self.character.y >= floor_y - self.character.height:
-                self.character.reset(self.initial_character_x, self.initial_character_y)
+                reset_game(self.stage.initial_character_x, self.stage.initial_character_y)
 
-            # 발판 그리기
+            # 발판 그리기, 움직임 구현
             for block in self.blocks:
                 block.move()
-                pygame.draw.rect(self.screen, block.color, (block.x, block.y, block.width, block.height))
+                pygame.draw.rect(screen, BLUE, (block.x, block.y, block.width, block.height))
 
             # 포탈 그리기
-            for portal in self.portals:
-                pygame.draw.rect(self.screen, (255, 0, 255), portal.rect)
+            self.portal.draw(screen)
 
             # 가시 그리기
             for spike in self.spikes:
-                pygame.draw.rect(self.screen, (0, 0, 0), spike.rect)  # 가시 색상은 검정색으로 설정
+                pygame.draw.rect(screen, (0, 0, 0), spike.rect)  # 가시 색상은 검정색으로 설정
 
-            # 캐릭터 생성
-            self.character.draw(self.screen)
+            # 캐릭터 그리기
+            self.character.draw(screen)
 
             pygame.display.update()
-            self.clock.tick(60)
+            clock.tick(60)
 
         pygame.quit()
         sys.exit()
