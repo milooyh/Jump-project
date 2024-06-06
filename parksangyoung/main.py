@@ -42,8 +42,8 @@ def check_portal_collision(character, portal):
     return None
 
 # 바닥과 충돌 시 초기 위치로
-def reset_game(initial_x, initial_y):
-    Character.reset(initial_x, initial_y)
+def reset_game(character, initial_x, initial_y):
+    character.reset(initial_x, initial_y)
 
 # 가시 충돌 감지
 def check_spike_collision(character, spikes):
@@ -126,11 +126,11 @@ class Game:
             spike_collided = check_spike_collision(self.character, self.spikes)
             if spike_collided:
                 print("Character hit a spike! Respawning...")
-                reset_game(self.stage.initial_character_x, self.stage.initial_character_y)
+                reset_game(self.character, self.stage.initial_character_x, self.stage.initial_character_y)
 
             # 바닥과 충돌하면 게임 리셋
             if self.character.y >= floor_y - self.character.height:
-                reset_game(self.stage.initial_character_x, self.stage.initial_character_y)
+                reset_game(self.character, self.stage.initial_character_x, self.stage.initial_character_y)
 
             # 발판 그리기, 움직임 구현
             for block in self.blocks:
