@@ -51,6 +51,12 @@ class GameManager:
         self.character.current_color_index = 0
         self.obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
 
+    def set_background_color(self):
+        """목숨 개수에 따라 배경색 설정"""
+        if self.character.life == 3:
+            self.screen.fill(WHITE)
+        
+    
     def reset_items_and_obstacles(self):
         """아이템과 장애물 위치 재설정"""
         self.heart_items = HeartItem(250,400)
