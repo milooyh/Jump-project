@@ -59,6 +59,8 @@ class GameManager:
             self.screen.fill(ORANGE)
         elif self.character.life == 1:
             self.screen.fill(RED)    
+        else:
+            self.screen.fill(BLACK) #목숨 없으면 게임 오버 처리 함수 추가하기
     
     def reset_items_and_obstacles(self):
         """아이템과 장애물 위치 재설정"""
