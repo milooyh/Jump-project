@@ -3,8 +3,8 @@ from obstacle import Spike
 from portal import Portal
 
 class Map1:
-    initial_character_x = 50
-    initial_character_y = 500
+    initial_character_x = 100
+    initial_character_y = 400
     portal = Portal(745, 50, 40, 40, 'map2', 'images/portal.png')
     blocks = [  
         Block(100, 500),
@@ -27,7 +27,7 @@ class Map2:
 class Map3:
     initial_character_x = 0
     initial_character_y = 300
-    portal = Portal(745, 50, 40, 40, 'map4', 'images/portal.png')
+    portal = Portal(745, 150, 40, 40, 'map4', 'images/portal.png')
     blocks = [
         Block(0, 300),
         Block(100, 300),
