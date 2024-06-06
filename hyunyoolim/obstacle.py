@@ -1,7 +1,7 @@
+# obstacle.py
+
 import pygame
 from setting import *
-
-# obstacle.py
 
 class Obstacle:
     def __init__(self, x, y, speed):

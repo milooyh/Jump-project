@@ -1,9 +1,14 @@
+# character.py
+
 import pygame
 from setting import *
 from screen import Screen
-from hyunyoolim.block import Block
+from block import Block
 from obstacle import Obstacle
 from portal import Portal
+from screen import Screen
+from portal import Portal
+from item import *
 
 class Character:
     def __init__(self, blocks, obstacles, portal):
@@ -23,6 +28,7 @@ class Character:
         self.blocks = blocks
         self.obstacles = obstacles
         self.portal = portal
+        
         self.colors = [RED, ORANGE, YELLOW]
         self.current_color_index = 0
         self.show_life = False
@@ -34,7 +40,7 @@ class Character:
         self.speed_boost_remaining_time = 0
         self.heart_item_eaten = False
         
-        self.image = pygame.image.load('character.png').convert_alpha()
+        self.image = pygame.image.load('hyunyoolim\character.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
 
     def set_initial_position(self):
@@ -43,16 +49,23 @@ class Character:
 
     def update_game_state(self):
         current_time = pygame.time.get_ticks()
-        
+        print("스페이스 바 눌림 여부:", self.space_pressed)
+
         if self.space_pressed and self.is_on_ground:
+            print('점프 중')
             self.vertical_momentum = -self.jump_speed
             self.is_on_ground = False
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
+            print('왼쪽키 눌림')
             self.x = max(LEFT_EDGE, self.x - self.speed)
         if keys[pygame.K_RIGHT]:
+            print('오른쪽키 눌림')
             self.x = min(RIGHT_EDGE, self.x + self.speed)
+
+        if self.x > SCREEN_WIDTH // 2:
+            dx = self.x - SCREEN_WIDTH // 2
 
         self.x = max(0, min(SCREEN_WIDTH - self.width, self.x))
         self.vertical_momentum += self.gravity
@@ -66,14 +79,16 @@ class Character:
 
         block_collided = Block.check_collision(self.x, self.y, self.width, self.height, self.blocks)
         obstacle_collided = Obstacle.check_collision(self.x, self.y, self.width, self.height, self.obstacles)
-        if block_collided:
-            if self.vertical_momentum > 0:
-                self.y = block_collided.y - self.height
-                self.vertical_momentum = 0
-                self.is_on_ground = True
-
-        if obstacle_collided and not self.invincible:
+        
+        if block_collided and self.vertical_momentum > 0:
+            self.y = block_collided.y - self.height
+            self.vertical_momentum = 0
+            self.is_on_ground = True
+                
+        if obstacle_collided:
+            print("장애물과 충돌 여부:", obstacle_collided)
             self.life -= 1
+            print('라이프 개수', self.life)
             self.show_life = True
             self.life_counter = current_time
             if self.life == 0:
@@ -83,31 +98,35 @@ class Character:
                 self.set_initial_position()
                 self.vertical_momentum = 0
                 self.is_on_ground = True
-
-        # 무적 효과가 끝나면 무적 해제
+        
+        if pygame.Rect(self.x, self.y, self.width, self.height).colliderect(self.portal.rect):
+            self.game_clear = True
+        
         if self.invincible and current_time - self.invincible_timer > 5000:
             self.invincible = False
-
-        # 스피드 효과가 끝나면 장애물 속도 복원
+        
         if self.speed_boost_timer and current_time - self.speed_boost_timer > 5000:
             for obstacle in self.obstacles:
                 obstacle.speed *= 2
             self.speed_boost_timer = 0
+            
+        self.check_item_collision()
 
     def draw_game_elements(self, screen, blocks, obstacles, portal):
         screen.blit(self.image, (self.x, self.y))
+        
         for block in blocks:
             block.draw(screen)
-        for obstacle in obstacles:
+        for obstacle in self.obstacles:
             obstacle.draw(screen)
         
         portal.draw(screen)
-
+        
         if self.show_life:
             font = pygame.font.Font(None, 36)
-            text = font.render(f"life : {self.life}", True, BLACK)
+            text = font.render(f"like : {self.life}", True, BLACK)
             current_time = pygame.time.get_ticks()
-            if current_time - self.life_counter >= 1000:  # 1초 동안만 표시
+            if current_time - self.life_counter >= 1000:
                 self.show_life = False
 
         # 남은 시간 표시
@@ -123,19 +142,24 @@ class Character:
             text = font.render(f"Speed Boost: {remaining_time}", True, BLACK)
             screen.blit(text, (10, 80))
 
-    def check_item_collision(self, heart_item, speed_item, invincibility_item):
-        if pygame.Rect(self.x, self.y, self.width, self.height).colliderect(heart_item.rect):
+    def check_item_collision(self):
+        character_rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        for item in self.items:
+            if character_rect.colliderect(item.rect):
+                self.handle_item_collision(item)
+    
+    def handle_item_collision(self, item):
+        if isinstance(item, HeartItem):
             if not self.heart_item_eaten:
                 self.life += 1
                 self.heart_item_eaten = True
-                return True
-            heart_item.x = -100  # 화면 밖으로 이동
-        if pygame.Rect(self.x, self.y, self.width, self.height).colliderect(speed_item.rect):
+                item.x = -100  # Move off-screen
+        elif isinstance(item, SpeedItem):
             for obstacle in self.obstacles:
-                obstacle.speed /= 2  # 속도 절반으로 줄이기
-            self.speed_boost_timer = pygame.time.get_ticks()  # 타이머 시작
-            speed_item.x = -100  # 화면 밖으로 이동
-        if pygame.Rect(self.x, self.y, self.width, self.height).colliderect(invincibility_item.rect):
+                obstacle.speed /= 2  # Halve speed
+            self.speed_boost_timer = pygame.time.get_ticks()  # Start timer
+            item.x = -100  # Move off-screen
+        elif isinstance(item, InvincibilityItem):
             self.invincible = True
-            self.invincible_timer = pygame.time.get_ticks()  # 타이머 시작
-            invincibility_item.x = -100  # 화면 밖으로 이동
+            self.invincible_timer = pygame.time.get_ticks()  # Start timer
+            item.x = -100  # Move off-screen
