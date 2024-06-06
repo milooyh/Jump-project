@@ -57,7 +57,8 @@ class GameManager:
             self.screen.fill(WHITE)
         elif self.character.life == 2:
             self.screen.fill(ORANGE)
-            
+        elif self.character.life == 1:
+            self.screen.fill(RED)    
     
     def reset_items_and_obstacles(self):
         """아이템과 장애물 위치 재설정"""
