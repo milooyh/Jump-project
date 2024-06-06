@@ -146,7 +146,7 @@ def main():
         powerup_collided = check_collision(character_rect, powerups, powerup_radius * 2, powerup_radius * 2)
         if powerup_collided:
             powerups.remove(powerup_collided)
-            score += 10
+            score += 1
 
         if not powerups and portal is None:
             last_block = blocks[-1]
