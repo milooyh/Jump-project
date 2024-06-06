@@ -2,7 +2,7 @@ import pygame
 
 class Portal:
     def __init__(self, x, y):
-        self.x = x
+        self.x = x - 30
         self.y = y
 
     def draw(self, screen):
