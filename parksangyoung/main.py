@@ -2,7 +2,7 @@ import pygame
 import sys
 import importlib
 from character import Character
-from map import Map1, Map2, Map3, Map4
+from map import *
 
 pygame.init()
 
