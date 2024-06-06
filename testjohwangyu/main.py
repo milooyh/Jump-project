@@ -157,7 +157,8 @@ def main():
             if current_stage in stages:
                 blocks, enemies, powerups, chasing_enemy = init_stage(*stages[current_stage])
                 portal = None
-                character_x, character_y = SCREEN_WIDTH // 2, SCREEN_HEIGHT - character_height * 2
+                # 캐릭터 시작 위치를 왼쪽 끝에 가깝게 설정
+                character_x, character_y = character_width, SCREEN_HEIGHT - character_height * 2
                 start_ticks = pygame.time.get_ticks()
             else:
                 show_game_over_screen(screen, score)
