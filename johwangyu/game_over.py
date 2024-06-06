@@ -23,7 +23,10 @@ def show_game_over_screen(screen, score):
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
-                    waiting = False  # 게임을 다시 시작
+                    return "restart"  # 재시작 선택 시 "restart" 반환
                 if event.key == pygame.K_q:
                     pygame.quit()
                     sys.exit()
+
+if __name__ == "__main__":
+    show_game_over_screen(pygame.display.set_mode((800, 600)), 0)
