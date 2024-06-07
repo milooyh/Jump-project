@@ -1,6 +1,6 @@
 from block import Block
-from khjoo120.obstacle import Spike
-from khjoo120.portal import Portal
+from obstacle import Spike
+from portal import Portal
 
 class Map:
     initial_character_x = 50
