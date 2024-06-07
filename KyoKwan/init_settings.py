@@ -17,7 +17,7 @@ FLOOR_COLOR = (144, 228, 144)
 SPIKE_COLOR = (0, 0, 0)
 
 # 캐릭터 속성
-character_width, character_height = 25, 42
+character_width, character_height = 20, 20
 character_x, character_y = 30, SCREEN_HEIGHT - character_height * 2
 character_speed = 6
 jump_speed = 20
