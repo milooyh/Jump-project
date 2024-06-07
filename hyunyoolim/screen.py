@@ -1,9 +1,16 @@
+# screen.py
+
 import pygame
 import sys
 from setting import *
 from obstacle import Obstacle
-from hyunyoolim.block import Block
-from portal import Portal
+from block import Block
+from portal import Portal   
+
+
+
+
+
 
 class Screen:
     def __init__(self):
@@ -11,7 +18,6 @@ class Screen:
 
     @staticmethod
     def show_start_screen(screen):
-        """게임 시작 화면 표시"""
         screen.fill(WHITE)
         font = pygame.font.Font(None, 64)
         text = font.render("Press SPACE to Start", True, BLACK)
@@ -22,7 +28,6 @@ class Screen:
 
     @staticmethod
     def wait_for_space():
-        """SPACE 키 입력을 대기"""
         waiting = True
         while waiting:
             for event in pygame.event.get():
@@ -34,7 +39,6 @@ class Screen:
 
     @staticmethod
     def show_clear_screen(screen):
-        """게임 클리어 화면 표시 및 다음 스테이지로 이동"""
         screen.fill(WHITE)
         font = pygame.font.Font(None, 64)
         text = font.render("Game Clear!", True, GREEN)
@@ -42,11 +46,9 @@ class Screen:
         screen.blit(text, text_rect)
         pygame.display.update()
         pygame.time.wait(2000)
-        game_manager.advance_stage() # 다음 스테이지로 이동
 
     @staticmethod
     def show_game_over_screen(screen, game_manager):
-        """게임 오버 화면 표시 및 재시작/종료 선택"""
         screen.fill(WHITE)
         font = pygame.font.Font(None, 64)
         text = font.render("Game Over", True, RED)

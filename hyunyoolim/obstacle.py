@@ -18,6 +18,6 @@ class Obstacle:
     @staticmethod
     def check_collision(character_x, character_y, character_width, character_height, obstacles):  
         for obstacle in obstacles:
-            if pygame.Rect(character_x, character_y, character_width, character_height).colliderect(pygame.Rect(obstacle.x, obstacle.y, platform_width, platform_height)):
+            if pygame.Rect(character_x, character_y, character_width, character_height).colliderect(pygame.Rect(obstacle.x, obstacle.y, obstacle_width, obstacle_height)):
                 return obstacle
         return None
