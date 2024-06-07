@@ -39,14 +39,24 @@ class Map3:
         Block(700, 300)
     ]
     spikes = [
-        Spike(150, 270,),
-        Spike(225, 150,),
-        Spike(300, 270),
-        Spike(375, 150),
-        Spike(450, 270),
-        Spike(525, 150),
-        Spike(600, 270),
-        Spike(675, 150)
+    Spike(100, 250),
+    Spike(100, 280),
+    Spike(150, 250),
+    Spike(150, 280),
+    Spike(200, 250),
+    Spike(200, 280),
+    Spike(300, 250),
+    Spike(300, 280),
+    Spike(350, 250),
+    Spike(350, 280),
+    Spike(400, 250),
+    Spike(400, 280),
+    Spike(500, 250),
+    Spike(500, 280),
+    Spike(550, 250),
+    Spike(550, 280),
+    Spike(600, 250),
+    Spike(600, 280)
     ]
 
 class Map4:
