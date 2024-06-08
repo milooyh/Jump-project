@@ -9,6 +9,8 @@ right_walk = pygame.image.load('C:/OSSW4/Img/Right_W.png')
 right_jump = pygame.image.load('C:/OSSW4/Img/Right_J.png')
 user_image = pygame.image.load('C:/OSSW4/Img/User.png')
 block_image = pygame.image.load('C:/OSSW4/Img/block.png')
+falling_block_image = pygame.image.load('C:/OSSW4/Img/Block.png')
+
 
 
 
@@ -19,6 +21,7 @@ right_walk = pygame.transform.scale(right_walk, (character_width, character_heig
 right_jump = pygame.transform.scale(right_jump, (character_width, character_height))
 user_image = pygame.transform.scale(user_image, (character_width, character_height))
 block_image = pygame.transform.scale(block_image, (platform_width, platform_height)) 
+falling_block_image = pygame.transform.scale(falling_block_image, (platform_width, platform_height))
 
 map_modules = [Map_1]
 current_map_index = 0
@@ -42,6 +45,10 @@ block_spawn_delay = 2
 
 falling_block = Block(800, 0, speed=10)
 falling_block.is_visible = False
+if falling_block.is_visible:
+    falling_block.y += falling_block.speed
+    screen.blit(falling_block_image, (falling_block.x - camera_x, falling_block.y))
+
 
 attempt_count = 0
 
