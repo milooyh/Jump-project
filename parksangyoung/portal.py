@@ -9,7 +9,7 @@ class Portal:
         self.width = width
         self.height = height
 
-    def load_image(self, filename):
+    def load_image(self, filename): # 포탈 이미지 불러오기
         path = os.path.join(os.path.dirname(__file__), filename)
         if not os.path.isfile(path):
             raise FileNotFoundError(f"No file '{path}' found")
