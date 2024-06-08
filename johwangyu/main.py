@@ -23,7 +23,7 @@ def remove_floor_section(blocks, x_position, width):
             return True
     return False
 
-
+#
 def main():
     pygame.init()
 
