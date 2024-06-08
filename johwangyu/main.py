@@ -1,10 +1,26 @@
 import pygame
 import sys
-import subprocess
 from game_over import show_game_over_screen
 from stage import init_stage, stages
 from lobby import show_lobby_screen
 from spike import Spike
+
+def check_collision(character_rect, objects):
+    for obj in objects:
+        if character_rect.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)):
+            return obj
+    return None
+
+def check_spike_collision(character_rect, spike):
+    return character_rect.colliderect(pygame.Rect(spike.x, spike.y, spike.width, spike.height))
+
+def remove_floor_section(blocks, x_position, width):
+    for block in blocks:
+        if block.x == x_position:
+            blocks.remove(block)
+            return True
+    return False
+
 
 def main():
     pygame.init()
