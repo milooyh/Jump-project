@@ -7,10 +7,6 @@ from obstacle import Obstacle
 from block import Block
 from portal import Portal   
 
-
-
-
-
 class Screen:
     def __init__(self):
         pass
