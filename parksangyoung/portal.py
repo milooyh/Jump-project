@@ -16,4 +16,4 @@ class Portal:
         return pygame.image.load(path)
 
     def draw(self, screen):
-        screen.blit(self.image, (self.rect.x, self.rect.y))#
+        screen.blit(self.image, (self.rect.x, self.rect.y))
