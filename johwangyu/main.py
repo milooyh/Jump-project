@@ -1,6 +1,5 @@
 import pygame
 import sys
-import subprocess
 from game_over import show_game_over_screen
 from stage import init_stage, stages
 from lobby import show_lobby_screen
@@ -52,6 +51,19 @@ def main():
         pygame.quit()
         sys.exit()
 
+    # 색깔 정의
+    WHITE = (255, 255, 255)
+    RED = (255, 0, 0)
+    BLUE = (0, 0, 255)
+    GREEN = (0, 255, 0)
+    YELLOW = (255, 223, 0)
+    PURPLE = (128, 0, 128)
+    FLOOR_COLOR = (144, 228, 144)
+    BLACK = (0, 0, 0)
+    ORANGE = (255, 165, 0)
+    BROWN = (139, 69, 19)
+
+    # 캐릭터 속성 설정
     character_width, character_height = 20, 20
     character_x, character_y = character_width, SCREEN_HEIGHT - character_height * 2
     character_speed = 6
@@ -60,7 +72,9 @@ def main():
 
     floor_height = 150
     floor_y = SCREEN_HEIGHT - floor_height
-
+    FLOOR_COLOR = (139, 69, 19)
+    
+    # 발판 속성 설정
     platform_width, platform_height = 100, 20
     platform_color = (0, 0, 255)
 
@@ -72,14 +86,30 @@ def main():
     current_stage = 1
     blocks, enemies, powerups, portal = init_stage(*stages[current_stage])
 
-    second_block_x, second_block_y = 500, 350
-
-    # Spike 객체의 생성과 사용 수정
+    # 추가된 부분: 두 번째 블록의 좌표 설정
+    second_block_x, second_block_y = 500, 350  # 예시 좌표
+    
+    # 가시 돌 생성
     spike = Spike(505, floor_y - 1, 90, 20)
 
     clock = pygame.time.Clock()
-    current_image = user_image
-    is_jumping = False
+
+    def check_collision(character, objects, width, height):
+        for obj in objects:
+            if character.colliderect(pygame.Rect(obj.x, obj.y, width, height)):
+                return obj
+        return None
+
+    # 추가된 함수: 바닥을 지우는 함수
+    def remove_floor_section(x, width):
+        # 바닥의 색깔을 흰색으로 덮어서 지움
+        pygame.draw.rect(screen, WHITE, (x, floor_y, width, floor_height))
+
+# 추가된 함수: 플레이어와 가시 돌의 충돌 확인
+    def check_spike_collision(player_rect, spike_rect):
+        if player_rect.colliderect(spike_rect):
+            return True
+        return False
 
     running = True
     vertical_momentum = 0
@@ -106,8 +136,9 @@ def main():
                 pass
             else:
                 running = False
-
-        if check_spike_collision(character_rect, spike):
+                
+        # 추가된 부분: 가시 돌과 플레이어의 충돌 확인
+        if check_spike_collision(character_rect, spike.rect):
             choice = show_game_over_screen(screen, score)
             if choice == "restart":
                 pass
@@ -123,6 +154,10 @@ def main():
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_SPACE:
                     space_pressed = False
+
+        if space_pressed and is_on_ground:
+            vertical_momentum = -         jump_speed
+            is_on_ground = False
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
@@ -194,8 +229,13 @@ def main():
                 character_x, character_y = character_width, SCREEN_HEIGHT - character_height * 2
                 start_ticks = pygame.time.get_ticks()
             else:
-                subprocess.run(["python", "KyoKwan/main_game.py"])
-                running = False
+                choice = show_game_over_screen(screen, score)
+                if choice == "restart":
+                    # 재시작
+                    # 캐릭터 및 게임 상태 초기화 코드 작성
+                    pass
+                else:
+                    running = False
 
         if floor_removed:
             remove_floor_section(blocks, second_block_x, platform_width)
@@ -214,8 +254,9 @@ def main():
 
         if portal:
             portal.draw(screen)
-
-        pygame.draw.rect(screen, (0, 0, 0), spike.rect)
+            
+        # 추가된 부분: 가시 돌 그리기
+        pygame.draw.rect(screen, BLACK, spike.rect)
 
         font = pygame.font.Font(None, 36)
         text = font.render(f"Score: {score}  Time Left: {int(time_left)}", True, (0, 0, 0))
