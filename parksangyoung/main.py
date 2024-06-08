@@ -14,6 +14,7 @@ pygame.display.set_caption("점프 점프")
 
 # 색상 정의
 WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
 
 # 캐릭터 속성 설정
 character_speed = 6
