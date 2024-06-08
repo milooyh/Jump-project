@@ -43,7 +43,7 @@ attempt_count = 0
 
 # 텔레포트 효과를 위한 변수들
 teleporting = False
-teleport_frames = 60  # 텔레포트 이펙트 프레임 수
+teleport_frames = 60 
 teleport_frame_count = 0
 teleport_initial_position = (0, 0)
 teleport_final_position = (1000, 540)
