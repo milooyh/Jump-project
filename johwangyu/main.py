@@ -27,6 +27,7 @@ def check_collision(character_rect, objects, obj_width, obj_height):
     return None
 
 def check_spike_collision(character_rect, spike):
+    # 'spike.rect'를 사용하여 충돌 검사
     return character_rect.colliderect(spike.rect)
 
 def remove_floor_section(blocks, x_position, width):
@@ -73,12 +74,12 @@ def main():
 
     second_block_x, second_block_y = 500, 350
 
+    # Spike 객체의 생성과 사용 수정
     spike = Spike(505, floor_y - 1, 90, 20)
 
     clock = pygame.time.Clock()
     current_image = user_image
     is_jumping = False
-    is_moving = False
 
     running = True
     vertical_momentum = 0
@@ -119,13 +120,9 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     space_pressed = True
-                if event.key in [pygame.K_LEFT, pygame.K_RIGHT]:
-                    is_moving = True
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_SPACE:
                     space_pressed = False
-                if event.key in [pygame.K_LEFT, pygame.K_RIGHT]:
-                    is_moving = False
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
@@ -134,20 +131,20 @@ def main():
                 current_image = left_jump
             else:
                 current_image = left_walk
-        elif keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT]:
             character_x += character_speed
             if not is_on_ground:
                 current_image = right_jump
             else:
                 current_image = right_walk
-        else:
-            if not is_moving:
-                current_image = user_image  # 가만히 있을 때 이미지
 
         if space_pressed and is_on_ground:
             vertical_momentum = -jump_speed
             is_on_ground = False
-            is_jumping = True
+            if keys[pygame.K_LEFT]:
+                current_image = left_jump
+            elif keys[pygame.K_RIGHT]:
+                current_image = right_jump
         else:
             is_jumping = False
 
@@ -204,6 +201,7 @@ def main():
             remove_floor_section(blocks, second_block_x, platform_width)
 
         pygame.draw.rect(screen, (144, 228, 144), (0, floor_y, SCREEN_WIDTH, floor_height))
+
 
         for block in blocks:
             pygame.draw.rect(screen, platform_color, (block.x, block.y, platform_width, platform_height))
