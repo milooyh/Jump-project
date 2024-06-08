@@ -6,6 +6,37 @@ from stage import init_stage, stages
 from lobby import show_lobby_screen
 from spike import Spike
 
+# 이미지 로딩 및 크기 조정
+left_walk = pygame.image.load('C:/OSSW4/Img/Left_W.png')
+left_jump = pygame.image.load('C:/OSSW4/Img/Left_J.png')
+right_walk = pygame.image.load('C:/OSSW4/Img/Right_W.png')
+right_jump = pygame.image.load('C:/OSSW4/Img/Right_J.png')
+user_image = pygame.image.load('C:/OSSW4/Img/User.png')
+
+left_walk = pygame.transform.scale(left_walk, (20, 20))
+left_jump = pygame.transform.scale(left_jump, (20, 20))
+right_walk = pygame.transform.scale(right_walk, (20, 20))
+right_jump = pygame.transform.scale(right_jump, (20, 20))
+user_image = pygame.transform.scale(user_image, (20, 20))
+
+def check_collision(character_rect, objects, obj_width, obj_height):
+    for obj in objects:
+        obj_rect = pygame.Rect(obj.x, obj.y, obj_width, obj_height)
+        if character_rect.colliderect(obj_rect):
+            return obj
+    return None
+
+def check_spike_collision(character_rect, spike):
+    # 'spike.rect'를 사용하여 충돌 검사
+    return character_rect.colliderect(spike.rect)
+
+def remove_floor_section(blocks, x_position, width):
+    for block in blocks:
+        if block.x == x_position:
+            blocks.remove(block)
+            return True
+    return False
+
 def main():
     pygame.init()
 
@@ -16,7 +47,6 @@ def main():
     lobby_choice = show_lobby_screen(SCREEN_WIDTH, SCREEN_HEIGHT)
     if lobby_choice == "start":
         print("game start!")
-        # 게임 시작 코드 작성
     elif lobby_choice == "quit":
         print("Exit Game")
         pygame.quit()
@@ -44,7 +74,7 @@ def main():
     FLOOR_COLOR = (139, 69, 19)
     
     platform_width, platform_height = 100, 20
-    platform_color = BLUE
+    platform_color = (0, 0, 255)
 
     powerup_radius = 10
 
@@ -88,7 +118,7 @@ def main():
     floor_removed = False
 
     while running:
-        screen.fill(WHITE)
+        screen.fill((255, 255, 255))
         character_rect = pygame.Rect(character_x, character_y, character_width, character_height)
 
         seconds = (pygame.time.get_ticks() - start_ticks) / 1000
@@ -124,8 +154,26 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             character_x -= character_speed
+            if not is_on_ground:
+                current_image = left_jump
+            else:
+                current_image = left_walk
         if keys[pygame.K_RIGHT]:
             character_x += character_speed
+            if not is_on_ground:
+                current_image = right_jump
+            else:
+                current_image = right_walk
+
+        if space_pressed and is_on_ground:
+            vertical_momentum = -jump_speed
+            is_on_ground = False
+            if keys[pygame.K_LEFT]:
+                current_image = left_jump
+            elif keys[pygame.K_RIGHT]:
+                current_image = right_jump
+        else:
+            is_jumping = False
 
         character_x = max(0, min(SCREEN_WIDTH - character_width, character_x))
         vertical_momentum += gravity
@@ -177,19 +225,19 @@ def main():
                 running = False
 
         if floor_removed:
-            remove_floor_section(second_block_x, platform_width)
+            remove_floor_section(blocks, second_block_x, platform_width)
 
-        pygame.draw.rect(screen, FLOOR_COLOR, (0, floor_y, SCREEN_WIDTH, floor_height))
-        pygame.draw.rect(screen, RED, character_rect)
+        pygame.draw.rect(screen, (144, 228, 144), (0, floor_y, SCREEN_WIDTH, floor_height))
+
 
         for block in blocks:
             pygame.draw.rect(screen, platform_color, (block.x, block.y, platform_width, platform_height))
 
         for enemy in enemies:
-            pygame.draw.rect(screen, GREEN, (enemy.x, enemy.y, enemy_width, enemy_height))
+            pygame.draw.rect(screen, (0, 255, 0), (enemy.x, enemy.y, enemy_width, enemy_height))
 
         for powerup in powerups:
-            pygame.draw.circle(screen, YELLOW, (powerup.x + powerup_radius, powerup.y + powerup_radius), powerup_radius)
+            pygame.draw.circle(screen, (255, 223, 0), (powerup.x + powerup_radius, powerup.y + powerup_radius), powerup_radius)
 
         if portal:
             portal.draw(screen)
@@ -197,8 +245,11 @@ def main():
         pygame.draw.rect(screen, BLACK, spike.rect)
 
         font = pygame.font.Font(None, 36)
-        text = font.render(f"Score: {score}  Time Left: {int(time_left)}", True, BLACK)
+        text = font.render(f"Score: {score}  Time Left: {int(time_left)}", True, (0, 0, 0))
         screen.blit(text, (10, 10))
+
+        current_image = pygame.transform.scale(current_image, (character_width, character_height))
+        screen.blit(current_image, (character_x, character_y))
 
         pygame.display.flip()
         clock.tick(60)
