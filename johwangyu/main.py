@@ -1,11 +1,6 @@
 import pygame
 import sys
-<<<<<<< HEAD
-import subprocess
-# from game_over import show_game_over_screen # 이 줄은 주석 처리
-=======
 from game_over import show_game_over_screen
->>>>>>> b6ecef49141e7e6fd2f088cc478a47d30b8cfb99
 from stage import init_stage, stages
 from lobby import show_lobby_screen
 from spike import Spike
@@ -90,15 +85,13 @@ def main():
     current_stage = 1
     blocks, enemies, powerups, portal = init_stage(*stages[current_stage])
 
-<<<<<<< HEAD
     second_block_x, second_block_y = 500, 350
 
-=======
+
     # 추가된 부분: 두 번째 블록의 좌표 설정
     second_block_x, second_block_y = 500, 350  # 예시 좌표
     
     # 가시 돌 생성
->>>>>>> b6ecef49141e7e6fd2f088cc478a47d30b8cfb99
     spike = Spike(505, floor_y - 1, 90, 20)
 
     clock = pygame.time.Clock()
@@ -139,7 +132,7 @@ def main():
 
         seconds = (pygame.time.get_ticks() - start_ticks) / 1000
         time_left = time_limit - seconds
-<<<<<<< HEAD
+
 
         if check_spike_collision(character_rect, spike) or check_collision(character_rect, enemies, enemy_width, enemy_height):
             # 게임을 바로 재시작
@@ -147,7 +140,7 @@ def main():
             blocks, enemies, powerups, portal = init_stage(*stages[current_stage])
             start_ticks = pygame.time.get_ticks()
             score = 0
-=======
+
         if time_left <= 0:
             choice = show_game_over_screen(screen, score)
             if choice == "restart":
@@ -162,7 +155,6 @@ def main():
                 pass
             else:
                 running = False
->>>>>>> b6ecef49141e7e6fd2f088cc478a47d30b8cfb99
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
