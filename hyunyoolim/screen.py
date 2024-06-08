@@ -37,15 +37,15 @@ class Screen:
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                     waiting = False
 
-    @staticmethod
-    def show_clear_screen(screen):
-        screen.fill(WHITE)
-        font = pygame.font.Font(None, 64)
-        text = font.render("Game Clear!", True, GREEN)
-        text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
-        screen.blit(text, text_rect)
-        pygame.display.update()
-        pygame.time.wait(2000)
+    # @staticmethod
+    # def show_clear_screen(screen):
+    #     screen.fill(WHITE)
+    #     font = pygame.font.Font(None, 64)
+    #     text = font.render("Game Clear!", True, GREEN)
+    #     text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+    #     screen.blit(text, text_rect)
+    #     pygame.display.update()
+    #     pygame.time.wait(2000)
 
     @staticmethod
     def show_game_over_screen(screen, game_manager):
