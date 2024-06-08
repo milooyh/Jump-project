@@ -1,7 +1,7 @@
 import pygame
 import sys
 import subprocess
-#from game_over import show_game_over_screen
+# from game_over import show_game_over_screen # 이 줄은 주석 처리
 from stage import init_stage, stages
 from lobby import show_lobby_screen
 from spike import Spike
@@ -27,7 +27,6 @@ def check_collision(character_rect, objects, obj_width, obj_height):
     return None
 
 def check_spike_collision(character_rect, spike):
-    # 'spike.rect'를 사용하여 충돌 검사
     return character_rect.colliderect(spike.rect)
 
 def remove_floor_section(blocks, x_position, width):
@@ -74,7 +73,6 @@ def main():
 
     second_block_x, second_block_y = 500, 350
 
-    # Spike 객체의 생성과 사용 수정
     spike = Spike(505, floor_y - 1, 90, 20)
 
     clock = pygame.time.Clock()
@@ -100,19 +98,13 @@ def main():
 
         seconds = (pygame.time.get_ticks() - start_ticks) / 1000
         time_left = time_limit - seconds
-        if time_left <= 0:
-            choice = show_game_over_screen(screen, score)
-            if choice == "restart":
-                pass
-            else:
-                running = False
 
-        if check_spike_collision(character_rect, spike):
-            choice = show_game_over_screen(screen, score)
-            if choice == "restart":
-                pass
-            else:
-                running = False
+        if check_spike_collision(character_rect, spike) or check_collision(character_rect, enemies, enemy_width, enemy_height):
+            # 게임을 바로 재시작
+            character_x, character_y = 30, SCREEN_HEIGHT - character_height * 2
+            blocks, enemies, powerups, portal = init_stage(*stages[current_stage])
+            start_ticks = pygame.time.get_ticks()
+            score = 0
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -169,14 +161,6 @@ def main():
         else:
             is_on_ground = False
 
-        enemy_collided = check_collision(character_rect, enemies, enemy_width, enemy_height)
-        if enemy_collided:
-            choice = show_game_over_screen(screen, score)
-            if choice == "restart":
-                pass
-            else:
-                running = False
-
         for enemy in enemies:
             enemy.x += enemy_speed * enemy.direction
             if enemy.x <= 0 or enemy.x >= SCREEN_WIDTH - enemy_width:
@@ -201,7 +185,6 @@ def main():
             remove_floor_section(blocks, second_block_x, platform_width)
 
         pygame.draw.rect(screen, (144, 228, 144), (0, floor_y, SCREEN_WIDTH, floor_height))
-
 
         for block in blocks:
             pygame.draw.rect(screen, platform_color, (block.x, block.y, platform_width, platform_height))
