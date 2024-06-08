@@ -1,6 +1,10 @@
 import pygame
 import sys
+<<<<<<< HEAD
 import subprocess
+=======
+import subprocess  # subprocess 모듈 추가
+>>>>>>> 9c0b7e764e471b07f4bd2c6070e6cc14b82a2906
 from game_over import show_game_over_screen
 from stage import init_stage, stages
 from lobby import show_lobby_screen
@@ -52,6 +56,20 @@ def main():
         pygame.quit()
         sys.exit()
 
+<<<<<<< HEAD
+=======
+    WHITE = (255, 255, 255)
+    RED = (255, 0, 0)
+    BLUE = (0, 0, 255)
+    GREEN = (0, 255, 0)
+    YELLOW = (255, 223, 0)
+    PURPLE = (128, 0, 128)
+    FLOOR_COLOR = (144, 228, 144)
+    BLACK = (0, 0, 0)
+    ORANGE = (255, 165, 0)
+    BROWN = (139, 69, 19)
+
+>>>>>>> 9c0b7e764e471b07f4bd2c6070e6cc14b82a2906
     character_width, character_height = 20, 20
     character_x, character_y = character_width, SCREEN_HEIGHT - character_height * 2
     character_speed = 6
@@ -60,10 +78,18 @@ def main():
 
     floor_height = 150
     floor_y = SCREEN_HEIGHT - floor_height
+<<<<<<< HEAD
 
     platform_width, platform_height = 100, 20
     platform_color = (0, 0, 255)
 
+=======
+    FLOOR_COLOR = (139, 69, 19)
+    
+    platform_width, platform_height = 100, 20
+    platform_color = BLUE
+
+>>>>>>> 9c0b7e764e471b07f4bd2c6070e6cc14b82a2906
     powerup_radius = 10
 
     enemy_width, enemy_height = 33, 33
@@ -72,6 +98,7 @@ def main():
     current_stage = 1
     blocks, enemies, powerups, portal = init_stage(*stages[current_stage])
 
+<<<<<<< HEAD
     second_block_x, second_block_y = 500, 350
 
     # Spike 객체의 생성과 사용 수정
@@ -80,6 +107,27 @@ def main():
     clock = pygame.time.Clock()
     current_image = user_image
     is_jumping = False
+=======
+    second_block_x, second_block_y = 500, 350  # 추가된 부분: 두 번째 블록의 좌표
+
+    spike = Spike(505, floor_y - 1, 90, 20)
+
+    clock = pygame.time.Clock()
+
+    def check_collision(character, objects, width, height):
+        for obj in objects:
+            if character.colliderect(pygame.Rect(obj.x, obj.y, width, height)):
+                return obj
+        return None
+
+    def remove_floor_section(x, width):
+        pygame.draw.rect(screen, WHITE, (x, floor_y, width, floor_height))
+
+    def check_spike_collision(player_rect, spike_rect):
+        if player_rect.colliderect(spike_rect):
+            return True
+        return False
+>>>>>>> 9c0b7e764e471b07f4bd2c6070e6cc14b82a2906
 
     running = True
     vertical_momentum = 0
@@ -106,8 +154,13 @@ def main():
                 pass
             else:
                 running = False
+<<<<<<< HEAD
 
         if check_spike_collision(character_rect, spike):
+=======
+                
+        if check_spike_collision(character_rect, spike.rect):
+>>>>>>> 9c0b7e764e471b07f4bd2c6070e6cc14b82a2906
             choice = show_game_over_screen(screen, score)
             if choice == "restart":
                 pass
@@ -124,6 +177,13 @@ def main():
                 if event.key == pygame.K_SPACE:
                     space_pressed = False
 
+<<<<<<< HEAD
+=======
+        if space_pressed and is_on_ground:
+            vertical_momentum = -jump_speed
+            is_on_ground = False
+
+>>>>>>> 9c0b7e764e471b07f4bd2c6070e6cc14b82a2906
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             character_x -= character_speed
@@ -194,7 +254,11 @@ def main():
                 character_x, character_y = character_width, SCREEN_HEIGHT - character_height * 2
                 start_ticks = pygame.time.get_ticks()
             else:
+<<<<<<< HEAD
                 subprocess.run(["python", "KyoKwan/main_game.py"])
+=======
+                subprocess.run(["python", "KyoKwan/main_game.py"])  # subprocess를 사용하여 main_game.py 실행
+>>>>>>> 9c0b7e764e471b07f4bd2c6070e6cc14b82a2906
                 running = False
 
         if floor_removed:
@@ -215,7 +279,11 @@ def main():
         if portal:
             portal.draw(screen)
 
+<<<<<<< HEAD
         pygame.draw.rect(screen, (0, 0, 0), spike.rect)
+=======
+        pygame.draw.rect(screen, BLACK, spike.rect)
+>>>>>>> 9c0b7e764e471b07f4bd2c6070e6cc14b82a2906
 
         font = pygame.font.Font(None, 36)
         text = font.render(f"Score: {score}  Time Left: {int(time_left)}", True, (0, 0, 0))
