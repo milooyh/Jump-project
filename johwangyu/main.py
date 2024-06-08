@@ -201,7 +201,7 @@ def main():
             remove_floor_section(blocks, second_block_x, platform_width)
 
         pygame.draw.rect(screen, (144, 228, 144), (0, floor_y, SCREEN_WIDTH, floor_height))
-        pygame.draw.rect(screen, (255, 0, 0), character_rect)
+
 
         for block in blocks:
             pygame.draw.rect(screen, platform_color, (block.x, block.y, platform_width, platform_height))
