@@ -416,8 +416,7 @@ while running:
         for block in blocks:
             if block.is_visible:
                 pygame.draw.rect(screen, platform_color, (block.x - camera_x, block.y, platform_width, platform_height))
-                # text = font.render(f"({block.x}, {block.y})", True, RED)
-                # screen.blit(text, (block.x - camera_x, block.y - 20))
+                
 
         if check_trigger_zone_collision(character_rect, spike_trigger_zone):
             spike_height = 110
