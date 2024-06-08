@@ -8,6 +8,9 @@ left_jump = pygame.image.load('C:/OSSW4/Img/Left_J.png')
 right_walk = pygame.image.load('C:/OSSW4/Img/Right_W.png')
 right_jump = pygame.image.load('C:/OSSW4/Img/Right_J.png')
 user_image = pygame.image.load('C:/OSSW4/Img/User.png')
+block_image = pygame.image.load('C:/OSSW4/Img/block.png')
+
+
 
 # 크기 조정
 left_walk = pygame.transform.scale(left_walk, (character_width, character_height))
@@ -15,6 +18,7 @@ left_jump = pygame.transform.scale(left_jump, (character_width, character_height
 right_walk = pygame.transform.scale(right_walk, (character_width, character_height))
 right_jump = pygame.transform.scale(right_jump, (character_width, character_height))
 user_image = pygame.transform.scale(user_image, (character_width, character_height))
+block_image = pygame.transform.scale(block_image, (platform_width, platform_height)) 
 
 map_modules = [Map_1]
 current_map_index = 0
