@@ -426,7 +426,7 @@ while running:
         for spike in spike_positions:
             pygame.draw.rect(screen, SPIKE_COLOR, (spike[0] - camera_x, spike[1], spike_width, spike_height))
 
-        pygame.draw.rect(screen, (0, 255, 0), trigger_falling_block_zone.move(-camera_x, 0), 2)
+        # pygame.draw.rect(screen, (0, 255, 0), trigger_falling_block_zone.move(-camera_x, 0), 2)
         pygame.draw.rect(screen, (0, 0, 0), del_block_1.move(-camera_x, 0), 2)
         pygame.draw.rect(screen, (0, 255, 0), add_block_1.move(-camera_x, 0), 2)
         pygame.draw.rect(screen, (0, 0, 255), trigger_moving_block_zone.move(-camera_x, 0), 2)
