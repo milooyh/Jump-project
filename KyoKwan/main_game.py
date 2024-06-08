@@ -3,11 +3,11 @@ import sys
 from init_settings import *
 from game_objects import *
 
-left_walk = pygame.image.load('C:/OSSW4/KyoKwan/Left_W.png')
-left_jump = pygame.image.load('C:/OSSW4/KyoKwan/Left_J.png')
-right_walk = pygame.image.load('C:/OSSW4/KyoKwan/Right_W.png')
-right_jump = pygame.image.load('C:/OSSW4/KyoKwan/Right_J.png')
-user_image = pygame.image.load('C:/OSSW4/KyoKwan/User.png')
+left_walk = pygame.image.load('C:/OSSW4/Img/Left_W.png')
+left_jump = pygame.image.load('C:/OSSW4/Img/Left_J.png')
+right_walk = pygame.image.load('C:/OSSW4/Img/Right_W.png')
+right_jump = pygame.image.load('C:/OSSW4/Img/Right_J.png')
+user_image = pygame.image.load('C:/OSSW4/Img/User.png')
 
 # 크기 조정
 left_walk = pygame.transform.scale(left_walk, (character_width, character_height))

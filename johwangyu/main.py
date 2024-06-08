@@ -21,6 +21,8 @@ def main():
         print("Exit Game")
         pygame.quit()
         sys.exit()
+        
+
 
     WHITE = (255, 255, 255)
     RED = (255, 0, 0)
@@ -39,6 +41,7 @@ def main():
     jump_speed = 17
     gravity = 1.4
 
+    
     floor_height = 150
     floor_y = SCREEN_HEIGHT - floor_height
     FLOOR_COLOR = (139, 69, 19)
@@ -59,7 +62,8 @@ def main():
     spike = Spike(505, floor_y - 1, 90, 20)
 
     clock = pygame.time.Clock()
-
+    character_image = pygame.image.load('Img/User.png')  
+    character_image = pygame.transform.scale(character_image, (character_width, character_height))
     def check_collision(character, objects, width, height):
         for obj in objects:
             if character.colliderect(pygame.Rect(obj.x, obj.y, width, height)):
