@@ -258,6 +258,7 @@ while running:
         for block in blocks:
             if block.is_visible:
                 pygame.draw.rect(screen, platform_color, (block.x - camera_x, block.y, platform_width, platform_height))
+                screen.blit(block_image, (block.x - camera_x, block.y))
                 # text = font.render(f"({block.x}, {block.y})", True, RED)
                 # screen.blit(text, (block.x - camera_x, block.y - 20))
 
