@@ -27,7 +27,8 @@ def check_collision(character_rect, objects, obj_width, obj_height):
     return None
 
 def check_spike_collision(character_rect, spike):
-    return character_rect.colliderect(pygame.Rect(spike.x, spike.y, spike.width, spike.height))
+    # 'spike.rect'를 사용하여 충돌 검사
+    return character_rect.colliderect(spike.rect)
 
 def remove_floor_section(blocks, x_position, width):
     for block in blocks:
@@ -73,6 +74,7 @@ def main():
 
     second_block_x, second_block_y = 500, 350
 
+    # Spike 객체의 생성과 사용 수정
     spike = Spike(505, floor_y - 1, 90, 20)
 
     clock = pygame.time.Clock()
