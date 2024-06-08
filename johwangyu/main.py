@@ -53,9 +53,9 @@ def main():
         sys.exit()
 
     character_width, character_height = 20, 20
-    character_x, character_y = character_width, SCREEN_HEIGHT - character_height * 2
+    character_x, character_y = 30, SCREEN_HEIGHT - character_height * 2
     character_speed = 6
-    jump_speed = 17
+    jump_speed = 20
     gravity = 1.4
 
     floor_height = 150
