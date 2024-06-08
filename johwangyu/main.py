@@ -1,6 +1,6 @@
 import pygame
 import sys
-import subprocess  # subprocess 모듈 추가
+import subprocess
 from game_over import show_game_over_screen
 from stage import init_stage, stages
 from lobby import show_lobby_screen
@@ -16,13 +16,26 @@ def main():
     lobby_choice = show_lobby_screen(SCREEN_WIDTH, SCREEN_HEIGHT)
     if lobby_choice == "start":
         print("game start!")
-        # 게임 시작 코드 작성
     elif lobby_choice == "quit":
         print("Exit Game")
         pygame.quit()
         sys.exit()
-        
 
+    character_images = {
+        'left_walk': pygame.image.load('C:/OSSW4/Img/Left_W.png'),
+        'left_jump': pygame.image.load('C:/OSSW4/Img/Left_J.png'),
+        'right_walk': pygame.image.load('C:/OSSW4/Img/Right_W.png'),
+        'right_jump': pygame.image.load('C:/OSSW4/Img/Right_J.png'),
+        'idle': pygame.image.load('C:/OSSW4/Img/User.png')
+    }
+
+    def update_character_image(direction, is_jumping):
+        if direction < 0:
+            return character_images['left_jump'] if is_jumping else character_images['left_walk']
+        elif direction > 0:
+            return character_images['right_jump'] if is_jumping else character_images['right_walk']
+        else:
+            return character_images['idle']
 
     WHITE = (255, 255, 255)
     RED = (255, 0, 0)
@@ -41,11 +54,9 @@ def main():
     jump_speed = 17
     gravity = 1.4
 
-    
     floor_height = 150
     floor_y = SCREEN_HEIGHT - floor_height
-    FLOOR_COLOR = (139, 69, 19)
-    
+
     platform_width, platform_height = 100, 20
     platform_color = BLUE
 
@@ -57,26 +68,13 @@ def main():
     current_stage = 1
     blocks, enemies, powerups, portal = init_stage(*stages[current_stage])
 
-    second_block_x, second_block_y = 500, 350  # 추가된 부분: 두 번째 블록의 좌표
+    second_block_x, second_block_y = 500, 350
 
     spike = Spike(505, floor_y - 1, 90, 20)
 
     clock = pygame.time.Clock()
-    character_image = pygame.image.load('Img/User.png')  
-    character_image = pygame.transform.scale(character_image, (character_width, character_height))
-    def check_collision(character, objects, width, height):
-        for obj in objects:
-            if character.colliderect(pygame.Rect(obj.x, obj.y, width, height)):
-                return obj
-        return None
-
-    def remove_floor_section(x, width):
-        pygame.draw.rect(screen, WHITE, (x, floor_y, width, floor_height))
-
-    def check_spike_collision(player_rect, spike_rect):
-        if player_rect.colliderect(spike_rect):
-            return True
-        return False
+    current_image = character_images['idle']
+    is_jumping = False
 
     running = True
     vertical_momentum = 0
@@ -103,7 +101,7 @@ def main():
                 pass
             else:
                 running = False
-                
+
         if check_spike_collision(character_rect, spike.rect):
             choice = show_game_over_screen(screen, score)
             if choice == "restart":
@@ -121,15 +119,21 @@ def main():
                 if event.key == pygame.K_SPACE:
                     space_pressed = False
 
-        if space_pressed and is_on_ground:
-            vertical_momentum = -jump_speed
-            is_on_ground = False
-
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             character_x -= character_speed
+            current_image = update_character_image(-1, is_jumping)
         if keys[pygame.K_RIGHT]:
             character_x += character_speed
+            current_image = update_character_image(1, is_jumping)
+
+        if space_pressed and is_on_ground:
+            vertical_momentum = -jump_speed
+            is_on_ground = False
+            is_jumping = True
+            current_image = update_character_image(-1 if keys[pygame.K_LEFT] else 1, is_jumping)
+        else:
+            is_jumping = False
 
         character_x = max(0, min(SCREEN_WIDTH - character_width, character_x))
         vertical_momentum += gravity
@@ -177,7 +181,7 @@ def main():
                 character_x, character_y = character_width, SCREEN_HEIGHT - character_height * 2
                 start_ticks = pygame.time.get_ticks()
             else:
-                subprocess.run(["python", "KyoKwan/main_game.py"])  # subprocess를 사용하여 main_game.py 실행
+                subprocess.run(["python", "KyoKwan/main_game.py"])
                 running = False
 
         if floor_removed:
@@ -203,6 +207,9 @@ def main():
         font = pygame.font.Font(None, 36)
         text = font.render(f"Score: {score}  Time Left: {int(time_left)}", True, BLACK)
         screen.blit(text, (10, 10))
+
+        current_image = pygame.transform.scale(current_image, (character_width, character_height))
+        screen.blit(current_image, (character_x, character_y))
 
         pygame.display.flip()
         clock.tick(60)
