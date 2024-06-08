@@ -62,7 +62,7 @@ class Map3: # 3스테이지
 class Map4: # 4스테이지
     initial_character_x = 0
     initial_character_y = 550
-    portal = Portal(720, 45, 70, 70, 'hyunyoolim.main', 'images/portal.png')
+    portal = Portal(720, 45, 70, 70, 'map5', 'images/portal.png')
     blocks = [
         Block(0, 550),
         MovingBlock(400, 525, move_range=200, speed=2),
