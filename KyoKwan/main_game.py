@@ -58,7 +58,7 @@ def load_next_map():
     else:
         pygame.quit()
         sys.exit()
-
+#
 def reset_game():
     global character_x, character_y, vertical_momentum, is_on_ground, blocks, additional_block_added_1, additional_block_added_2, moving_block_triggered, block_spawn_time, block_spawned, camera_x, trick_hole_visible, trick_hole_y, falling_block, spike_height, spike_positions, spike_triggered, on_jumping_block, jump_timer, down_key_count, attempt_count
     attempt_count += 1
