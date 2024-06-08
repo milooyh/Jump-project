@@ -32,7 +32,7 @@ class Character:
             raise FileNotFoundError(f"No file '{path}' found")
         return pygame.image.load(path)
 
-    def move_left(self):
+    def move_left(self): #왼쪽으로 이동
         self.x -= self.speed
         self.rect.x = self.x
         self.direction = "left"
