@@ -71,7 +71,7 @@ class Character:
         self.direction = "right"
         self.image_state = "idle"
 
-    def update_image(self):
+    def update_image(self): #움직임에 따라 캐릭터 이미지 업데이트
         if not self.is_on_ground:
             self.image_state = f"jump_{self.direction}"
         elif self.image_state.startswith("jump"):
