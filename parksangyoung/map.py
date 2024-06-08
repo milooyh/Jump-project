@@ -2,7 +2,7 @@ from block import Block, MovingBlock
 from obstacle import Spike
 from portal import Portal
 
-class Map1:
+class Map1: # 1스테이지
     initial_character_x = 100
     initial_character_y = 400
     portal = Portal(720, 50, 70, 70, 'map2', 'images/portal.png')
@@ -13,7 +13,7 @@ class Map1:
         Block(700, 200)
     ]
 
-class Map2:
+class Map2: # 2스테이지
     initial_character_x = 50
     initial_character_y = 100
     portal = Portal(720, 50, 70, 70, 'map3', 'images/portal.png')
@@ -24,7 +24,7 @@ class Map2:
         Block(600, 200)
     ]
 
-class Map3:
+class Map3: # 3스테이지
     initial_character_x = 0
     initial_character_y = 300
     portal = Portal(720, 150, 70, 70, 'map4', 'images/portal.png')
@@ -59,7 +59,7 @@ class Map3:
     Spike(600, 280)
     ]
 
-class Map4:
+class Map4: # 4스테이지
     initial_character_x = 0
     initial_character_y = 550
     portal = Portal(720, 45, 70, 70, 'hyunyoolim.main', 'images/portal.png')
