@@ -5,11 +5,13 @@ from stage import init_stage, stages
 from lobby import show_lobby_screen
 from spike import Spike
 
-def check_collision(character_rect, objects):
+def check_collision(character_rect, objects, obj_width, obj_height):
     for obj in objects:
-        if character_rect.colliderect(pygame.Rect(obj.x, obj.y, obj.width, obj.height)):
+        obj_rect = pygame.Rect(obj.x, obj.y, obj_width, obj_height)
+        if character_rect.colliderect(obj_rect):
             return obj
     return None
+
 
 def check_spike_collision(character_rect, spike):
     return character_rect.colliderect(pygame.Rect(spike.x, spike.y, spike.width, spike.height))
