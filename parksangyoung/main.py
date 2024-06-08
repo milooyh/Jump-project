@@ -1,6 +1,7 @@
 import pygame
 import sys
-import importlib
+import os
+import subprocess
 from character import Character
 from map import *
 
@@ -11,7 +12,7 @@ SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("점프 점프")
 
-# 색깔 정의
+# 색상 정의
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
@@ -26,7 +27,9 @@ gravity = 1
 floor_height = 22
 floor_y = SCREEN_HEIGHT - floor_height
 
-# 발판 속성 설정을 block.py로 이동
+# 현재 스크립트 파일의 디렉토리를 기준으로 경로 설정
+current_dir = os.path.dirname(__file__)
+hyunyoolim_path = os.path.abspath(os.path.join(current_dir, "../hyunyoolim"))
 
 # 충돌 감지
 def check_collision(character, blocks):
@@ -119,7 +122,16 @@ class Game:
 
             # 포탈 충돌 검사 및 처리
             if check_portal_collision(self.character, self.portal):
-                self.next_stage()
+                if self.stage_index == len(self.stages) - 1:  # 만약 마지막 스테이지라면
+                    # hyunyoolim 폴더 안에 있는 main 모듈의 main 함수 실행
+                    try:
+                        subprocess.run(["python", os.path.join(hyunyoolim_path, "main.py")])
+                    except Exception as e:
+                        print("Failed to run hyunyoolim:", e)
+                    pygame.quit()
+                    sys.exit()
+                else:
+                    self.next_stage()
                 continue
 
             # 가시 충돌 검사 및 처리
@@ -156,3 +168,4 @@ class Game:
 if __name__ == "__main__":
     game = Game()
     game.run()
+
