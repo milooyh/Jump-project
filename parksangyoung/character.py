@@ -38,7 +38,7 @@ class Character:
         self.direction = "left"
         self.image_state = "walk_left"
 
-    def move_right(self):
+    def move_right(self): #오른쪽으로 이동
         self.x += self.speed
         self.rect.x = self.x
         self.direction = "right"
