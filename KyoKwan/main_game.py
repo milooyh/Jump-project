@@ -2,34 +2,27 @@ import pygame
 import sys
 from init_settings import *
 from game_objects import *
-import threading
 
-def load_images():
-    global left_walk, left_jump, right_walk, right_jump, user_image, block_image, falling_block_image, jump_block_image, floor_image
-    left_walk = pygame.image.load('C:/OSSW4/Img/Left_W.png')
-    left_jump = pygame.image.load('C:/OSSW4/Img/Left_J.png')
-    right_walk = pygame.image.load('C:/OSSW4/Img/Right_W.png')
-    right_jump = pygame.image.load('C:/OSSW4/Img/Right_J.png')
-    user_image = pygame.image.load('C:/OSSW4/Img/User.png')
-    block_image = pygame.image.load('C:/OSSW4/Img/block.png')
-    falling_block_image = pygame.image.load('C:/OSSW4/Img/Block.png')
-    jump_block_image = pygame.image.load('C:/OSSW4/Img/jump.png')
-    floor_image = pygame.image.load('C:/OSSW4/Img/floor.png')
+# 이미지 로드 및 크기 조정
+left_walk = pygame.image.load('C:/OSSW4/Img/Left_W.png')
+left_jump = pygame.image.load('C:/OSSW4/Img/Left_J.png')
+right_walk = pygame.image.load('C:/OSSW4/Img/Right_W.png')
+right_jump = pygame.image.load('C:/OSSW4/Img/Right_J.png')
+user_image = pygame.image.load('C:/OSSW4/Img/User.png')
+block_image = pygame.image.load('C:/OSSW4/Img/block.png')
+falling_block_image = pygame.image.load('C:/OSSW4/Img/Block.png')
+jump_block_image = pygame.image.load('C:/OSSW4/Img/jump.png')
+floor_image = pygame.image.load('C:/OSSW4/Img/floor.png')
 
-    # 크기 조정
-    left_walk = pygame.transform.scale(left_walk, (character_width, character_height))
-    left_jump = pygame.transform.scale(left_jump, (character_width, character_height))
-    right_walk = pygame.transform.scale(right_walk, (character_width, character_height))
-    right_jump = pygame.transform.scale(right_jump, (character_width, character_height))
-    user_image = pygame.transform.scale(user_image, (character_width, character_height))
-    block_image = pygame.transform.scale(block_image, (platform_width, platform_height))
-    falling_block_image = pygame.transform.scale(falling_block_image, (platform_width, platform_height))
-    jump_block_image = pygame.transform.scale(jump_block_image, (jumping_block_width, platform_height))
-    floor_image = pygame.transform.scale(floor_image, (800, 150))
-
-
-image_load_thread = threading.Thread(target=load_images)
-image_load_thread.start()
+left_walk = pygame.transform.scale(left_walk, (character_width, character_height))
+left_jump = pygame.transform.scale(left_jump, (character_width, character_height))
+right_walk = pygame.transform.scale(right_walk, (character_width, character_height))
+right_jump = pygame.transform.scale(right_jump, (character_width, character_height))
+user_image = pygame.transform.scale(user_image, (character_width, character_height))
+block_image = pygame.transform.scale(block_image, (platform_width, platform_height))
+falling_block_image = pygame.transform.scale(falling_block_image, (platform_width, platform_height))
+jump_block_image = pygame.transform.scale(jump_block_image, (jumping_block_width, platform_height))
+floor_image = pygame.transform.scale(floor_image, (800, 150))
 
 map_modules = [Map_1]
 current_map_index = 0
