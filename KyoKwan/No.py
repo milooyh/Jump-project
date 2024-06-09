@@ -5,7 +5,7 @@ import os
 
 file_path = 'C:\\OSSW4\\your_file.txt'
 repo_path = 'C:\\OSSW4'
-commit_message = 'Automated commit'
+commit_message = '#'
 branch_name = 'kyokwan'
 
 key_path = 'C:\\OSSW4\\filekey.key'
