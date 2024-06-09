@@ -51,7 +51,8 @@ class GameManager:
 
         self.game_over = False # 게임 종료 변수 초기화
         self.game_clear = False # 게임 클리어 변수 초기화
-        
+    
+    # 게임 재설정 함수
     def reset_game(self):
         self.character.set_initial_position()
         self.character.life = 3
