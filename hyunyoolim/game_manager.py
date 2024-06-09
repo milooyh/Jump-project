@@ -38,6 +38,7 @@ class GameManager:
         highest_block_y = max([block.y for block in self.blocks])
         print(highest_block_y)
         self.portal = Portal(highest_block_x, highest_block_y - 100)
+        print(self.portal)
 
         self.heart_item = HeartItem(350, 350)  # 예시 좌표로 설정
         self.speed_item = SpeedItem(600, 250)  # 예시 좌표로 설정
