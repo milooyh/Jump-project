@@ -6,7 +6,7 @@ from setting import * # 설정 파일에서 모든 설정 가져오기
 # 장애물 클래스 정의
 class Obstacle:
     def __init__(self, x, y, speed):
-        self.x = x
+        self.x = x # 장애물 x좌표 설정
         self.y = y
         self.speed = speed
 
