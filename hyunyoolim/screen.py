@@ -52,6 +52,7 @@ class Screen:
     # 게임 오버 화면 표시 함수
     @staticmethod
     def show_game_over_screen(screen, game_manager):
+        print('show game over screen 함수 호출 !!!')
         screen.fill(WHITE)
         font = pygame.font.Font(None, 64)
         text = font.render("Game Over", True, RED)
