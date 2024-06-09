@@ -48,6 +48,7 @@ class Character:
         self.current_color_index = 0
         print(self.current_color_index)
         self.show_life = False
+        print(self.show_life)
         self.life_counter = 0
         self.invincible = False
         self.invincible_timer = 0
