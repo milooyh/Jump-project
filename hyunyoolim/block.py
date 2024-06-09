@@ -1,6 +1,7 @@
 import pygame
 from setting import *
 
+# block 클래스 정의
 class Block:
     def __init__(self, x, y):
         self.x = x
