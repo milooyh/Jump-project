@@ -47,6 +47,7 @@ class Screen:
         screen.blit(text, text_rect)
         pygame.display.update()
         pygame.time.wait(2000) # 2초 동안 대기
+        print('show_clear_screen 함수 호출')
 
     @staticmethod
     def show_game_over_screen(screen, game_manager):
