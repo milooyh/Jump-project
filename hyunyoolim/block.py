@@ -15,6 +15,8 @@ class Block:
         # platform_height: 블록의 높이 (setting 모듈에서 가져옴)
         pygame.draw.rect(screen, platform_color, pygame.Rect(self.x, self.y, platform_width, platform_height))
         
+    
+    # 캐릭터와 블록 간의 충돌 검사
     @staticmethod
     def check_collision(character_x, character_y, character_width, character_height, blocks):  
         for block in blocks:
