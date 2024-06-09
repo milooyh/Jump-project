@@ -13,7 +13,7 @@ falling_block_image = pygame.image.load('C:/OSSW4/Img/Block.png')
 
 
 
-
+#
 # 크기 조정
 left_walk = pygame.transform.scale(left_walk, (character_width, character_height))
 left_jump = pygame.transform.scale(left_jump, (character_width, character_height))
