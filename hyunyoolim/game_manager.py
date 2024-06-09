@@ -10,6 +10,7 @@ from obstacle import Obstacle # 장애물 클래스 임포트
 from portal import Portal # 포털 클래스 임포트
 from item import * # 아이템 관련 모든 설정 가져오기
 
+# 게임 매이저 클래스
 class GameManager:
     
     def __init__(self):
