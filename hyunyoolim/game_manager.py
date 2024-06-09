@@ -1,7 +1,7 @@
-# game_manager.py
-
 import pygame
 import sys
+from pygame.locals import USEREVENT
+import subprocess  # subprocess 모듈을 추가해야 합니다.
 from setting import *
 from character import Character
 from screen import Screen
@@ -95,16 +95,20 @@ class GameManager:
                 print('아이템 그리기')
 
                 if self.character.game_clear:
-                    Screen.show_clear_screen(self.screen)
                     print('게임 클리어')
+                    # 포탈과 충돌하면 main.py 실행
+                    subprocess.run(["python", "johwangyu/main.py"])
+                    break
                 elif self.character.game_over:
-                    Screen.show_game_over_screen(self.screen, self)
                     print('게임오버')
-                    
-                
+                    Screen.show_game_over_screen(self.screen, self)
                     
             pygame.display.update()
             self.clock.tick(60)
 
         pygame.quit()
         sys.exit()
+
+if __name__ == "__main__":
+    game_manager = GameManager()
+    game_manager.run_game()
