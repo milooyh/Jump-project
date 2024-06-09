@@ -475,10 +475,19 @@ while running:
             load_next_map()
 
         screen.blit(character_image, (character_x - camera_x, character_y))
-
+        screen.blit(cloud_image, (550 - camera_x, 210))
+        screen.blit(cloud_image, (1000 - camera_x, 500))
         attempt_text = font.render(f"Die: {attempt_count}", True, RED)
+        
         screen.blit(attempt_text, (10, 10))
-
+        
+        for block in blocks:
+            if block.is_visible:
+                if (block.x, block.y) == (100, 260) or (block.x, block.y) == (160, 260) :
+                    screen.blit(cloud_image, (block.x - camera_x, block.y))
+                else:
+                    screen.blit(block_image, (block.x - camera_x, block.y))
+                    
         # 텔레포트 애니메이션
         teleport_frame_count += 1
         angle = 360 * (teleport_frame_count / teleport_frames)
