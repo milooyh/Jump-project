@@ -30,6 +30,7 @@ class GameManager:
 
         # 블록 장애물 포탈 생성
         self.blocks = [Block(x, y) for x, y in blocks_positions]
+        print(self.blocks)
         self.obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
 
         highest_block_x = max([block.x for block in self.blocks])
