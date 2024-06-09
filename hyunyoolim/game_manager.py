@@ -50,7 +50,7 @@ class GameManager:
         self.character = Character(self.blocks, self.obstacles, self.portal, self.items)
 
         self.game_over = False # 게임 종료 변수 초기화
-        self.game_clear = False
+        self.game_clear = False # 게임 클리어 변수 초기화
         
     def reset_game(self):
         self.character.set_initial_position()
