@@ -123,6 +123,8 @@ class GameManager:
                     # 포탈과 충돌하면 main.py 실행
                     subprocess.run(["python", "johwangyu/main.py"])
                     break
+                
+                # 게임 오버일 때
                 elif self.character.game_over:
                     print('게임오버')
                     Screen.show_game_over_screen(self.screen, self)
