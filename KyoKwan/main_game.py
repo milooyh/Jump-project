@@ -271,6 +271,9 @@ while running:
         if falling_block.is_visible:
             screen.blit(falling_block_image, (falling_block.x - camera_x, falling_block.y))
             
+        for spike in spike_positions:
+            screen.blit(spike_image, (spike[0] - camera_x, spike[1]))    
+            
         if check_trigger_zone_collision(character_rect, spike_trigger_zone):
             spike_height = 110
             spike_positions = [(x, floor_y - spike_height) for x in range(550, 600, spike_width)]
