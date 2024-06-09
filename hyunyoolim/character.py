@@ -48,7 +48,7 @@ class Character:
         print(self.colors)
         self.current_color_index = 0 # 현재 색상 인덱스
         print(self.current_color_index)
-        self.show_life = False
+        self.show_life = False # 생명력 표시 여부
         print(self.show_life)
         self.life_counter = 0
         print(self.life_counter)
