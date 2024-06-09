@@ -119,17 +119,16 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     space_pressed = True
-                if event.key == pygame.K_LEFT:
-                    current_image = left_jump if not is_on_ground else left_walk
-                elif event.key == pygame.K_RIGHT:
-                    current_image = right_jump if not is_on_ground else right_walk
-            elif event.type is pygame.KEYUP:
+            elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_SPACE:
                     space_pressed = False
 
+        # 점프 로직을 이벤트 처리 외부로 이동
         if space_pressed and is_on_ground:
             vertical_momentum = -jump_speed
             is_on_ground = False
+            space_pressed = False  # 추가: 점프 후 바로 키 상태 초기화
+
 
         character_x += (pygame.key.get_pressed()[pygame.K_RIGHT] - pygame.key.get_pressed()[pygame.K_LEFT]) * character_speed
         character_x = max(0, min(SCREEN_WIDTH - character_width, character_x))
