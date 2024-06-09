@@ -82,6 +82,7 @@ class Character:
         current_time = pygame.time.get_ticks() # 현재 시간
         print(current_time)
         
+        # 스페이스바가 눌렸고 캐릭터가 땅에 있을 때 점프
         if self.space_pressed and self.is_on_ground:
             self.vertical_momentum = -self.jump_speed
             self.is_on_ground = False
