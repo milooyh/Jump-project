@@ -28,6 +28,7 @@ class Character:
         self.is_on_ground = True
         print(self.is_on_ground)
         self.space_pressed = False
+        print(self.space_pressed)
         self.life = 3
         self.game_over = False
         self.game_clear = False
