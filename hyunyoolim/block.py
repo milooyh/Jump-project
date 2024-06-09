@@ -19,6 +19,7 @@ class Block:
     # 캐릭터와 블록 간의 충돌 검사
     # character_x: 캐릭터의 x 좌표
     #  character_y: 캐릭터의 y 좌표
+    # character_width: 캐릭터의 너비
     @staticmethod
     def check_collision(character_x, character_y, character_width, character_height, blocks):  
         for block in blocks:
