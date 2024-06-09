@@ -95,7 +95,7 @@ class Character:
         if keys[pygame.K_RIGHT]:
             self.x = min(RIGHT_EDGE, self.x + self.speed)
 
-        self.x = max(0, min(SCREEN_WIDTH - self.width, self.x))
+        self.x = max(0, min(SCREEN_WIDTH - self.width, self.x)) # 화면 경계를 벗어나지 않도록
         self.vertical_momentum += self.gravity
         self.y += self.vertical_momentum
         self.y = min(self.y, floor_y - self.height)
