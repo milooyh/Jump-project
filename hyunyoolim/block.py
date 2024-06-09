@@ -8,7 +8,7 @@ class Block:
         self.x = x
         print(x)
         self.y = y
-        
+        print(y)
 
     # 화면에 블록 그리기
     def draw(self, screen):
@@ -16,7 +16,7 @@ class Block:
         # platform_width: 블록의 너비 (setting 모듈에서 가져옴)
         # platform_height: 블록의 높이 (setting 모듈에서 가져옴)
         pygame.draw.rect(screen, platform_color, pygame.Rect(self.x, self.y, platform_width, platform_height))
-        
+        print('draw 함수 불렸다 !')
     
     # 캐릭터와 블록 간의 충돌 검사
     # character_x: 캐릭터의 x 좌표
