@@ -96,6 +96,7 @@ class GameManager:
                 self.character.update_game_state()
                 print('게임 상태 업데이트')
 
+                # 게임 요소 화면에 그리기
                 self.character.draw_game_elements(self.screen, self.blocks, self.obstacles, self.portal)
                 print('게임 요소 그리기')
                 
