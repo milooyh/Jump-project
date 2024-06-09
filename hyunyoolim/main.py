@@ -13,6 +13,8 @@ def main():
     game_manager = GameManager()
     Screen.show_start_screen(screen)
     game_manager.run_game()
+    
+    print('main 함수 실행 !!!!!')
 
 if __name__ == "__main__":
     main() 
