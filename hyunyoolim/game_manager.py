@@ -44,8 +44,9 @@ class GameManager:
         self.heart_item = HeartItem(350, 350)  # 예시 좌표로 설정
         self.speed_item = SpeedItem(600, 250)  # 예시 좌표로 설정
         self.invincibility_item = InvincibilityItem(500, 150)  # 예시 좌표로 설정
-        
         self.items = [self.heart_item, self.speed_item, self.invincibility_item]
+        
+        # 캐릭터 생성
         self.character = Character(self.blocks, self.obstacles, self.portal, self.items)
 
         
