@@ -12,7 +12,7 @@ branch_name = 'kyokwan'
 
 while True:
     if not os.path.exists(file_path):
-        open(file_path, 'w').close()
+        open(file _path, 'w').close()
     
     with open(file_path, 'a') as f:
         f.write('#\n')
