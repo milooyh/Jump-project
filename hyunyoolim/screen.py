@@ -66,6 +66,7 @@ class Screen:
         text_rect = text.get_rect(center=try_again_button.center)
         screen.blit(text, text_rect)
 
+        # exit 버튼 위치와 크기 조정
         exit_button = pygame.Rect(250, 475, 300, 50)
         pygame.draw.rect(screen, RED, exit_button)
         text = font.render("Exit", True, WHITE)
