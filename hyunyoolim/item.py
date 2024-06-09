@@ -29,14 +29,14 @@ class Item:
 # 하트 아이템 클래스 정의
 class HeartItem(Item):
     def __init__(self, x, y):
-        super().__init__(x, y, 'heart.png')
+        super().__init__(x, y, 'heart.png') # 상위 클래스의 생성자를 호출하여 초기화
 
 # 느림보 아이템 클래스 정의
 class SpeedItem(Item):
     def __init__(self, x, y):
-        super().__init__(x, y, 'slow.png')
+        super().__init__(x, y, 'slow.png') # 상위 클래스의 생성자를 호출하여 초기화
 
 # 무적 아이템 클래스 정의
 class InvincibilityItem(Item):
     def __init__(self, x, y):
-        super().__init__(x, y, 'star.png')
+        super().__init__(x, y, 'star.png') # 상위 클래스의 생성자를 호출하여 초기화
