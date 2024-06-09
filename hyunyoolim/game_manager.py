@@ -59,7 +59,8 @@ class GameManager:
         self.character.game_over = False
         self.character.current_color_index = 0
         self.obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
-                
+    
+    # 게임 실행 함수
     def run_game(self):
         running = True
         font = pygame.font.Font(None, 36)
