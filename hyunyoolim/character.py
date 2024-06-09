@@ -46,7 +46,7 @@ class Character:
         print(self.items)
         self.colors = [RED, ORANGE, YELLOW] # 생명력 표시에 사용될 색상 리스트
         print(self.colors)
-        self.current_color_index = 0
+        self.current_color_index = 0 # 현재 색상 인덱스
         print(self.current_color_index)
         self.show_life = False
         print(self.show_life)
