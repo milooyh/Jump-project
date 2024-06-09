@@ -20,7 +20,8 @@ class Item:
         
         # 아이템의 사각 영역 설정
         self.rect = self.image.get_rect(topleft=(self.x, self.y))
-        
+    
+    # 화면에 아이템 그리기
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))
 
