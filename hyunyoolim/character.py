@@ -178,6 +178,7 @@ class Character:
             text = font.render(f"Speed Boost: {remaining_time}", True, BLACK)
             screen.blit(text, (10, 80))
 
+    # 아이템과의 충돌을 확인하고 처리
     def check_item_collision(self):
         character_rect = pygame.Rect(self.x, self.y, self.width, self.height)
         for item in self.items:
