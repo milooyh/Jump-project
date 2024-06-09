@@ -24,6 +24,7 @@ class Screen:
         Screen.wait_for_space() # 스페이스바 입력 대기
         print('show_start_screen 햠수 불려짐')
 
+    # 스페이스바 입력 대기 함수
     @staticmethod
     def wait_for_space():
         waiting = True
