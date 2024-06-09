@@ -62,7 +62,7 @@ class Character:
         print(self.invincible_remaining_time)
         self.speed_boost_remaining_time = 0 # 속도 증가 지속 시간
         print(self.speed_boost_remaining_time)
-        self.heart_item_eaten = False
+        self.heart_item_eaten = False # 하트 아이템 먹었나
         print(self.heart_item_eaten)
         
         self.image = pygame.image.load('hyunyoolim\character.png').convert_alpha()
