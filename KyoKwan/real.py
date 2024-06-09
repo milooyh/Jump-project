@@ -36,4 +36,4 @@ while True:
         print(f"An error occurred: {e}")
     
     # 30초 대기
-    time.sleep(30)
+    time.sleep(10)
