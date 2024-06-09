@@ -10,7 +10,7 @@ right_jump = pygame.image.load('C:/OSSW4/Img/Right_J.png')
 user_image = pygame.image.load('C:/OSSW4/Img/User.png')
 block_image = pygame.image.load('C:/OSSW4/Img/block.png')
 falling_block_image = pygame.image.load('C:/OSSW4/Img/Block.png')
-spike_image = pygame.image.load('/path/to/spike.png')
+spike_image = pygame.image.load('C:/OSSW4/Img/spike.png')
 
 #
 # 크기 조정
