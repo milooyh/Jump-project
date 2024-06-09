@@ -156,7 +156,8 @@ class Character:
             obstacle.draw(screen)
         
         portal.draw(screen)
-
+        
+        # 생명력이 표시될 경우 화면에 표시
         if self.show_life:
             font = pygame.font.Font(None, 36)
             text = font.render(f"life : {self.life}", True, BLACK)
