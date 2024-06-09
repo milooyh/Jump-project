@@ -18,7 +18,7 @@ class Screen:
         screen.fill(WHITE) # 화면 흰색으로 채움
         font = pygame.font.Font(None, 64) # 폰트 설정
         text = font.render("Press SPACE to Start", True, BLACK) # 텍스트 렌더링
-        text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+        text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)) # 텍스트 위치 설정
         screen.blit(text, text_rect)
         pygame.display.update()
         Screen.wait_for_space()
