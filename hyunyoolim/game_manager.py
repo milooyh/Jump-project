@@ -26,6 +26,7 @@ class GameManager:
 
         # 바닥의 y좌표 설정
         self.floor_y = floor_y
+        print(self.floor_y)
 
         self.blocks = [Block(x, y) for x, y in blocks_positions]
         self.obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
