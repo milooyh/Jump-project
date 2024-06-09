@@ -38,6 +38,7 @@ class Character:
         self.blocks = blocks
         print(self.blocks)
         self.obstacles = obstacles
+        print(self.obstacles)
         self.portal = portal
         self.items = items
         self.colors = [RED, ORANGE, YELLOW]
