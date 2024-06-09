@@ -10,6 +10,7 @@ class Obstacle:
         self.y = y # 장애물 y좌표 설정
         self.speed = speed # 장애물 속도 설정
 
+    # 위치 업데이트 함수
     def update_position(self):
         self.x -= self.speed
 
