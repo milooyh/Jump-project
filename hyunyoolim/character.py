@@ -91,6 +91,7 @@ class Character:
         # 왼쪽 방향키가 눌렸을 때 왼쪽으로 이동
         if keys[pygame.K_LEFT]:
             self.x = max(LEFT_EDGE, self.x - self.speed)
+        # 오른쪽 방향키가 눌렸을 때 오른쪽으로 이동
         if keys[pygame.K_RIGHT]:
             self.x = min(RIGHT_EDGE, self.x + self.speed)
 
