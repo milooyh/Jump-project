@@ -12,7 +12,7 @@ def main():
 
     game_manager = GameManager() # 게임 관리자 인스턴스 생성
     Screen.show_start_screen(screen) # 시작 화면 표시
-    game_manager.run_game()
+    game_manager.run_game() # 게임 실행 함수 적용
     
     print('main 함수 실행 !!!!!')
 
