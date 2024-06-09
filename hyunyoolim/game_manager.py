@@ -33,8 +33,8 @@ class GameManager:
         print(self.blocks)
         self.obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
         print(self.obstacles)
-        
         highest_block_x = max([block.x for block in self.blocks])
+        print(highest_block_x)
         highest_block_y = max([block.y for block in self.blocks])
         self.portal = Portal(highest_block_x, highest_block_y - 100)
 
