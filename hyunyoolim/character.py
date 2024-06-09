@@ -36,6 +36,7 @@ class Character:
         self.game_clear = False
         print(self.game_clear)
         self.blocks = blocks
+        print(self.blocks)
         self.obstacles = obstacles
         self.portal = portal
         self.items = items
