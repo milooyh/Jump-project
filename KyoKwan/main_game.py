@@ -10,8 +10,7 @@ right_jump = pygame.image.load('C:/OSSW4/Img/Right_J.png')
 user_image = pygame.image.load('C:/OSSW4/Img/User.png')
 block_image = pygame.image.load('C:/OSSW4/Img/block.png')
 falling_block_image = pygame.image.load('C:/OSSW4/Img/Block.png')
-
-
+spike_image = pygame.image.load('/path/to/spike.png')
 
 #
 # 크기 조정
@@ -22,6 +21,7 @@ right_jump = pygame.transform.scale(right_jump, (character_width, character_heig
 user_image = pygame.transform.scale(user_image, (character_width, character_height))
 block_image = pygame.transform.scale(block_image, (platform_width, platform_height)) 
 falling_block_image = pygame.transform.scale(falling_block_image, (platform_width, platform_height))
+spike_image = pygame.transform.scale(spike_image, (spike_width, spike_height))
 
 map_modules = [Map_1]
 current_map_index = 0
