@@ -185,6 +185,7 @@ class Character:
             if character_rect.colliderect(item.rect):
                 self.handle_item_collision(item)
 
+    # 아이템과의 충돌 처리
     def handle_item_collision(self, item):
         if isinstance(item, HeartItem):
             if not self.heart_item_eaten:
