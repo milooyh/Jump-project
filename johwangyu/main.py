@@ -1,9 +1,9 @@
 import pygame
 import sys
 import subprocess
-from game_over import show_game_over_screen
+# from game_over import show_game_over_screen
 from stage import init_stage, stages
-from lobby import show_lobby_screen
+# from lobby import show_lobby_screen
 from spike import Spike
 
 # 이미지 로딩 및 크기 조정
@@ -43,12 +43,13 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("점프 점프")
 
-    lobby_choice = show_lobby_screen(SCREEN_WIDTH, SCREEN_HEIGHT)
-    if lobby_choice == "start":
-        print("game start!")
-    elif lobby_choice == "quit":
-        pygame.quit()
-        sys.exit()
+    # 로비 화면 표시 주석 처리
+    # lobby_choice = show_lobby_screen(SCREEN_WIDTH, SCREEN_HEIGHT)
+    # if lobby_choice == "start":
+    #     print("game start!")
+    # elif lobby_choice == "quit":
+    #     pygame.quit()
+    #     sys.exit()
 
     # 색깔 및 기본 설정
     WHITE = (255, 255, 255)
@@ -108,10 +109,10 @@ def main():
             score = 0
 
         if time_left <= 0:
-            choice = show_game_over_screen(screen, score)
-            if choice == "restart":
-                continue
-            else:
+            # choice = show_game_over_screen(screen, score)
+            # if choice == "restart":
+            #     continue
+            # else:
                 running = False
 
         for event in pygame.event.get():
@@ -129,7 +130,6 @@ def main():
             vertical_momentum = -jump_speed
             is_on_ground = False
             space_pressed = False  # 추가: 점프 후 바로 키 상태 초기화
-
 
         character_x += (pygame.key.get_pressed()[pygame.K_RIGHT] - pygame.key.get_pressed()[pygame.K_LEFT]) * character_speed
         character_x = max(0, min(SCREEN_WIDTH - character_width, character_x))
