@@ -37,6 +37,7 @@ class Screen:
                     waiting = False
         print('wait_for_space 함수 호출')
 
+    # 클리어 화면 표시 함수
     @staticmethod
     def show_clear_screen(screen):
         screen.fill(WHITE)
