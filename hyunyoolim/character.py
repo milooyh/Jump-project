@@ -1,5 +1,5 @@
-import pygame
-from setting import *
+import pygame # 파이게임 모듈 임포트
+from setting import * # 게임 설정 파일 임포트
 from screen import Screen
 from block import Block
 from obstacle import Obstacle
