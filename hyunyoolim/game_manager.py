@@ -63,7 +63,7 @@ class GameManager:
     # 게임 실행 함수
     def run_game(self):
         running = True # 게임 실행 여부
-        font = pygame.font.Font(None, 36)
+        font = pygame.font.Font(None, 36) # 폰트 설정
         obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
 
         while running:
