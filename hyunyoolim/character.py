@@ -147,6 +147,7 @@ class Character:
             
         self.check_item_collision()
 
+    # 게임 요소 화면에 그리기
     def draw_game_elements(self, screen, blocks, obstacles, portal):
         screen.blit(self.image, (self.x, self.y))
         for block in blocks:
