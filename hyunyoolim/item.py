@@ -6,7 +6,7 @@ from setting import * # 설정 파일에서 모든 설정 가져오기
 class Item:
     def __init__(self, x, y, image_path):
         self.x = x # x좌표 설정
-        self.y = y
+        self.y = y # y좌표 설정
         self.width = 50
         self.height = 50
         base_path = os.path.dirname(os.path.realpath(__file__))
