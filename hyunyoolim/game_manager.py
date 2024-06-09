@@ -79,6 +79,7 @@ class GameManager:
                 
                 # 키가 눌렸을 때
                 if event.type == pygame.KEYDOWN:
+                    # 스페이스바가 눌렸을 때
                     if event.key == pygame.K_SPACE:
                         self.character.space_pressed = True
                         print('스페이스바 눌림')
