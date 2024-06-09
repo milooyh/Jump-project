@@ -100,6 +100,7 @@ class Character:
         self.y += self.vertical_momentum
         self.y = min(self.y, floor_y - self.height) # 바닥 아래로 내려가지 않도록
 
+        # 캐릭터가 바닥에 닿으면 땅에 붙음
         if self.y >= floor_y - self.height:
             self.y = floor_y - self.height
             self.vertical_momentum = 0
