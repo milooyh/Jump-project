@@ -13,6 +13,8 @@ block_image = pygame.image.load('C:/OSSW4/Img/block.png')
 falling_block_image = pygame.image.load('C:/OSSW4/Img/Block.png')
 jump_block_image = pygame.image.load('C:/OSSW4/Img/jump.png')
 floor_image = pygame.image.load('C:/OSSW4/Img/floor.png')
+cloud_image = pygame.image.load('C:/OSSW4/Img/cloud.png')
+
 
 left_walk = pygame.transform.scale(left_walk, (character_width, character_height))
 left_jump = pygame.transform.scale(left_jump, (character_width, character_height))
@@ -23,6 +25,7 @@ block_image = pygame.transform.scale(block_image, (platform_width, platform_heig
 falling_block_image = pygame.transform.scale(falling_block_image, (platform_width, platform_height))
 jump_block_image = pygame.transform.scale(jump_block_image, (jumping_block_width, platform_height))
 floor_image = pygame.transform.scale(floor_image, (800, 150))
+cloud_image = pygame.transform.scale(cloud_image, (platform_width, platform_height))
 
 map_modules = [Map_1]
 current_map_index = 0
@@ -267,10 +270,10 @@ while running:
 
         for block in blocks:
             if block.is_visible:
-                pygame.draw.rect(screen, platform_color, (block.x - camera_x, block.y, platform_width, platform_height))
-                screen.blit(block_image, (block.x - camera_x, block.y))
-                # text = font.render(f"({block.x}, {block.y})", True, RED)
-                # screen.blit(text, (block.x - camera_x, block.y - 20))
+                if (block.x, block.y) == (100, 260) or (block.x, block.y) == (160, 260):
+                    screen.blit(cloud_image, (block.x - camera_x, block.y))
+                else:
+                    screen.blit(block_image, (block.x - camera_x, block.y))
                 
         if falling_block.is_visible:
             screen.blit(falling_block_image, (falling_block.x - camera_x, falling_block.y))
