@@ -200,4 +200,4 @@ class Character:
         elif isinstance(item, InvincibilityItem):
             self.invincible = True
             self.invincible_timer = pygame.time.get_ticks()  # Start timer 타이머 시작
-            item.x = -100  # Move off-screen
+            item.x = -100  # Move off-screen 화면 밖으로 이동
