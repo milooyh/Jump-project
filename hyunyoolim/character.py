@@ -131,6 +131,7 @@ class Character:
                 self.vertical_momentum = 0
                 self.is_on_ground = True
         
+        # 포털 충돌 시 게임 클리어
         if pygame.Rect(self.x, self.y, self.width, self.height).colliderect(self.portal.rect):
             self.game_clear = True
 
