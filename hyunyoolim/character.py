@@ -65,6 +65,7 @@ class Character:
         print(self.heart_item_eaten)
         
         self.image = pygame.image.load('hyunyoolim\character.png').convert_alpha()
+        print(self.image)
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
 
     def set_initial_position(self):
