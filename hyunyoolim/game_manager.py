@@ -91,6 +91,7 @@ class GameManager:
                         self.character.space_pressed = False
                         print('스페이스바 안 눌림')
 
+            # 게임 오버나 클리어가 아닌 경우 게임 업데이트 함수
             if not self.character.game_over and not self.character.game_clear:
                 self.character.update_game_state()
                 print('게임 상태 업데이트')
