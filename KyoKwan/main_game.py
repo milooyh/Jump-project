@@ -267,10 +267,13 @@ while running:
                 block.move()
                 if block.is_visible and character_rect.colliderect(pygame.Rect(block.x, block.y, platform_width, platform_height)):
                     reset_game()
-
+                    
+        screen.blit(cloud_image, (550 - camera_x, 210))
+        screen.blit(cloud_image, (1000 - camera_x, 500))
+    
         for block in blocks:
             if block.is_visible:
-                if (block.x, block.y) == (100, 260) or (block.x, block.y) == (160, 260):
+                if (block.x, block.y) == (100, 260) or (block.x, block.y) == (160, 260) :
                     screen.blit(cloud_image, (block.x - camera_x, block.y))
                 else:
                     screen.blit(block_image, (block.x - camera_x, block.y))
@@ -283,7 +286,7 @@ while running:
 
         if check_trigger_zone_collision(character_rect, spike_trigger_zone):
             spike_height = 110
-            spike_positions = [(x, floor_y - spike_height) for x in range(550, 600, spike_width)]
+            spike_positions = [(x, floor_y - spike_height) for x in range(550, 580, spike_width)]
 
         for spike in spike_positions:
             pygame.draw.rect(screen, SPIKE_COLOR, (spike[0] - camera_x, spike[1], spike_width, spike_height))
@@ -293,7 +296,7 @@ while running:
         # pygame.draw.rect(screen, (0, 255, 0), add_block_1.move(-camera_x, 0), 2)
         # pygame.draw.rect(screen, (0, 0, 255), trigger_moving_block_zone.move(-camera_x, 0), 2)
         # pygame.draw.rect(screen, (0, 255, 0), trigger_zone.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (0, 0, 255), spike_trigger_zone.move(-camera_x, 0), 2)
+        #pygame.draw.rect(screen, (0, 0, 255), spike_trigger_zone.move(-camera_x, 0), 2)
         # pygame.draw.rect(screen, (255, 0, 0), teleport_zone, 2)
 
         portal_angle += 2
