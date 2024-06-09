@@ -44,7 +44,7 @@ class Character:
         print(self.portal)
         self.items = items
         print(self.items)
-        self.colors = [RED, ORANGE, YELLOW]
+        self.colors = [RED, ORANGE, YELLOW] # 생명력 표시에 사용될 색상 리스트
         print(self.colors)
         self.current_color_index = 0
         print(self.current_color_index)
