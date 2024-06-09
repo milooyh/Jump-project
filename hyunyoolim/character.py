@@ -54,7 +54,7 @@ class Character:
         print(self.life_counter)
         self.invincible = False # 무적 상태 여부
         print(self.invincible)
-        self.invincible_timer = 0
+        self.invincible_timer = 0 # 무적 지속 시간 타이머
         print(self.invincible_timer)
         self.speed_boost_timer = 0
         print(self.speed_boost_timer)
