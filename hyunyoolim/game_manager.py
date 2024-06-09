@@ -117,6 +117,7 @@ class GameManager:
                 self.invincibility_item.draw(self.screen)
                 print('아이템 그리기')
 
+                # 게임 클리어 상태일 때
                 if self.character.game_clear:
                     print('게임 클리어')
                     # 포탈과 충돌하면 main.py 실행
