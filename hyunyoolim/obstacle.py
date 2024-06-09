@@ -20,6 +20,7 @@ class Obstacle:
         pygame.draw.rect(screen, obstacle_color, pygame.Rect(self.x, self.y, obstacle_width, obstacle_height))
         print('draw 함수 불림 ! - 장애물')
     
+    # 장애물과 부딪힘 여부 판단 함수
     @staticmethod
     def check_collision(character_x, character_y, character_width, character_height, obstacles):  
         for obstacle in obstacles:
