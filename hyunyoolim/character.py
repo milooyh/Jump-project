@@ -56,7 +56,7 @@ class Character:
         print(self.invincible)
         self.invincible_timer = 0 # 무적 지속 시간 타이머
         print(self.invincible_timer)
-        self.speed_boost_timer = 0
+        self.speed_boost_timer = 0 # 속도 증가 지속 시간 타이머
         print(self.speed_boost_timer)
         self.invincible_remaining_time = 0
         print(self.invincible_remaining_time)
