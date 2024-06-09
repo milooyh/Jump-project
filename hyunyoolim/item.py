@@ -5,7 +5,7 @@ from setting import * # 설정 파일에서 모든 설정 가져오기
 # 아이템 클래스 정의
 class Item:
     def __init__(self, x, y, image_path):
-        self.x = x
+        self.x = x # x좌표 설정
         self.y = y
         self.width = 50
         self.height = 50
