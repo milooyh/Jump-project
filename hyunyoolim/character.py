@@ -30,6 +30,7 @@ class Character:
         self.space_pressed = False
         print(self.space_pressed)
         self.life = 3
+        print(self.life)
         self.game_over = False
         self.game_clear = False
         self.blocks = blocks
