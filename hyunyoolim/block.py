@@ -30,3 +30,4 @@ class Block:
             if pygame.Rect(character_x, character_y, character_width, character_height).colliderect(pygame.Rect(block.x, block.y, platform_width, platform_height)):
                 return block
         return None
+        print('check_collision 함수 불렸다 !')
