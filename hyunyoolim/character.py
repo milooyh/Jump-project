@@ -6,6 +6,7 @@ from obstacle import Obstacle
 from portal import Portal
 from item import *
 
+# character 클래스 정의
 class Character:
     def __init__(self, blocks, obstacles, portal, items):
         self.width = 20
