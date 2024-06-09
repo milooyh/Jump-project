@@ -8,6 +8,7 @@ class Block:
         self.x = x
         self.y = y
 
+    # 화면에 블록 그리기
     def draw(self, screen):
         pygame.draw.rect(screen, platform_color, pygame.Rect(self.x, self.y, platform_width, platform_height))
         
