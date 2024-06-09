@@ -17,6 +17,8 @@ class Item:
         # 이미지 로드 및 크기 조절
         self.image = pygame.image.load(image_full_path).convert_alpha()
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
+        
+        # 아이템의 사각 영역 설정
         self.rect = self.image.get_rect(topleft=(self.x, self.y))
         
     def draw(self, screen):
