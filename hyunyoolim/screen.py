@@ -93,6 +93,7 @@ class Screen:
     # 게임 요소 그리는 함수
     @staticmethod
     def draw_game_elements(screen, character_rect):
+        print('draw game elements 함수 호출')
         pygame.draw.rect(screen, RED, character_rect)
         for block in Block:
             pygame.draw.rect(screen, platform_color, pygame.Rect(block.x, block.y, platform_width, platform_height))
