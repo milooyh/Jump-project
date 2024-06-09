@@ -11,6 +11,7 @@ class Block:
     # 화면에 블록 그리기
     def draw(self, screen):
         # platform_color: 블록의 색상 (setting 모듈에서 가져옴)
+        # platform_width: 블록의 너비 (setting 모듈에서 가져옴)
         pygame.draw.rect(screen, platform_color, pygame.Rect(self.x, self.y, platform_width, platform_height))
         
     @staticmethod
