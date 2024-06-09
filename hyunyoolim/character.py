@@ -42,6 +42,7 @@ class Character:
         self.portal = portal
         print(self.portal)
         self.items = items
+        print(self.items)
         self.colors = [RED, ORANGE, YELLOW]
         self.current_color_index = 0
         self.show_life = False
