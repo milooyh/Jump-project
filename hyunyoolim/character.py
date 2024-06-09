@@ -46,6 +46,7 @@ class Character:
         self.colors = [RED, ORANGE, YELLOW]
         print(self.colors)
         self.current_color_index = 0
+        print(self.current_color_index)
         self.show_life = False
         self.life_counter = 0
         self.invincible = False
