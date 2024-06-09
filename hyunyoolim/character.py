@@ -98,7 +98,7 @@ class Character:
         self.x = max(0, min(SCREEN_WIDTH - self.width, self.x)) # 화면 경계를 벗어나지 않도록
         self.vertical_momentum += self.gravity
         self.y += self.vertical_momentum
-        self.y = min(self.y, floor_y - self.height)
+        self.y = min(self.y, floor_y - self.height) # 바닥 아래로 내려가지 않도록
 
         if self.y >= floor_y - self.height:
             self.y = floor_y - self.height
