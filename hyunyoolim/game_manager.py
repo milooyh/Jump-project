@@ -76,6 +76,8 @@ class GameManager:
                 if event.type == pygame.QUIT:
                     running = False
                     print('게임 강제 종료')
+                
+                # 키가 눌렸을 때
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.character.space_pressed = True
