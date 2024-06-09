@@ -24,6 +24,7 @@ class Character:
         self.y = SCREEN_HEIGHT - self.height * 2
         print(self.y)
         self.vertical_momentum = 0
+        print(self.vertical_momentum)
         self.is_on_ground = True
         self.space_pressed = False
         self.life = 3
