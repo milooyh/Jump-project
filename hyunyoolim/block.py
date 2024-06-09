@@ -6,7 +6,9 @@ class Block:
     def __init__(self, x, y):
         # 블록 초기 위치 설정
         self.x = x
+        print(x)
         self.y = y
+        
 
     # 화면에 블록 그리기
     def draw(self, screen):
