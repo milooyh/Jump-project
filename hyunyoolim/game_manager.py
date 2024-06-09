@@ -132,9 +132,6 @@ class GameManager:
             pygame.display.update() # 게임 화면 업데이트
             self.clock.tick(60) # FPS을 60으로 유지
 
-        pygame.quit()
+        # 게임 및 시스템 종료
+        pygame.quit() 
         sys.exit()
-
-if __name__ == "__main__":
-    game_manager = GameManager()
-    game_manager.run_game()
