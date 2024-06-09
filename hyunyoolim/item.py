@@ -24,6 +24,7 @@ class Item:
     # 화면에 아이템 그리기
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))
+        print('draw 함수 불려짐 !')
 
 class HeartItem(Item):
     def __init__(self, x, y):
