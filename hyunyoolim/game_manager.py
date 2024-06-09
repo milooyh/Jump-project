@@ -129,7 +129,7 @@ class GameManager:
                     print('게임오버')
                     Screen.show_game_over_screen(self.screen, self)
                     
-            pygame.display.update()
+            pygame.display.update() # 게임 화면 업데이트
             self.clock.tick(60)
 
         pygame.quit()
