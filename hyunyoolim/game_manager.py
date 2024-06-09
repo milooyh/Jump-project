@@ -1,5 +1,5 @@
 import pygame # 파이게임 라이브러리 임포트
-import sys
+import sys # 시스템 관련 기능 제공 모듈 임포트
 from pygame.locals import USEREVENT
 import subprocess  # subprocess 모듈을 추가해야 합니다.
 from setting import *
