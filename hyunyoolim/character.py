@@ -52,6 +52,7 @@ class Character:
         self.life_counter = 0
         print(self.life_counter)
         self.invincible = False
+        print(self.invincible)
         self.invincible_timer = 0
         self.speed_boost_timer = 0
         self.invincible_remaining_time = 0
