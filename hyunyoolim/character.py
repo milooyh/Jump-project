@@ -40,6 +40,7 @@ class Character:
         self.obstacles = obstacles
         print(self.obstacles)
         self.portal = portal
+        print(self.portal)
         self.items = items
         self.colors = [RED, ORANGE, YELLOW]
         self.current_color_index = 0
