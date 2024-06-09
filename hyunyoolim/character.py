@@ -32,6 +32,7 @@ class Character:
         self.life = 3
         print(self.life)
         self.game_over = False
+        print(self.game_over)
         self.game_clear = False
         self.blocks = blocks
         self.obstacles = obstacles
