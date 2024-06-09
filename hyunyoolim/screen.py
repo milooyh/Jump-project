@@ -12,6 +12,7 @@ class Screen:
     def __init__(self):
         pass
 
+    # 시작 화면 표시 함수
     @staticmethod
     def show_start_screen(screen):
         screen.fill(WHITE)
