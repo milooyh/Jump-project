@@ -10,6 +10,7 @@ from item import * # 아이템 클래스 임포트
 class Character:
     def __init__(self, blocks, obstacles, portal, items):
         self.width = 20
+        print(self.width)
         self.height = 20
         self.speed = 6
         self.jump_speed = 20
