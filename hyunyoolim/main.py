@@ -11,7 +11,7 @@ def main():
     pygame.display.set_caption("Jump Game") # 창의 제목 설정
 
     game_manager = GameManager() # 게임 관리자 인스턴스 생성
-    Screen.show_start_screen(screen)
+    Screen.show_start_screen(screen) # 시작 화면 표시
     game_manager.run_game()
     
     print('main 함수 실행 !!!!!')
