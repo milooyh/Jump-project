@@ -13,6 +13,7 @@ class Obstacle:
     # 위치 업데이트 함수
     def update_position(self):
         self.x -= self.speed
+        print('update_position 함수 불림 !')
 
     def draw(self, screen):
         pygame.draw.rect(screen, obstacle_color, pygame.Rect(self.x, self.y, obstacle_width, obstacle_height))
