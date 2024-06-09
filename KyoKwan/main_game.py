@@ -3,6 +3,7 @@ import sys
 from init_settings import *
 from game_objects import *
 
+# 이미지 로드 및 크기 조정
 left_walk = pygame.image.load('C:/OSSW4/Img/Left_W.png')
 left_jump = pygame.image.load('C:/OSSW4/Img/Left_J.png')
 right_walk = pygame.image.load('C:/OSSW4/Img/Right_W.png')
@@ -11,16 +12,12 @@ user_image = pygame.image.load('C:/OSSW4/Img/User.png')
 block_image = pygame.image.load('C:/OSSW4/Img/block.png')
 falling_block_image = pygame.image.load('C:/OSSW4/Img/Block.png')
 
-
-
-
-# 크기 조정
 left_walk = pygame.transform.scale(left_walk, (character_width, character_height))
 left_jump = pygame.transform.scale(left_jump, (character_width, character_height))
 right_walk = pygame.transform.scale(right_walk, (character_width, character_height))
 right_jump = pygame.transform.scale(right_jump, (character_width, character_height))
 user_image = pygame.transform.scale(user_image, (character_width, character_height))
-block_image = pygame.transform.scale(block_image, (platform_width, platform_height)) 
+block_image = pygame.transform.scale(block_image, (platform_width, platform_height))
 falling_block_image = pygame.transform.scale(falling_block_image, (platform_width, platform_height))
 
 map_modules = [Map_1]
@@ -31,13 +28,12 @@ del_block_1 = pygame.Rect(220, 350, 100, 100)
 add_block_1 = pygame.Rect(50, 340, 30, 30)
 trigger_moving_block_zone = pygame.Rect(160, 220, 30, 30)
 trigger_falling_block_zone = pygame.Rect(800, 320, 50, 10)
-clock = pygame.time.Clock()
 trigger_zone = pygame.Rect(680, 510, 240, 50)
 spike_trigger_zone = pygame.Rect(540, 455, 20, 100)
 jumping_block = Block(1050, 450)
 jumping_block.is_visible = False
 jumping_trigger_zone = pygame.Rect(1050, 400, 150, 20)
-
+clock = pygame.time.Clock()
 font = pygame.font.Font(None, 20)
 
 block_spawn_time = 0
@@ -46,17 +42,21 @@ block_spawn_delay = 2
 falling_block = Block(800, 0, speed=10)
 falling_block.is_visible = False
 
-
-
-
 attempt_count = 0
 
 # 텔레포트 효과를 위한 변수들
 teleporting = False
-teleport_frames = 60 
+teleport_frames = 60
 teleport_frame_count = 0
 teleport_initial_position = (0, 0)
 teleport_final_position = (1000, 540)
+
+def check_spike_collision(character_rect, spikes):
+    for spike in spikes:
+        spike_rect = pygame.Rect(spike[0], spike[1], spike_width, spike_height)
+        if character_rect.colliderect(spike_rect):
+            return True
+    return False
 
 def load_next_map():
     global current_map_index, character_x, character_y, blocks, camera_x
@@ -68,7 +68,7 @@ def load_next_map():
     else:
         pygame.quit()
         sys.exit()
-#
+
 def reset_game():
     global character_x, character_y, vertical_momentum, is_on_ground, blocks, additional_block_added_1, additional_block_added_2, moving_block_triggered, block_spawn_time, block_spawned, camera_x, trick_hole_visible, trick_hole_y, falling_block, spike_height, spike_positions, spike_triggered, on_jumping_block, jump_timer, down_key_count, attempt_count
     attempt_count += 1
@@ -430,8 +430,10 @@ while running:
         for block in blocks:
             if block.is_visible:
                 pygame.draw.rect(screen, platform_color, (block.x - camera_x, block.y, platform_width, platform_height))
-                # text = font.render(f"({block.x}, {block.y})", True, RED)
-                # screen.blit(text, (block.x - camera_x, block.y - 20))
+                screen.blit(block_image, (block.x - camera_x, block.y))
+
+        if falling_block.is_visible:
+            screen.blit(falling_block_image, (falling_block.x - camera_x, falling_block.y))
 
         if check_trigger_zone_collision(character_rect, spike_trigger_zone):
             spike_height = 110
