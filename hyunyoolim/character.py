@@ -77,6 +77,7 @@ class Character:
         self.y = SCREEN_HEIGHT - self.height * 2
         print('set_initial_position 함수 불림 !')
 
+    # 게임 상태 업데이트
     def update_game_state(self):
         current_time = pygame.time.get_ticks()
         
