@@ -27,3 +27,4 @@ class Obstacle:
             if pygame.Rect(character_x, character_y, character_width, character_height).colliderect(pygame.Rect(obstacle.x, obstacle.y, obstacle_width, obstacle_height)):
                 return obstacle
         return None
+        print('check_collision 함수 불림 !')
