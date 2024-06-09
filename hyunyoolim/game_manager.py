@@ -105,7 +105,8 @@ class GameManager:
                     obstacle.update_position()
                     if obstacle.x < -obstacle_width:
                         obstacle.x = SCREEN_WIDTH
-                    
+                
+                # 생명력 화면에 표시
                 life_text = font.render(f"Life: {self.character.life}", True, BLACK)
                 life_rect = life_text.get_rect(center=(SCREEN_WIDTH // 2, 30))
                 self.screen.blit(life_text, life_rect)
