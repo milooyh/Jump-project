@@ -167,7 +167,7 @@ def main():
                 character_x, character_y = character_width, SCREEN_HEIGHT - character_height * 2
                 start_ticks = pygame.time.get_ticks()
             else:
-                subprocess.run(["python", "KyoKwan/main_game.py"])
+                subprocess.run([sys.executable, "./KyoKwan/main_game.py"], check=True)
                 running = False
 
         # 바닥을 색상으로 그림
