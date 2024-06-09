@@ -52,7 +52,7 @@ class Character:
         print(self.show_life)
         self.life_counter = 0 # 생명력 표시 카운터
         print(self.life_counter)
-        self.invincible = False
+        self.invincible = False # 무적 상태 여부
         print(self.invincible)
         self.invincible_timer = 0
         print(self.invincible_timer)
