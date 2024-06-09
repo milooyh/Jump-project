@@ -17,6 +17,7 @@ class GameManager:
         pygame.init() # 파이게임 초기화
         pygame.font.init() # 폰트 초기화
 
+        # 화면 설정 및 윈도우 생성
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption("점프 점프")
 
