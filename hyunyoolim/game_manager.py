@@ -14,7 +14,7 @@ from item import * # 아이템 관련 모든 설정 가져오기
 class GameManager:
     
     def __init__(self):
-        pygame.init()
+        pygame.init() # 파이게임 초기화
         pygame.font.init()
 
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
