@@ -8,7 +8,7 @@ class Obstacle:
     def __init__(self, x, y, speed):
         self.x = x # 장애물 x좌표 설정
         self.y = y # 장애물 y좌표 설정
-        self.speed = speed
+        self.speed = speed # 장애물 속도 설정
 
     def update_position(self):
         self.x -= self.speed
