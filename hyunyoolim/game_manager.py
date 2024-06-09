@@ -3,7 +3,7 @@ import sys # 시스템 관련 기능 제공 모듈 임포트
 from pygame.locals import USEREVENT # pygame 라이브러리에서 userevent를 임포트
 import subprocess  # subprocess 모듈을 추가해야 합니다.
 from setting import * # 설정 파일에서 모든 설정 가져오기
-from character import Character
+from character import Character # 캐릭터 클래스 임포트
 from screen import Screen
 from block import Block
 from obstacle import Obstacle
