@@ -110,7 +110,7 @@ class Character:
         print(block_collided)
         obstacle_collided = Obstacle.check_collision(self.x, self.y, self.width, self.height, self.obstacles)
         print(obstacle_collided)
-        
+        # 캐릭터가 블록과 충돌했을 때, 아래로 이동 속도를 제어하여 땅에 붙습니다.
         if block_collided:
             if self.vertical_momentum > 0:
                 self.y = block_collided.y - self.height
