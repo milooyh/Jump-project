@@ -4,7 +4,7 @@ from setting import *
 # 포털 클래스 정의
 class Portal:
     def __init__(self, x, y):
-        self.x = 700
+        self.x = 700 # 포털 x 좌표
         self.y = 150
         self.width = 50
         self.height = 50
