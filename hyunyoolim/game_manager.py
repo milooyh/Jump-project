@@ -22,7 +22,7 @@ class GameManager:
         pygame.display.set_caption("점프 점프")
 
         self.clock = pygame.time.Clock() # FPS 제어를 위한 clock 객체 생성
-        Screen.show_start_screen(self.screen)
+        Screen.show_start_screen(self.screen) # 시작 화면 표시
 
         self.floor_y = floor_y
 
