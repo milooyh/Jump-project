@@ -191,7 +191,7 @@ class Character:
             if not self.heart_item_eaten:
                 self.life += 1
                 self.heart_item_eaten = True
-                item.x = -100  # Move off-screen
+                item.x = -100  # Move off-screen 화면 밖으로 이동
         elif isinstance(item, SpeedItem):
             for obstacle in self.obstacles:
                 obstacle.speed /= 2  # Halve speed
