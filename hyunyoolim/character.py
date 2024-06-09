@@ -65,6 +65,7 @@ class Character:
         self.heart_item_eaten = False # 하트 아이템 먹었나
         print(self.heart_item_eaten)
         
+        # 캐릭터 이미지 로드 및 크기 조절
         self.image = pygame.image.load('hyunyoolim\character.png').convert_alpha()
         print(self.image)
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
