@@ -45,9 +45,8 @@ block_spawn_delay = 2
 
 falling_block = Block(800, 0, speed=10)
 falling_block.is_visible = False
-if falling_block.is_visible:
-    falling_block.y += falling_block.speed
-    screen.blit(falling_block_image, (falling_block.x - camera_x, falling_block.y))
+
+
 
 
 attempt_count = 0
@@ -268,7 +267,10 @@ while running:
                 screen.blit(block_image, (block.x - camera_x, block.y))
                 # text = font.render(f"({block.x}, {block.y})", True, RED)
                 # screen.blit(text, (block.x - camera_x, block.y - 20))
-
+                
+        if falling_block.is_visible:
+            screen.blit(falling_block_image, (falling_block.x - camera_x, falling_block.y))
+            
         if check_trigger_zone_collision(character_rect, spike_trigger_zone):
             spike_height = 110
             spike_positions = [(x, floor_y - spike_height) for x in range(550, 600, spike_width)]
