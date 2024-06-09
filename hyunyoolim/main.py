@@ -8,7 +8,7 @@ from screen import Screen # 화면 관련 모듈 임포트
 def main():
     pygame.init() # 파이게임 초기화
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) # 화면 설정
-    pygame.display.set_caption("Jump Game")
+    pygame.display.set_caption("Jump Game") # 창의 제목 설정
 
     game_manager = GameManager()
     Screen.show_start_screen(screen)
