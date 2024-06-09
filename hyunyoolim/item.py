@@ -1,6 +1,6 @@
 import pygame # 파이게임 라이브러리 임포트
 import os # 운영체제와 상호작용하기 위해 os 모듈 임포트
-from setting import *
+from setting import * # 설정 파일에서 모든 설정 가져오기
 
 class Item:
     def __init__(self, x, y, image_path):
