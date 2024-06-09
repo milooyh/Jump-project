@@ -16,6 +16,7 @@ class Character:
         self.speed = 6
         print(self.speed)
         self.jump_speed = 20
+        print(self.jump_speed)
         self.gravity = 1.4
         self.x = SCREEN_WIDTH // 2
         self.y = SCREEN_HEIGHT - self.height * 2
