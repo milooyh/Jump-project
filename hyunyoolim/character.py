@@ -194,7 +194,7 @@ class Character:
                 item.x = -100  # Move off-screen 화면 밖으로 이동
         elif isinstance(item, SpeedItem):
             for obstacle in self.obstacles:
-                obstacle.speed /= 2  # Halve speed
+                obstacle.speed /= 2  # Halve speed 장애물 속도 줄임
             self.speed_boost_timer = pygame.time.get_ticks()  # Start timer
             item.x = -100  # Move off-screen
         elif isinstance(item, InvincibilityItem):
