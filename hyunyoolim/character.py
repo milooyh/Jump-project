@@ -26,6 +26,7 @@ class Character:
         self.vertical_momentum = 0
         print(self.vertical_momentum)
         self.is_on_ground = True
+        print(self.is_on_ground)
         self.space_pressed = False
         self.life = 3
         self.game_over = False
