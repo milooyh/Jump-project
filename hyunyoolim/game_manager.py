@@ -70,7 +70,9 @@ class GameManager:
             self.screen.fill(WHITE) # 화면 흰색으로 채움
             character_rect = pygame.Rect(self.character.x, self.character.y, self.character.width, self.character.height)
 
+            # 이벤트 처리
             for event in pygame.event.get():
+                # 이벤트 종료 시
                 if event.type == pygame.QUIT:
                     running = False
                     print('게임 강제 종료')
