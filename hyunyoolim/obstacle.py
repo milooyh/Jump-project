@@ -15,6 +15,7 @@ class Obstacle:
         self.x -= self.speed
         print('update_position 함수 불림 !')
 
+    # 화면 요소 그리는 함수
     def draw(self, screen):
         pygame.draw.rect(screen, obstacle_color, pygame.Rect(self.x, self.y, obstacle_width, obstacle_height))
 
