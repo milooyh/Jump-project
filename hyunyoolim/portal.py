@@ -6,7 +6,7 @@ class Portal:
     def __init__(self, x, y):
         self.x = 700 # 포털 x 좌표
         self.y = 150 # 포털 y좌표
-        self.width = 50
+        self.width = 50 # 포털 너비
         self.height = 50
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         self.image = pygame.image.load('hyunyoolim\portal.png').convert_alpha()  # 이미지 불러오기
