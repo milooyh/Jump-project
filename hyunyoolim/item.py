@@ -7,7 +7,7 @@ class Item:
     def __init__(self, x, y, image_path):
         self.x = x # x좌표 설정
         self.y = y # y좌표 설정
-        self.width = 50
+        self.width = 50 # 아이템 너비 설정
         self.height = 50
         base_path = os.path.dirname(os.path.realpath(__file__))
         image_full_path = os.path.join(base_path, image_path)
