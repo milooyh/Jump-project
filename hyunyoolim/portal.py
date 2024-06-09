@@ -1,6 +1,7 @@
 import pygame
 from setting import *
 
+# 포털 클래스 정의
 class Portal:
     def __init__(self, x, y):
         self.x = 700
