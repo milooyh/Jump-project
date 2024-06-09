@@ -22,6 +22,7 @@ class Screen:
         screen.blit(text, text_rect) # 화면에 텍스트 그리기
         pygame.display.update() # 화면 업데이트
         Screen.wait_for_space() # 스페이스바 입력 대기
+        print('show_start_screen 햠수 불려짐')
 
     @staticmethod
     def wait_for_space():
