@@ -1,6 +1,6 @@
 # obstacle.py
 
-import pygame
+import pygame # 파이게임 라이브러리 임포트
 from setting import *
 
 class Obstacle:
