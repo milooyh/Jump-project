@@ -12,12 +12,16 @@ left_jump = pygame.image.load('C:/OSSW4/Img/Left_J.png')
 right_walk = pygame.image.load('C:/OSSW4/Img/Right_W.png')
 right_jump = pygame.image.load('C:/OSSW4/Img/Right_J.png')
 user_image = pygame.image.load('C:/OSSW4/Img/User.png')
+block_image = pygame.image.load('C:/OSSW4/Img/block.png')
+# floor_image = pygame.image.load('C:/OSSW4/Img/floor.png')
 
 left_walk = pygame.transform.scale(left_walk, (20, 20))
 left_jump = pygame.transform.scale(left_jump, (20, 20))
 right_walk = pygame.transform.scale(right_walk, (20, 20))
 right_jump = pygame.transform.scale(right_jump, (20, 20))
 user_image = pygame.transform.scale(user_image, (20, 20))
+block_image = pygame.transform.scale(block_image, (100, 20))  
+# floor_image = pygame.transform.scale(floor_image, (800, 150)) 
 
 def check_collision(character_rect, objects, obj_width, obj_height):
     for obj in objects:
@@ -61,7 +65,7 @@ def main():
     BLACK = (0, 0, 0)
     ORANGE = (255, 165, 0)
     BROWN = (139, 69, 19)
-    FLOOR_COLOR = BROWN  # 변경된 바닥 색상
+    FLOOR_COLOR = (144, 228, 144)  # 추가된 부분
 
     # 캐릭터 및 게임 설정
     character_width, character_height = 20, 20
@@ -74,7 +78,6 @@ def main():
     floor_y = SCREEN_HEIGHT - floor_height
     
     platform_width, platform_height = 100, 20
-    platform_color = BLUE
 
     powerup_radius = 10
     enemy_width, enemy_height = 33, 33
@@ -169,10 +172,11 @@ def main():
                 subprocess.run(["python", "KyoKwan/main_game.py"])
                 running = False
 
-        pygame.draw.rect(screen, FLOOR_COLOR, (0, floor_y, SCREEN_WIDTH, floor_height))
+        # 바닥을 색상으로 그림
+        pygame.draw.rect(screen, FLOOR_COLOR, (0, floor_y, SCREEN_WIDTH, floor_height))  # 추가된 부분
 
         for block in blocks:
-            pygame.draw.rect(screen, platform_color, (block.x, block.y, platform_width, platform_height))
+            screen.blit(block_image, (block.x, block.y))
 
         for enemy in enemies:
             pygame.draw.rect(screen, GREEN, (enemy.x, enemy.y, enemy_width, enemy_height))

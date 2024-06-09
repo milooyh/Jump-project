@@ -12,6 +12,7 @@ user_image = pygame.image.load('C:/OSSW4/Img/User.png')
 block_image = pygame.image.load('C:/OSSW4/Img/block.png')
 falling_block_image = pygame.image.load('C:/OSSW4/Img/Block.png')
 jump_block_image = pygame.image.load('C:/OSSW4/Img/jump.png')
+floor_image = pygame.image.load('C:/OSSW4/Img/floor.png')
 
 left_walk = pygame.transform.scale(left_walk, (character_width, character_height))
 left_jump = pygame.transform.scale(left_jump, (character_width, character_height))
@@ -21,6 +22,7 @@ user_image = pygame.transform.scale(user_image, (character_width, character_heig
 block_image = pygame.transform.scale(block_image, (platform_width, platform_height))
 falling_block_image = pygame.transform.scale(falling_block_image, (platform_width, platform_height))
 jump_block_image = pygame.transform.scale(jump_block_image, (jumping_block_width, platform_height))
+floor_image = pygame.transform.scale(floor_image, (800, 150))
 
 map_modules = [Map_1]
 current_map_index = 0
