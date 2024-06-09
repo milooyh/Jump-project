@@ -7,6 +7,7 @@ from obstacle import Obstacle
 from block import Block
 from portal import Portal   
 
+# 화면 관련 클래스 정의
 class Screen:
     def __init__(self):
         pass
