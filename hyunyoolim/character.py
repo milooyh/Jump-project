@@ -195,7 +195,7 @@ class Character:
         elif isinstance(item, SpeedItem):
             for obstacle in self.obstacles:
                 obstacle.speed /= 2  # Halve speed 장애물 속도 줄임
-            self.speed_boost_timer = pygame.time.get_ticks()  # Start timer
+            self.speed_boost_timer = pygame.time.get_ticks()  # Start timer 타이머 시작
             item.x = -100  # Move off-screen
         elif isinstance(item, InvincibilityItem):
             self.invincible = True
