@@ -49,9 +49,7 @@ class GameManager:
         # 캐릭터 생성
         self.character = Character(self.blocks, self.obstacles, self.portal, self.items)
 
-        
-                
-        self.game_over = False
+        self.game_over = False # 게임 종료 변수 초기화
         self.game_clear = False
         
     def reset_game(self):
