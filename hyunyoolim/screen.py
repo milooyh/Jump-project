@@ -90,6 +90,7 @@ class Screen:
                         pygame.quit()
                         sys.exit()
 
+    # 게임 요소 그리는 함수
     @staticmethod
     def draw_game_elements(screen, character_rect):
         pygame.draw.rect(screen, RED, character_rect)
