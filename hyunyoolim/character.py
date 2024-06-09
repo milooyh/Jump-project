@@ -50,7 +50,7 @@ class Character:
         print(self.current_color_index)
         self.show_life = False # 생명력 표시 여부
         print(self.show_life)
-        self.life_counter = 0
+        self.life_counter = 0 # 생명력 표시 카운터
         print(self.life_counter)
         self.invincible = False
         print(self.invincible)
