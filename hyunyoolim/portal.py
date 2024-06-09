@@ -11,6 +11,8 @@ class Portal:
         
         # 포털의 사각 영역 설정
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        
+        # 포털 이미지 로드 및 크기 조절
         self.image = pygame.image.load('hyunyoolim\portal.png').convert_alpha()  # 이미지 불러오기
         self.image = pygame.transform.scale(self.image, (self.width, self.height))  # 이미지 크기 조절
     
