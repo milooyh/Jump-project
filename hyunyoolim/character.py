@@ -44,6 +44,7 @@ class Character:
         self.items = items
         print(self.items)
         self.colors = [RED, ORANGE, YELLOW]
+        print(self.colors)
         self.current_color_index = 0
         self.show_life = False
         self.life_counter = 0
