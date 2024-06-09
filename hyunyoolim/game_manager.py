@@ -28,6 +28,7 @@ class GameManager:
         self.floor_y = floor_y
         print(self.floor_y)
 
+        # 블록 장애물 포탈 생성
         self.blocks = [Block(x, y) for x, y in blocks_positions]
         self.obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
 
