@@ -1,4 +1,4 @@
-# main.py
+
 
 import pygame
 import sys
@@ -16,4 +16,4 @@ def main():
     game_manager.run_game()
 
 if __name__ == "__main__":
-    main()
+    main() 
