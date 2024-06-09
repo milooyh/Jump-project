@@ -34,6 +34,7 @@ class Character:
         self.game_over = False
         print(self.game_over)
         self.game_clear = False
+        print(self.game_clear)
         self.blocks = blocks
         self.obstacles = obstacles
         self.portal = portal
