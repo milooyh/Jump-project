@@ -12,7 +12,7 @@ repo_path = 'C:\\OSSW4'
 commit_message = 'w'
 
 # 작업할 브랜치 설정
-branch_name = 'KyoKwan'
+branch_name = 'kyokwan'
 
 while True:
     # 파일이 존재하지 않으면 생성
