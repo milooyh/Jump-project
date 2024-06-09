@@ -3,6 +3,7 @@ import sys
 from init_settings import *
 from game_objects import *
 
+# 이미지 로드 및 기본 스파이크 이미지 로드
 left_walk = pygame.image.load('C:/OSSW4/Img/Left_W.png')
 left_jump = pygame.image.load('C:/OSSW4/Img/Left_J.png')
 right_walk = pygame.image.load('C:/OSSW4/Img/Right_W.png')
@@ -10,18 +11,21 @@ right_jump = pygame.image.load('C:/OSSW4/Img/Right_J.png')
 user_image = pygame.image.load('C:/OSSW4/Img/User.png')
 block_image = pygame.image.load('C:/OSSW4/Img/block.png')
 falling_block_image = pygame.image.load('C:/OSSW4/Img/Block.png')
-spike_image = pygame.image.load('C:/OSSW4/Img/spike.png')
+original_spike_image = pygame.image.load('C:/OSSW4/Img/spike.png')
 
-#
 # 크기 조정
 left_walk = pygame.transform.scale(left_walk, (character_width, character_height))
 left_jump = pygame.transform.scale(left_jump, (character_width, character_height))
 right_walk = pygame.transform.scale(right_walk, (character_width, character_height))
 right_jump = pygame.transform.scale(right_jump, (character_width, character_height))
 user_image = pygame.transform.scale(user_image, (character_width, character_height))
-block_image = pygame.transform.scale(block_image, (platform_width, platform_height)) 
+block_image = pygame.transform.scale(block_image, (platform_width, platform_height))
 falling_block_image = pygame.transform.scale(falling_block_image, (platform_width, platform_height))
-spike_image = pygame.transform.scale(spike_image, (spike_width, spike_height))
+
+def scale_spike_image(height):
+    """스파이크 이미지의 높이에 맞게 스케일 조정"""
+    scaled_image = pygame.transform.scale(original_spike_image, (spike_width, height))
+    return scaled_image
 
 map_modules = [Map_1]
 current_map_index = 0
@@ -46,14 +50,11 @@ block_spawn_delay = 2
 falling_block = Block(800, 0, speed=10)
 falling_block.is_visible = False
 
-
-
-
 attempt_count = 0
 
 # 텔레포트 효과를 위한 변수들
 teleporting = False
-teleport_frames = 60 
+teleport_frames = 60
 teleport_frame_count = 0
 teleport_initial_position = (0, 0)
 teleport_final_position = (1000, 540)
@@ -68,7 +69,7 @@ def load_next_map():
     else:
         pygame.quit()
         sys.exit()
-#
+
 def reset_game():
     global character_x, character_y, vertical_momentum, is_on_ground, blocks, additional_block_added_1, additional_block_added_2, moving_block_triggered, block_spawn_time, block_spawned, camera_x, trick_hole_visible, trick_hole_y, falling_block, spike_height, spike_positions, spike_triggered, on_jumping_block, jump_timer, down_key_count, attempt_count
     attempt_count += 1
@@ -265,31 +266,16 @@ while running:
             if block.is_visible:
                 pygame.draw.rect(screen, platform_color, (block.x - camera_x, block.y, platform_width, platform_height))
                 screen.blit(block_image, (block.x - camera_x, block.y))
-                # text = font.render(f"({block.x}, {block.y})", True, RED)
-                # screen.blit(text, (block.x - camera_x, block.y - 20))
-                
+
         if falling_block.is_visible:
             screen.blit(falling_block_image, (falling_block.x - camera_x, falling_block.y))
-            
 
         if check_trigger_zone_collision(character_rect, spike_trigger_zone):
             spike_height = 110
             spike_positions = [(x, floor_y - spike_height) for x in range(550, 600, spike_width)]
-            
-            
-        for spike in spike_positions:
-            screen.blit(spike_image, (spike[0] - camera_x, spike[1], spike_width, spike_height))   
-            
-        # for spike in spike_positions:
-        #     pygame.draw.rect(screen, SPIKE_COLOR, (spike[0] - camera_x, spike[1], spike_width, spike_height))
-
-        # pygame.draw.rect(screen, (0, 255, 0), trigger_falling_block_zone.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (0, 0, 0), del_block_1.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (0, 255, 0), add_block_1.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (0, 0, 255), trigger_moving_block_zone.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (0, 255, 0), trigger_zone.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (0, 0, 255), spike_trigger_zone.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (255, 0, 0), teleport_zone, 2)
+            for spike in spike_positions:
+                current_spike_image = scale_spike_image(spike_height)
+                screen.blit(current_spike_image, (spike[0] - camera_x, spike[1]))
 
         portal_angle += 2
         rotated_portal_image = pygame.transform.rotate(portal_image, portal_angle)
@@ -435,23 +421,17 @@ while running:
         for block in blocks:
             if block.is_visible:
                 pygame.draw.rect(screen, platform_color, (block.x - camera_x, block.y, platform_width, platform_height))
-                # text = font.render(f"({block.x}, {block.y})", True, RED)
-                # screen.blit(text, (block.x - camera_x, block.y - 20))
+                screen.blit(block_image, (block.x - camera_x, block.y))
+
+        if falling_block.is_visible:
+            screen.blit(falling_block_image, (falling_block.x - camera_x, falling_block.y))
 
         if check_trigger_zone_collision(character_rect, spike_trigger_zone):
             spike_height = 110
             spike_positions = [(x, floor_y - spike_height) for x in range(550, 600, spike_width)]
-
-        for spike in spike_positions:
-            pygame.draw.rect(screen, SPIKE_COLOR, (spike[0] - camera_x, spike[1], spike_width, spike_height))
-
-        # pygame.draw.rect(screen, (0, 255, 0), trigger_falling_block_zone.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (0, 0, 0), del_block_1.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (0, 255, 0), add_block_1.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (0, 0, 255), trigger_moving_block_zone.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (0, 255, 0), trigger_zone.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (0, 0, 255), spike_trigger_zone.move(-camera_x, 0), 2)
-        # pygame.draw.rect(screen, (255, 0, 0), teleport_zone, 2)
+            for spike in spike_positions:
+                current_spike_image = scale_spike_image(spike_height)
+                screen.blit(current_spike_image, (spike[0] - camera_x, spike[1]))
 
         portal_angle += 2
         rotated_portal_image = pygame.transform.rotate(portal_image, portal_angle)
