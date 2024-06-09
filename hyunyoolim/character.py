@@ -9,6 +9,7 @@ from item import * # 아이템 클래스 임포트
 # character 클래스 정의
 class Character:
     def __init__(self, blocks, obstacles, portal, items):
+        # 캐릭터 초기값 설정
         self.width = 20
         print(self.width)
         self.height = 20
