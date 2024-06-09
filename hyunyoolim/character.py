@@ -60,7 +60,7 @@ class Character:
         print(self.speed_boost_timer)
         self.invincible_remaining_time = 0 # 무적 지속 시간
         print(self.invincible_remaining_time)
-        self.speed_boost_remaining_time = 0
+        self.speed_boost_remaining_time = 0 # 속도 증가 지속 시간
         print(self.speed_boost_remaining_time)
         self.heart_item_eaten = False
         print(self.heart_item_eaten)
