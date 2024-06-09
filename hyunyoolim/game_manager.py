@@ -62,22 +62,17 @@ class GameManager:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-                    print('게임 강제 종료')
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.character.space_pressed = True
-                        print('스페이스바 눌림')
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_SPACE:
                         self.character.space_pressed = False
-                        print('스페이스바 안 눌림')
 
             if not self.character.game_over and not self.character.game_clear:
                 self.character.update_game_state()
-                print('게임 상태 업데이트')
 
                 self.character.draw_game_elements(self.screen, self.blocks, self.obstacles, self.portal)
-                print('게임 요소 그리기')
                 
                 # 장애물 위치 업데이트
                 for obstacle in self.obstacles:
@@ -92,15 +87,12 @@ class GameManager:
                 self.heart_item.draw(self.screen)
                 self.speed_item.draw(self.screen)
                 self.invincibility_item.draw(self.screen)
-                print('아이템 그리기')
 
                 if self.character.game_clear:
-                    print('게임 클리어')
                     # 포탈과 충돌하면 main.py 실행
                     subprocess.run(["python", "johwangyu/main.py"])
                     break
                 elif self.character.game_over:
-                    print('게임오버')
                     Screen.show_game_over_screen(self.screen, self)
                     
             pygame.display.update()
