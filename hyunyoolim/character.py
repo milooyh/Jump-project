@@ -20,6 +20,7 @@ class Character:
         self.gravity = 1.4
         print(self.gravity)
         self.x = SCREEN_WIDTH // 2
+        print(self.x)
         self.y = SCREEN_HEIGHT - self.height * 2
         self.vertical_momentum = 0
         self.is_on_ground = True
