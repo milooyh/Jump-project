@@ -1,7 +1,7 @@
 # obstacle.py
 
 import pygame # 파이게임 라이브러리 임포트
-from setting import *
+from setting import * # 설정 파일에서 모든 설정 가져오기
 
 class Obstacle:
     def __init__(self, x, y, speed):
