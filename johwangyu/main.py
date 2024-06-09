@@ -46,23 +46,22 @@ def main():
     if lobby_choice == "start":
         print("game start!")
     elif lobby_choice == "quit":
-        print("Exit Game")
         pygame.quit()
         sys.exit()
 
-    # 색깔 정의
+    # 색깔 및 기본 설정
     WHITE = (255, 255, 255)
     RED = (255, 0, 0)
     BLUE = (0, 0, 255)
     GREEN = (0, 255, 0)
     YELLOW = (255, 223, 0)
     PURPLE = (128, 0, 128)
-    FLOOR_COLOR = (144, 228, 144)
     BLACK = (0, 0, 0)
     ORANGE = (255, 165, 0)
     BROWN = (139, 69, 19)
+    FLOOR_COLOR = BROWN  # 변경된 바닥 색상
 
-    # 캐릭터 속성 설정
+    # 캐릭터 및 게임 설정
     character_width, character_height = 20, 20
     character_x, character_y = 30, SCREEN_HEIGHT - character_height * 2
     character_speed = 6
@@ -71,48 +70,20 @@ def main():
 
     floor_height = 150
     floor_y = SCREEN_HEIGHT - floor_height
-    FLOOR_COLOR = (139, 69, 19)
     
-    # 발판 속성 설정
     platform_width, platform_height = 100, 20
-    platform_color = (0, 0, 255)
+    platform_color = BLUE
 
     powerup_radius = 10
-
     enemy_width, enemy_height = 33, 33
     enemy_speed = 5
 
     current_stage = 1
     blocks, enemies, powerups, portal = init_stage(*stages[current_stage])
 
-    second_block_x, second_block_y = 500, 350
-
-
-    # 추가된 부분: 두 번째 블록의 좌표 설정
-    second_block_x, second_block_y = 500, 350  # 예시 좌표
-    
-    # 가시 돌 생성
-    spike = Spike(505, floor_y - 1, 90, 20)
+    spike = Spike(505, floor_y - 20, 90, 20)
 
     clock = pygame.time.Clock()
-
-    def check_collision(character, objects, width, height):
-        for obj in objects:
-            if character.colliderect(pygame.Rect(obj.x, obj.y, width, height)):
-                return obj
-        return None
-
-    # 추가된 함수: 바닥을 지우는 함수
-    def remove_floor_section(x, width):
-        # 바닥의 색깔을 흰색으로 덮어서 지움
-        pygame.draw.rect(screen, WHITE, (x, floor_y, width, floor_height))
-
-# 추가된 함수: 플레이어와 가시 돌의 충돌 확인
-    def check_spike_collision(player_rect, spike_rect):
-        if player_rect.colliderect(spike_rect):
-            return True
-        return False
-
     running = True
     vertical_momentum = 0
     is_on_ground = True
@@ -120,22 +91,16 @@ def main():
     score = 0
     time_limit = 20
     start_ticks = pygame.time.get_ticks()
-    powerup_effect_duration = 5
-    powerup_effect_start_time = 0
-    powerup_effect = None
-
-    floor_removed = False
+    current_image = user_image  # 초기 이미지 설정
 
     while running:
-        screen.fill((255, 255, 255))
+        screen.fill(WHITE)
         character_rect = pygame.Rect(character_x, character_y, character_width, character_height)
 
         seconds = (pygame.time.get_ticks() - start_ticks) / 1000
         time_left = time_limit - seconds
 
-
-        if check_spike_collision(character_rect, spike) or check_collision(character_rect, enemies, enemy_width, enemy_height):
-            # 게임을 바로 재시작
+        if check_spike_collision(character_rect, spike.rect) or check_collision(character_rect, enemies, enemy_width, enemy_height):
             character_x, character_y = 30, SCREEN_HEIGHT - character_height * 2
             blocks, enemies, powerups, portal = init_stage(*stages[current_stage])
             start_ticks = pygame.time.get_ticks()
@@ -144,56 +109,29 @@ def main():
         if time_left <= 0:
             choice = show_game_over_screen(screen, score)
             if choice == "restart":
-                pass
-            else:
-                running = False
-                
-        # 추가된 부분: 가시 돌과 플레이어의 충돌 확인
-        if check_spike_collision(character_rect, spike.rect):
-            choice = show_game_over_screen(screen, score)
-            if choice == "restart":
-                pass
+                continue
             else:
                 running = False
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            if event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     space_pressed = True
-            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT:
+                    current_image = left_jump if not is_on_ground else left_walk
+                elif event.key == pygame.K_RIGHT:
+                    current_image = right_jump if not is_on_ground else right_walk
+            elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_SPACE:
                     space_pressed = False
 
         if space_pressed and is_on_ground:
-            vertical_momentum = -         jump_speed
-            is_on_ground = False
-
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            character_x -= character_speed
-            if not is_on_ground:
-                current_image = left_jump
-            else:
-                current_image = left_walk
-        if keys[pygame.K_RIGHT]:
-            character_x += character_speed
-            if not is_on_ground:
-                current_image = right_jump
-            else:
-                current_image = right_walk
-
-        if space_pressed and is_on_ground:
             vertical_momentum = -jump_speed
             is_on_ground = False
-            if keys[pygame.K_LEFT]:
-                current_image = left_jump
-            elif keys[pygame.K_RIGHT]:
-                current_image = right_jump
-        else:
-            is_jumping = False
 
+        character_x += (pygame.key.get_pressed()[pygame.K_RIGHT] - pygame.key.get_pressed()[pygame.K_LEFT]) * character_speed
         character_x = max(0, min(SCREEN_WIDTH - character_width, character_x))
         vertical_momentum += gravity
         character_y += vertical_momentum
@@ -205,15 +143,11 @@ def main():
                 character_y = block_collided.y - character_height
                 vertical_momentum = 0
                 is_on_ground = True
-                if block_collided.x == second_block_x and block_collided.y == second_block_y:
-                    blocks.remove(block_collided)
-                    floor_removed = True
-        elif character_y >= floor_y - character_height:
+
+        if character_y >= floor_y - character_height:
             character_y = floor_y - character_height
             vertical_momentum = 0
             is_on_ground = True
-        else:
-            is_on_ground = False
 
         for enemy in enemies:
             enemy.x += enemy_speed * enemy.direction
@@ -229,39 +163,33 @@ def main():
             current_stage += 1
             if current_stage in stages:
                 blocks, enemies, powerups, portal = init_stage(*stages[current_stage])
-                character_x, character_y = character_width, SCREEN_HEIGHT - character_height * 2
+                character_x, character_y = 30, SCREEN_HEIGHT - character_height * 2
                 start_ticks = pygame.time.get_ticks()
             else:
                 choice = show_game_over_screen(screen, score)
                 if choice == "restart":
-                    # 재시작
-                    # 캐릭터 및 게임 상태 초기화 코드 작성
-                    pass
+                    continue
                 else:
                     running = False
 
-        if floor_removed:
-            remove_floor_section(blocks, second_block_x, platform_width)
-
-        pygame.draw.rect(screen, (144, 228, 144), (0, floor_y, SCREEN_WIDTH, floor_height))
+        pygame.draw.rect(screen, FLOOR_COLOR, (0, floor_y, SCREEN_WIDTH, floor_height))
 
         for block in blocks:
             pygame.draw.rect(screen, platform_color, (block.x, block.y, platform_width, platform_height))
 
         for enemy in enemies:
-            pygame.draw.rect(screen, (0, 255, 0), (enemy.x, enemy.y, enemy_width, enemy_height))
+            pygame.draw.rect(screen, GREEN, (enemy.x, enemy.y, enemy_width, enemy_height))
 
         for powerup in powerups:
-            pygame.draw.circle(screen, (255, 223, 0), (powerup.x + powerup_radius, powerup.y + powerup_radius), powerup_radius)
+            pygame.draw.circle(screen, YELLOW, (powerup.x + powerup_radius, powerup.y + powerup_radius), powerup_radius)
 
         if portal:
             portal.draw(screen)
-            
-        # 추가된 부분: 가시 돌 그리기
+
         pygame.draw.rect(screen, BLACK, spike.rect)
 
         font = pygame.font.Font(None, 36)
-        text = font.render(f"Score: {score}  Time Left: {int(time_left)}", True, (0, 0, 0))
+        text = font.render(f"Score: {score}  Time Left: {int(time_left)}", True, BLACK)
         screen.blit(text, (10, 10))
 
         current_image = pygame.transform.scale(current_image, (character_width, character_height))
