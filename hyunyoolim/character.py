@@ -109,6 +109,8 @@ class Character:
         block_collided = Block.check_collision(self.x, self.y, self.width, self.height, self.blocks)
         print(block_collided)
         obstacle_collided = Obstacle.check_collision(self.x, self.y, self.width, self.height, self.obstacles)
+        print(obstacle_collided)
+        
         if block_collided:
             if self.vertical_momentum > 0:
                 self.y = block_collided.y - self.height
