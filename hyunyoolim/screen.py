@@ -21,7 +21,7 @@ class Screen:
         text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)) # 텍스트 위치 설정
         screen.blit(text, text_rect) # 화면에 텍스트 그리기
         pygame.display.update() # 화면 업데이트
-        Screen.wait_for_space()
+        Screen.wait_for_space() # 스페이스바 입력 대기
 
     @staticmethod
     def wait_for_space():
