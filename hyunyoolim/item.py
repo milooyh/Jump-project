@@ -36,6 +36,7 @@ class SpeedItem(Item):
     def __init__(self, x, y):
         super().__init__(x, y, 'slow.png')
 
+# 무적 아이템 클래스 정의
 class InvincibilityItem(Item):
     def __init__(self, x, y):
         super().__init__(x, y, 'star.png')
