@@ -130,7 +130,7 @@ class GameManager:
                     Screen.show_game_over_screen(self.screen, self)
                     
             pygame.display.update() # 게임 화면 업데이트
-            self.clock.tick(60)
+            self.clock.tick(60) # FPS을 60으로 유지
 
         pygame.quit()
         sys.exit()
