@@ -31,6 +31,7 @@ class HeartItem(Item):
     def __init__(self, x, y):
         super().__init__(x, y, 'heart.png')
 
+# 느림보 아이템 클래스 정의
 class SpeedItem(Item):
     def __init__(self, x, y):
         super().__init__(x, y, 'slow.png')
