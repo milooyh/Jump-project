@@ -56,7 +56,7 @@ class Screen:
         font = pygame.font.Font(None, 64)
         text = font.render("Game Over", True, RED)
         text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
-        screen.blit(text, text_rect)
+        screen.blit(text, text_rect) # 화면에 텍스트 그리기
 
         try_again_button = pygame.Rect(250, 400, 300, 50)
         pygame.draw.rect(screen, GREEN, try_again_button)
