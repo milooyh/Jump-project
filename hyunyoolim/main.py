@@ -10,7 +10,7 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) # 화면 설정
     pygame.display.set_caption("Jump Game") # 창의 제목 설정
 
-    game_manager = GameManager()
+    game_manager = GameManager() # 게임 관리자 인스턴스 생성
     Screen.show_start_screen(screen)
     game_manager.run_game()
     
