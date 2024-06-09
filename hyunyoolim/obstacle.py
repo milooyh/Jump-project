@@ -18,7 +18,8 @@ class Obstacle:
     # 화면 요소 그리는 함수
     def draw(self, screen):
         pygame.draw.rect(screen, obstacle_color, pygame.Rect(self.x, self.y, obstacle_width, obstacle_height))
-
+        print('draw 함수 불림 ! - 장애물')
+    
     @staticmethod
     def check_collision(character_x, character_y, character_width, character_height, obstacles):  
         for obstacle in obstacles:
