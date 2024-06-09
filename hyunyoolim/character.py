@@ -2,7 +2,7 @@ import pygame # 파이게임 모듈 임포트
 from setting import * # 게임 설정 파일 임포트
 from screen import Screen # 화면 설정 클래스 임포트
 from block import Block # 블록 클래스 임포트
-from obstacle import Obstacle
+from obstacle import Obstacle # 장애물 클래스 임포트
 from portal import Portal
 from item import *
 
