@@ -8,7 +8,7 @@ class Item:
         self.x = x # x좌표 설정
         self.y = y # y좌표 설정
         self.width = 50 # 아이템 너비 설정
-        self.height = 50
+        self.height = 50 # 아이템 높이 설정
         base_path = os.path.dirname(os.path.realpath(__file__))
         image_full_path = os.path.join(base_path, image_path)
         self.image = pygame.image.load(image_full_path).convert_alpha()
