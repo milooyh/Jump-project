@@ -70,7 +70,8 @@ class Character:
         print(self.image)
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
         print(self.image)
-        
+    
+    # 캐릭터 초기 위치 설정
     def set_initial_position(self):
         self.x = SCREEN_WIDTH // 2
         self.y = SCREEN_HEIGHT - self.height * 2
