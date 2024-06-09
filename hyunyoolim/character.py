@@ -107,6 +107,7 @@ class Character:
             self.is_on_ground = True
 
         block_collided = Block.check_collision(self.x, self.y, self.width, self.height, self.blocks)
+        print(block_collided)
         obstacle_collided = Obstacle.check_collision(self.x, self.y, self.width, self.height, self.obstacles)
         if block_collided:
             if self.vertical_momentum > 0:
