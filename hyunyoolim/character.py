@@ -123,6 +123,8 @@ class Character:
             self.life_counter = current_time
             if self.life == 0:
                 self.game_over = True
+            
+            # 생명력이 남아있으면 색상 변경 및 초기 위치로 이동
             else:
                 self.current_color_index = min(len(self.colors) - 1, self.current_color_index + 1)
                 self.set_initial_position()
