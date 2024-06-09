@@ -56,6 +56,7 @@ class Character:
         self.invincible_timer = 0
         print(self.invincible_timer)
         self.speed_boost_timer = 0
+        print(self.speed_boost_timer)
         self.invincible_remaining_time = 0
         self.speed_boost_remaining_time = 0
         self.heart_item_eaten = False
