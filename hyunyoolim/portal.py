@@ -16,5 +16,6 @@ class Portal:
         self.image = pygame.image.load('hyunyoolim\portal.png').convert_alpha()  # 이미지 불러오기
         self.image = pygame.transform.scale(self.image, (self.width, self.height))  # 이미지 크기 조절
     
+    # 포털 화면에 그리기
     def draw(self, screen):
-        screen.blit(self.image, (self.x, self.y))  # 이미지 그리기
+        screen.blit(self.image, (self.x, self.y))
