@@ -16,5 +16,6 @@ def main():
     
     print('main 함수 실행 !!!!!')
 
+# 스크립트가 직접 실행될 때만 main 함수 호출
 if __name__ == "__main__":
     main() 
