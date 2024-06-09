@@ -67,7 +67,7 @@ class GameManager:
         obstacles = [Obstacle(x, y, obstacle_speed) for x, y, obstacle_speed in obstacles_positions]
 
         while running:
-            self.screen.fill(WHITE)
+            self.screen.fill(WHITE) # 화면 흰색으로 채움
             character_rect = pygame.Rect(self.character.x, self.character.y, self.character.width, self.character.height)
 
             for event in pygame.event.get():
