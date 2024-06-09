@@ -1,4 +1,4 @@
-import pygame
+import pygame # 파이게임 모듈 임포트
 from setting import *
 from screen import Screen
 from block import Block
