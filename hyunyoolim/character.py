@@ -88,6 +88,7 @@ class Character:
             self.is_on_ground = False
 
         keys = pygame.key.get_pressed()
+        # 왼쪽 방향키가 눌렸을 때 왼쪽으로 이동
         if keys[pygame.K_LEFT]:
             self.x = max(LEFT_EDGE, self.x - self.speed)
         if keys[pygame.K_RIGHT]:
