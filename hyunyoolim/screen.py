@@ -58,6 +58,7 @@ class Screen:
         text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
         screen.blit(text, text_rect) # 화면에 텍스트 그리기
 
+        # try again 버튼 위치와 크기 조정
         try_again_button = pygame.Rect(250, 400, 300, 50)
         pygame.draw.rect(screen, GREEN, try_again_button)
         font = pygame.font.Font(None, 36)
