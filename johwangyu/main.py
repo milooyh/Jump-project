@@ -25,8 +25,8 @@ def check_collision(character_rect, objects, obj_width, obj_height):
             return obj
     return None
 
-def check_spike_collision(character_rect, spike):
-    return character_rect.colliderect(spike.rect)
+def check_spike_collision(character_rect, spike_rect):
+    return character_rect.colliderect(spike_rect)
 
 def remove_floor_section(blocks, x_position, width):
     for block in blocks:
@@ -123,7 +123,7 @@ def main():
                     current_image = left_jump if not is_on_ground else left_walk
                 elif event.key == pygame.K_RIGHT:
                     current_image = right_jump if not is_on_ground else right_walk
-            elif event.type == pygame.KEYUP:
+            elif event.type is pygame.KEYUP:
                 if event.key == pygame.K_SPACE:
                     space_pressed = False
 
