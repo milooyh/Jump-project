@@ -111,6 +111,7 @@ class GameManager:
                 life_rect = life_text.get_rect(center=(SCREEN_WIDTH // 2, 30))
                 self.screen.blit(life_text, life_rect)
                 
+                # 아이템 화면에 표시
                 self.heart_item.draw(self.screen)
                 self.speed_item.draw(self.screen)
                 self.invincibility_item.draw(self.screen)
