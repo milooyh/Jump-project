@@ -73,7 +73,7 @@ class Screen:
         text_rect = text.get_rect(center=exit_button.center)
         screen.blit(text, text_rect)
 
-        pygame.display.update()
+        pygame.display.update() # 화면 업데이트
 
         while True:
             for event in pygame.event.get():
