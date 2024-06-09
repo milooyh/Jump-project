@@ -94,7 +94,7 @@ class Screen:
     @staticmethod
     def draw_game_elements(screen, character_rect):
         print('draw game elements 함수 호출')
-        pygame.draw.rect(screen, RED, character_rect)
+        pygame.draw.rect(screen, RED, character_rect) # 빨간 사각형으로 캐릭터 그리기 - 사진으로 추후 대체
         for block in Block:
             pygame.draw.rect(screen, platform_color, pygame.Rect(block.x, block.y, platform_width, platform_height))
         for obstacle in Obstacle:
