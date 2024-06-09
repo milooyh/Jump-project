@@ -1,6 +1,4 @@
-
-
-import pygame
+import pygame # 파이게임 라이브러리 임포트
 import sys
 from setting import *
 from game_manager import GameManager
