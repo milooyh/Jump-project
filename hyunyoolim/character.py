@@ -80,6 +80,7 @@ class Character:
     # 게임 상태 업데이트
     def update_game_state(self):
         current_time = pygame.time.get_ticks() # 현재 시간
+        print(current_time)
         
         if self.space_pressed and self.is_on_ground:
             self.vertical_momentum = -self.jump_speed
