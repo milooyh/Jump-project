@@ -14,9 +14,7 @@ pygame.display.set_caption("점프 점프")
 
 # 색상 정의
 WHITE = (255, 255, 255)
-RED = (255, 0, 0)
 BLUE = (0, 0, 255)
-FLOOR_COLOR = (144, 228, 144)
 
 # 캐릭터 속성 설정
 character_speed = 6
@@ -148,6 +146,8 @@ class Game:
             for block in self.blocks:
                 block.move()
                 pygame.draw.rect(screen, BLUE, (block.x, block.y, block.width, block.height))
+            for block in self.blocks:
+                block.draw(screen)  # 변경된 draw 메소드 사용
 
             # 포탈 그리기
             self.portal.draw(screen)
@@ -168,4 +168,3 @@ class Game:
 if __name__ == "__main__":
     game = Game()
     game.run()
-

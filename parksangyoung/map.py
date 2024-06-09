@@ -7,10 +7,10 @@ class Map1:
     initial_character_y = 400
     portal = Portal(720, 50, 70, 70, 'map2', 'images/portal.png')
     blocks = [  
-        Block(100, 500),
-        Block(300, 400),
-        Block(500, 300),
-        Block(700, 200)
+        Block(100, 500, image_path='C:/OSSW4/Img/block.png'),
+        Block(300, 400, image_path='C:/OSSW4/Img/block.png'),
+        Block(500, 300, image_path='C:/OSSW4/Img/block.png'),
+        Block(700, 200, image_path='C:/OSSW4/Img/block.png')
     ]
 
 class Map2:
@@ -18,10 +18,10 @@ class Map2:
     initial_character_y = 100
     portal = Portal(720, 50, 70, 70, 'map3', 'images/portal.png')
     blocks = [
-        Block(50, 100),
-        Block(250, 400),
-        Block(500, 300),
-        Block(600, 200)
+        Block(50, 100, image_path='C:/OSSW4/Img/block.png'),
+        Block(250, 400, image_path='C:/OSSW4/Img/block.png'),
+        Block(500, 300, image_path='C:/OSSW4/Img/block.png'),
+        Block(600, 200, image_path='C:/OSSW4/Img/block.png')
     ]
 
 class Map3:
@@ -29,14 +29,14 @@ class Map3:
     initial_character_y = 300
     portal = Portal(720, 150, 70, 70, 'map4', 'images/portal.png')
     blocks = [
-        Block(0, 300),
-        Block(100, 300),
-        Block(200, 300),
-        Block(300, 300),
-        Block(400, 300),
-        Block(500, 300),
-        Block(600, 300),
-        Block(700, 300)
+        Block(0, 300, image_path='C:/OSSW4/Img/block.png'),
+        Block(100, 300, image_path='C:/OSSW4/Img/block.png'),
+        Block(200, 300, image_path='C:/OSSW4/Img/block.png'),
+        Block(300, 300, image_path='C:/OSSW4/Img/block.png'),
+        Block(400, 300, image_path='C:/OSSW4/Img/block.png'),
+        Block(500, 300, image_path='C:/OSSW4/Img/block.png'),
+        Block(600, 300, image_path='C:/OSSW4/Img/block.png'),
+        Block(700, 300, image_path='C:/OSSW4/Img/block.png')
     ]
     spikes = [
     Spike(100, 250),
@@ -64,10 +64,10 @@ class Map4:
     initial_character_y = 550
     portal = Portal(720, 45, 70, 70, 'hyunyoolim.main', 'images/portal.png')
     blocks = [
-        Block(0, 550),
-        MovingBlock(400, 525, move_range=200, speed=2),
-        Block(700, 425),
-        MovingBlock(400, 300, move_range=200, speed=3),
-        Block(0, 200),
-        MovingBlock(400, 100, move_range=200, speed=4)
+        Block(0, 550, image_path='C:/OSSW4/Img/block.png'),
+        MovingBlock(400, 525, move_range=200, speed=2, image_path='C:/OSSW4/Img/block.png'),
+        Block(700, 425, image_path='C:/OSSW4/Img/block.png'),
+        MovingBlock(400, 300, move_range=200, speed=3, image_path='C:/OSSW4/Img/block.png'),
+        Block(0, 200, image_path='C:/OSSW4/Img/block.png'),
+        MovingBlock(400, 100, move_range=200, speed=4, image_path='C:/OSSW4/Img/block.png')
     ]
