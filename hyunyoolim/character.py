@@ -199,5 +199,5 @@ class Character:
             item.x = -100  # Move off-screen 화면 밖으로 이동
         elif isinstance(item, InvincibilityItem):
             self.invincible = True
-            self.invincible_timer = pygame.time.get_ticks()  # Start timer
+            self.invincible_timer = pygame.time.get_ticks()  # Start timer 타이머 시작
             item.x = -100  # Move off-screen
