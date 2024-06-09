@@ -35,7 +35,9 @@ class Screen:
                     sys.exit()
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                     waiting = False
+        print('wait_for_space 함수 호출')
 
+    # 클리어 화면 표시 함수
     @staticmethod
     def show_clear_screen(screen):
         screen.fill(WHITE)
