@@ -1,5 +1,6 @@
 import pygame
 import sys
+import subprocess
 from game_over import show_game_over_screen
 from stage import init_stage, stages
 from lobby import show_lobby_screen
@@ -162,14 +163,11 @@ def main():
             current_stage += 1
             if current_stage in stages:
                 blocks, enemies, powerups, portal = init_stage(*stages[current_stage])
-                character_x, character_y = 30, SCREEN_HEIGHT - character_height * 2
+                character_x, character_y = character_width, SCREEN_HEIGHT - character_height * 2
                 start_ticks = pygame.time.get_ticks()
             else:
-                choice = show_game_over_screen(screen, score)
-                if choice == "restart":
-                    continue
-                else:
-                    running = False
+                subprocess.run(["python", "KyoKwan/main_game.py"])
+                running = False
 
         pygame.draw.rect(screen, FLOOR_COLOR, (0, floor_y, SCREEN_WIDTH, floor_height))
 
