@@ -86,6 +86,7 @@ class GameManager:
                 
                 # 키 떼어졌을 때
                 if event.type == pygame.KEYUP:
+                    # 스페이스바가 떼졌을 때
                     if event.key == pygame.K_SPACE:
                         self.character.space_pressed = False
                         print('스페이스바 안 눌림')
