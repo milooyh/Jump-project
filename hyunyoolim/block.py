@@ -4,6 +4,7 @@ from setting import *
 # block 클래스 정의
 class Block:
     def __init__(self, x, y):
+        # 블록 초기 위치 설정
         self.x = x
         self.y = y
 
