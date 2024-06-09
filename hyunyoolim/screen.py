@@ -49,6 +49,7 @@ class Screen:
         pygame.time.wait(2000) # 2초 동안 대기
         print('show_clear_screen 함수 호출')
 
+    # 게임 오버 화면 표시 함수
     @staticmethod
     def show_game_over_screen(screen, game_manager):
         screen.fill(WHITE)
