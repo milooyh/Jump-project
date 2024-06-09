@@ -62,6 +62,7 @@ class Character:
         self.speed_boost_remaining_time = 0
         print(self.speed_boost_remaining_time)
         self.heart_item_eaten = False
+        print(self.heart_item_eaten)
         
         self.image = pygame.image.load('hyunyoolim\character.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
