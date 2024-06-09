@@ -67,7 +67,8 @@ class Character:
         self.image = pygame.image.load('hyunyoolim\character.png').convert_alpha()
         print(self.image)
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
-
+        print(self.image)
+        
     def set_initial_position(self):
         self.x = SCREEN_WIDTH // 2
         self.y = SCREEN_HEIGHT - self.height * 2
