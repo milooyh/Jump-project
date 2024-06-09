@@ -116,7 +116,7 @@ class Character:
                 self.y = block_collided.y - self.height
                 self.vertical_momentum = 0
                 self.is_on_ground = True
-
+        # 장애물과 충돌 시, 무적 상태가 아니라면 생명력을 감소
         if obstacle_collided and not self.invincible:
             self.life -= 1
             self.show_life = True
