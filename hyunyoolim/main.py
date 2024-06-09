@@ -1,5 +1,5 @@
 import pygame # 파이게임 라이브러리 임포트
-import sys
+import sys # 시스템과 상호작용하기 위해 임포트
 from setting import *
 from game_manager import GameManager
 from screen import Screen
