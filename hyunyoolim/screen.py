@@ -7,11 +7,7 @@ from obstacle import Obstacle
 from block import Block
 from portal import Portal   
 
-<<<<<<< HEAD
-
-=======
 # 화면 관련 클래스 정의
->>>>>>> baa43c4392e1a69d3ef62042be22c2eab30b6569
 class Screen:
     def __init__(self):
         pass

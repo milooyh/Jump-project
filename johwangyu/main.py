@@ -1,10 +1,7 @@
 import pygame
 import sys
 import subprocess
-<<<<<<< HEAD
-=======
 from game_over import show_game_over_screen
->>>>>>> baa43c4392e1a69d3ef62042be22c2eab30b6569
 from stage import init_stage, stages
 from spike import Spike
 
@@ -57,7 +54,7 @@ def main():
     #     pygame.quit()
     #     sys.exit()
 
-<<<<<<< HEAD
+
     # 색깔 및 기본 설정
     WHITE = (255, 255, 255)
     RED = (255, 0, 0)
@@ -71,8 +68,7 @@ def main():
     FLOOR_COLOR = (144, 228, 144)  # 추가된 부분
 
     # 캐릭터 및 게임 설정
-=======
->>>>>>> baa43c4392e1a69d3ef62042be22c2eab30b6569
+
     character_width, character_height = 20, 20
     character_x, character_y = 30, SCREEN_HEIGHT - character_height * 2
     character_speed = 6
@@ -81,11 +77,9 @@ def main():
 
     floor_height = 150
     floor_y = SCREEN_HEIGHT - floor_height
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> baa43c4392e1a69d3ef62042be22c2eab30b6569
+
+
     platform_width, platform_height = 100, 20
 
     powerup_radius = 10
@@ -95,11 +89,7 @@ def main():
     current_stage = 1
     blocks, enemies, powerups, portal = init_stage(*stages[current_stage])
 
-<<<<<<< HEAD
-    spike = Spike(505, floor_y - 20, 90, 20)
 
-    clock = pygame.time.Clock()
-=======
     second_block_x, second_block_y = 500, 350
 
     # Spike 객체의 생성과 사용 수정
@@ -109,10 +99,10 @@ def main():
     current_image = user_image
     is_jumping = False
 
->>>>>>> baa43c4392e1a69d3ef62042be22c2eab30b6569
+
     running = True
     vertical_momentum = 0
-    is_on_ground = True
+    is_on_ground = False
     space_pressed = False
     score = 0
     time_limit = 20
@@ -133,12 +123,12 @@ def main():
             score = 0
 
         if time_left <= 0:
-<<<<<<< HEAD
+
             # choice = show_game_over_screen(screen, score)
             # if choice == "restart":
             #     continue
             # else:
-=======
+
             choice = show_game_over_screen(screen, score)
             if choice == "restart":
                 pass
@@ -150,7 +140,7 @@ def main():
             if choice == "restart":
                 pass
             else:
->>>>>>> baa43c4392e1a69d3ef62042be22c2eab30b6569
+
                 running = False
 
         for event in pygame.event.get():
@@ -163,9 +153,9 @@ def main():
                 if event.key == pygame.K_SPACE:
                     space_pressed = False
 
-<<<<<<< HEAD
+
         # 점프 로직을 이벤트 처리 외부로 이동
-=======
+
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             character_x -= character_speed
@@ -180,7 +170,7 @@ def main():
             else:
                 current_image = right_walk
 
->>>>>>> baa43c4392e1a69d3ef62042be22c2eab30b6569
+
         if space_pressed and is_on_ground:
             vertical_momentum = -jump_speed
             is_on_ground = False
@@ -221,18 +211,18 @@ def main():
                 character_x, character_y = character_width, SCREEN_HEIGHT - character_height * 2
                 start_ticks = pygame.time.get_ticks()
             else:
-<<<<<<< HEAD
+
                 subprocess.run([sys.executable, "./KyoKwan/main_game.py"], check=True)
                 running = False
-=======
+
                 subprocess.run(["python", "KyoKwan/main_game.py"])
                 running = False
 
-        if floor_removed:
+        if is_on_ground:
             remove_floor_section(blocks, second_block_x, platform_width)
 
         pygame.draw.rect(screen, (144, 228, 144), (0, floor_y, SCREEN_WIDTH, floor_height))
->>>>>>> baa43c4392e1a69d3ef62042be22c2eab30b6569
+
 
         # 바닥을 색상으로 그림
         pygame.draw.rect(screen, FLOOR_COLOR, (0, floor_y, SCREEN_WIDTH, floor_height))  # 추가된 부분
@@ -249,11 +239,10 @@ def main():
         if portal:
             portal.draw(screen)
 
-<<<<<<< HEAD
-        pygame.draw.rect(screen, BLACK, spike.rect)
-=======
+
+
         pygame.draw.rect(screen, (0, 0, 0), spike.rect)
->>>>>>> baa43c4392e1a69d3ef62042be22c2eab30b6569
+
 
         font = pygame.font.Font(None, 36)
         text = font.render(f"Score: {score}  Time Left: {int(time_left)}", True, BLACK)
