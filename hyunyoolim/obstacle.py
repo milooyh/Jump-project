@@ -13,12 +13,12 @@ class Obstacle:
     # 위치 업데이트 함수
     def update_position(self):
         self.x -= self.speed
-        print('update_position 함수 불림 !')
+        # print('update_position 함수 불림 !')
 
     # 화면 요소 그리는 함수
     def draw(self, screen):
         pygame.draw.rect(screen, obstacle_color, pygame.Rect(self.x, self.y, obstacle_width, obstacle_height))
-        print('draw 함수 불림 ! - 장애물')
+        # print('draw 함수 불림 ! - 장애물')
     
     # 장애물과 부딪힘 여부 판단 함수
     @staticmethod
@@ -27,4 +27,4 @@ class Obstacle:
             if pygame.Rect(character_x, character_y, character_width, character_height).colliderect(pygame.Rect(obstacle.x, obstacle.y, obstacle_width, obstacle_height)):
                 return obstacle
         return None
-        print('check_collision 함수 불림 !')
+        # print('check_collision 함수 불림 !')

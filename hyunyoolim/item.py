@@ -24,7 +24,7 @@ class Item:
     # 화면에 아이템 그리기
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))
-        print('draw 함수 불려짐 !')
+        # print('draw 함수 불려짐 !')
 
 # 하트 아이템 클래스 정의
 class HeartItem(Item):

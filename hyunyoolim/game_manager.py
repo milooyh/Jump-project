@@ -75,14 +75,14 @@ class GameManager:
                 # 이벤트 종료 시
                 if event.type == pygame.QUIT:
                     running = False
-                    print('게임 강제 종료')
+                    # print('게임 강제 종료')
                 
                 # 키가 눌렸을 때
                 if event.type == pygame.KEYDOWN:
                     # 스페이스바가 눌렸을 때
                     if event.key == pygame.K_SPACE:
                         self.character.space_pressed = True # 캐릭터의 space_pressed 변수 설정
-                        print('스페이스바 눌림')
+                        # print('스페이스바 눌림')
                 
                 # 키 떼어졌을 때
                 if event.type == pygame.KEYUP:

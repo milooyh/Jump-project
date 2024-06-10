@@ -14,7 +14,7 @@ def main():
     Screen.show_start_screen(screen) # 시작 화면 표시
     game_manager.run_game() # 게임 실행 함수 적용
     
-    print('main 함수 실행 !!!!!')
+    # print('main 함수 실행 !!!!!')
 
 # 스크립트가 직접 실행될 때만 main 함수 호출
 if __name__ == "__main__":

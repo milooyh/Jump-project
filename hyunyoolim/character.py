@@ -75,12 +75,12 @@ class Character:
     def set_initial_position(self):
         self.x = SCREEN_WIDTH // 2
         self.y = SCREEN_HEIGHT - self.height * 2
-        print('set_initial_position 함수 불림 !')
+        # print('set_initial_position 함수 불림 !')
 
     # 게임 상태 업데이트
     def update_game_state(self):
         current_time = pygame.time.get_ticks() # 현재 시간
-        print(current_time)
+        # print(current_time)
         
         # 스페이스바가 눌렸고 캐릭터가 땅에 있을 때 점프
         if self.space_pressed and self.is_on_ground:

@@ -102,12 +102,13 @@ def main():
 
     running = True
     vertical_momentum = 0
-    is_on_ground = False
+    is_on_ground = True
     space_pressed = False
     score = 0
     time_limit = 20
     start_ticks = pygame.time.get_ticks()
     current_image = user_image  # 초기 이미지 설정
+    floor_removed = False
 
     while running:
         screen.fill(WHITE)
@@ -187,7 +188,8 @@ def main():
             if vertical_momentum > 0:
                 character_y = block_collided.y - character_height
                 vertical_momentum = 0
-                is_on_ground = True
+                floor_removed = True
+
 
         if character_y >= floor_y - character_height:
             character_y = floor_y - character_height
@@ -218,7 +220,7 @@ def main():
                 subprocess.run(["python", "KyoKwan/main_game.py"])
                 running = False
 
-        if is_on_ground:
+        if floor_removed:
             remove_floor_section(blocks, second_block_x, platform_width)
 
         pygame.draw.rect(screen, (144, 228, 144), (0, floor_y, SCREEN_WIDTH, floor_height))

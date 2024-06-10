@@ -19,4 +19,4 @@ class Portal:
     # 포털 화면에 그리기
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))
-        print('draw 함수 불려짐 - 포털')
+        # print('draw 함수 불려짐 - 포털')

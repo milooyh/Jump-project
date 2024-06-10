@@ -16,7 +16,7 @@ class Block:
         # platform_width: 블록의 너비 (setting 모듈에서 가져옴)
         # platform_height: 블록의 높이 (setting 모듈에서 가져옴)
         pygame.draw.rect(screen, platform_color, pygame.Rect(self.x, self.y, platform_width, platform_height))
-        print('draw 함수 불렸다 !')
+        # print('draw 함수 불렸다 !')
     
     # 캐릭터와 블록 간의 충돌 검사
     # character_x: 캐릭터의 x 좌표
@@ -30,4 +30,4 @@ class Block:
             if pygame.Rect(character_x, character_y, character_width, character_height).colliderect(pygame.Rect(block.x, block.y, platform_width, platform_height)):
                 return block
         return None
-        print('check_collision 함수 불렸다 !')
+        # print('check_collision 함수 불렸다 !')
