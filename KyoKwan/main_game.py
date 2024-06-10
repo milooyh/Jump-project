@@ -443,7 +443,11 @@ while running:
         for block in blocks:
             if block.is_visible:
                 pygame.draw.rect(screen, platform_color, (block.x - camera_x, block.y, platform_width, platform_height))
+<<<<<<< HEAD
                 screen.blit(block_image, (block.x - camera_x, block.y))
+=======
+                
+>>>>>>> baa43c4392e1a69d3ef62042be22c2eab30b6569
 
         if falling_block.is_visible:
             screen.blit(falling_block_image, (falling_block.x - camera_x, falling_block.y))
@@ -458,6 +462,7 @@ while running:
         for spike in spike_positions:
             pygame.draw.rect(screen, SPIKE_COLOR, (spike[0] - camera_x, spike[1], spike_width, spike_height))
 
+<<<<<<< HEAD
         # pygame.draw.rect(screen, (0, 255, 0), trigger_falling_block_zone.move(-camera_x, 0), 2)
         # pygame.draw.rect(screen, (0, 0, 0), del_block_1.move(-camera_x, 0), 2)
         # pygame.draw.rect(screen, (0, 255, 0), add_block_1.move(-camera_x, 0), 2)
@@ -465,6 +470,8 @@ while running:
         # pygame.draw.rect(screen, (0, 255, 0), trigger_zone.move(-camera_x, 0), 2)
         # pygame.draw.rect(screen, (0, 0, 255), spike_trigger_zone.move(-camera_x, 0), 2)
         # pygame.draw.rect(screen, (255, 0, 0), teleport_zone, 2)
+=======
+>>>>>>> baa43c4392e1a69d3ef62042be22c2eab30b6569
 
         portal_angle += 2
         rotated_portal_image = pygame.transform.rotate(portal_image, portal_angle)

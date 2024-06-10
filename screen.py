@@ -5,30 +5,22 @@ import sys
 from setting import *
 from obstacle import Obstacle
 from block import Block
-from portal import Portal   
+from portal import Portal
 
-<<<<<<< HEAD
-
-=======
-# 화면 관련 클래스 정의
->>>>>>> baa43c4392e1a69d3ef62042be22c2eab30b6569
 class Screen:
     def __init__(self):
         pass
 
-    # 시작 화면 표시 함수
     @staticmethod
     def show_start_screen(screen):
-        screen.fill(WHITE) # 화면 흰색으로 채움
-        font = pygame.font.Font(None, 64) # 폰트 설정
-        text = font.render("Press SPACE to Start", True, BLACK) # 텍스트 렌더링
-        text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)) # 텍스트 위치 설정
-        screen.blit(text, text_rect) # 화면에 텍스트 그리기
-        pygame.display.update() # 화면 업데이트
-        Screen.wait_for_space() # 스페이스바 입력 대기
-        print('show_start_screen 햠수 불려짐')
+        screen.fill(WHITE)
+        font = pygame.font.Font(None, 64)
+        text = font.render("Press SPACE to Start", True, BLACK)
+        text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+        screen.blit(text, text_rect)
+        pygame.display.update()
+        Screen.wait_for_space()
 
-    # 스페이스바 입력 대기 함수
     @staticmethod
     def wait_for_space():
         waiting = True
@@ -39,9 +31,7 @@ class Screen:
                     sys.exit()
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                     waiting = False
-        print('wait_for_space 함수 호출')
 
-    # 클리어 화면 표시 함수
     @staticmethod
     def show_clear_screen(screen):
         screen.fill(WHITE)
@@ -50,20 +40,16 @@ class Screen:
         text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
         screen.blit(text, text_rect)
         pygame.display.update()
-        pygame.time.wait(2000) # 2초 동안 대기
-        print('show_clear_screen 함수 호출')
+        pygame.time.wait(2000)
 
-    # 게임 오버 화면 표시 함수
     @staticmethod
     def show_game_over_screen(screen, game_manager):
-        print('show game over screen 함수 호출 !!!')
         screen.fill(WHITE)
         font = pygame.font.Font(None, 64)
         text = font.render("Game Over", True, RED)
         text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
-        screen.blit(text, text_rect) # 화면에 텍스트 그리기
+        screen.blit(text, text_rect)
 
-        # try again 버튼 위치와 크기 조정
         try_again_button = pygame.Rect(250, 400, 300, 50)
         pygame.draw.rect(screen, GREEN, try_again_button)
         font = pygame.font.Font(None, 36)
@@ -71,14 +57,13 @@ class Screen:
         text_rect = text.get_rect(center=try_again_button.center)
         screen.blit(text, text_rect)
 
-        # exit 버튼 위치와 크기 조정
         exit_button = pygame.Rect(250, 475, 300, 50)
         pygame.draw.rect(screen, RED, exit_button)
         text = font.render("Exit", True, WHITE)
         text_rect = text.get_rect(center=exit_button.center)
         screen.blit(text, text_rect)
 
-        pygame.display.update() # 화면 업데이트
+        pygame.display.update()
 
         while True:
             for event in pygame.event.get():
@@ -94,11 +79,9 @@ class Screen:
                         pygame.quit()
                         sys.exit()
 
-    # 게임 요소 그리는 함수
     @staticmethod
     def draw_game_elements(screen, character_rect):
-        print('draw game elements 함수 호출')
-        pygame.draw.rect(screen, RED, character_rect) # 빨간 사각형으로 캐릭터 그리기 - 사진으로 추후 대체
+        pygame.draw.rect(screen, RED, character_rect)
         for block in Block:
             pygame.draw.rect(screen, platform_color, pygame.Rect(block.x, block.y, platform_width, platform_height))
         for obstacle in Obstacle:
